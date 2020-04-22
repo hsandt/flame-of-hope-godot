@@ -5,7 +5,7 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
-position = Vector2( -1, 0 )
+position = Vector2( 0, -1 )
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
 format = 1
