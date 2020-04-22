@@ -1,0 +1,3 @@
+[submodule "VisualDebugger"]
+	path = VisualDebugger
+	url = https://github.com/hsandt/GodotVisualDebugger.git
