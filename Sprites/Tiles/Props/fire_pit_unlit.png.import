@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/pits.png-58eca8a2302c8bca688534c85c2d62de.stex"
+path="res://.import/fire_pit_unlit.png-3b57df56aae2075d9465a0ea9c62e495.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Tiles/pits.png"
-dest_files=[ "res://.import/pits.png-58eca8a2302c8bca688534c85c2d62de.stex" ]
+source_file="res://Sprites/Tiles/Props/fire_pit_unlit.png"
+dest_files=[ "res://.import/fire_pit_unlit.png-3b57df56aae2075d9465a0ea9c62e495.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -30,5 +30,5 @@ process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0
