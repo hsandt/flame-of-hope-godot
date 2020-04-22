@@ -6,6 +6,9 @@ export var lit_on_start := false setget set_lit_on_start
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready():
+	if Engine.editor_hint:
+		return
+	
 	if lit_on_start:
 		animation_player.play("FirePit_Lit")
 	else:
