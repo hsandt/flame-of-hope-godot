@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/flame_small.png-34942a328a08c2c7428ca8895337a554.stex"
+path="res://.import/fire_pit_lit.png-5de43e21694429ed48b699ae87ba1cdd.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Tiles/FX/flame_small.png"
-dest_files=[ "res://.import/flame_small.png-34942a328a08c2c7428ca8895337a554.stex" ]
+source_file="res://Sprites/Props/fire_pit_lit.png"
+dest_files=[ "res://.import/fire_pit_lit.png-5de43e21694429ed48b699ae87ba1cdd.stex" ]
 
 [params]
 
