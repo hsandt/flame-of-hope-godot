@@ -5,7 +5,7 @@
 [resource]
 resource_name = "FirePit_Lit"
 tracks/0/type = "value"
-tracks/0/path = NodePath("Flame:visible")
+tracks/0/path = NodePath("FlameBig:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false

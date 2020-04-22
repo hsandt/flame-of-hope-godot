@@ -6,7 +6,7 @@ load_path = "res://.import/fire_pit_unlit.png-3b57df56aae2075d9465a0ea9c62e495.s
 [resource]
 resource_name = "FirePit_Unlit"
 tracks/0/type = "value"
-tracks/0/path = NodePath("Flame:visible")
+tracks/0/path = NodePath("FlameBig:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
