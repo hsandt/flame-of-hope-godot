@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Tilemap/Environment.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/ Props/FirePit.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Sprites/Character/character_idle_spritesheet.png" type="Texture" id=3]
+[ext_resource path="res://Anims/Character/ANIM_Character_Idle.tres" type="Animation" id=4]
+[ext_resource path="res://Anims/Character/ANIM_Character_Idle_Up.tres" type="Animation" id=5]
+[ext_resource path="res://Anims/Character/ANIM_Character_Idle_Right.tres" type="Animation" id=6]
+[ext_resource path="res://Anims/Character/ANIM_Character_Idle_Left.tres" type="Animation" id=7]
+[ext_resource path="res://Scripts/Character.gd" type="Script" id=8]
 
 [node name="Node2D" type="Node2D"]
 
@@ -51,3 +57,21 @@ text = "Level 1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( 241, 206 )
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Node2D"]
+position = Vector2( 0, -13 )
+texture = ExtResource( 3 )
+hframes = 16
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D"]
+anims/Character_Idle_Down = ExtResource( 4 )
+anims/Character_Idle_Left = ExtResource( 7 )
+anims/Character_Idle_Right = ExtResource( 6 )
+anims/Character_Idle_Up = ExtResource( 5 )
