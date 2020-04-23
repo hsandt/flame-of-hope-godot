@@ -20,4 +20,4 @@ func set_lit_on_start(new_lit_on_start):
 	if Engine.editor_hint:
 		# in game runtime we play FirePit_Lit/Unlit which also changes the Body
 		# sprite, but for preview in editor, showing/hiding Flame is enough
-		$Flame.visible = new_lit_on_start
+		$FlameBig.visible = new_lit_on_start
