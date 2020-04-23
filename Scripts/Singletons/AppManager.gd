@@ -27,7 +27,7 @@ func _ready():
 			print("[AppManager] Playing standalone game with auto-fullscreen ON, enabling fullscreen")
 			call_deferred("toggle_fullscreen")
 
-func _input(event):
+func _unhandled_input(event):
 	# let user toggle hi-dpi resolution freely
 	# (hi-dpi is hard to detect and resize is hard to force on start)
 	if event.is_action_pressed("app_toggle_hidpi"):
