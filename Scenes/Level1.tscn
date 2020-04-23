@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Tilemap/Environment.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/ Props/FirePit.tscn" type="PackedScene" id=2]
@@ -7,12 +7,14 @@
 [ext_resource path="res://Anims/Character/ANIM_Character_Idle_Up.tres" type="Animation" id=5]
 [ext_resource path="res://Anims/Character/ANIM_Character_Idle_Right.tres" type="Animation" id=6]
 [ext_resource path="res://Anims/Character/ANIM_Character_Idle_Left.tres" type="Animation" id=7]
-[ext_resource path="res://Scripts/Character.gd" type="Script" id=8]
+[ext_resource path="res://Scripts/Character/Character.gd" type="Script" id=8]
 [ext_resource path="res://Anims/Character/ANIM_Character_Walk_Down.tres" type="Animation" id=9]
 [ext_resource path="res://Sprites/Character/character_idle_spritesheet.png" type="Texture" id=10]
 [ext_resource path="res://Anims/Character/ANIM_Character_Walk_Right.tres" type="Animation" id=11]
 [ext_resource path="res://Anims/FX/SF_FlameSmall.tres" type="SpriteFrames" id=12]
+[ext_resource path="res://Scripts/Character/CharacterControl.gd" type="Script" id=13]
 [ext_resource path="res://Anims/Character/ANIM_Character_Walk_Left.tres" type="Animation" id=14]
+[ext_resource path="res://Scripts/Character/CharacterMotor.gd" type="Script" id=15]
 
 [node name="Node2D" type="Node2D"]
 
@@ -63,16 +65,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Character" type="KinematicBody2D" parent="."]
 position = Vector2( 241, 206 )
+collision_layer = 2
+collision_mask = 4
 script = ExtResource( 8 )
 
-[node name="Sprite" type="Sprite" parent="Node2D"]
+[node name="Sprite" type="Sprite" parent="Character"]
 position = Vector2( 0, -13 )
 texture = ExtResource( 10 )
 hframes = 16
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Character"]
 anims/Character_Idle_Down = ExtResource( 4 )
 anims/Character_Idle_Left = ExtResource( 7 )
 anims/Character_Idle_Right = ExtResource( 6 )
@@ -82,7 +86,15 @@ anims/Character_Walk_Left = ExtResource( 14 )
 anims/Character_Walk_Right = ExtResource( 11 )
 anims/Character_Walk_Up = ExtResource( 3 )
 
-[node name="FlameSmall" type="AnimatedSprite" parent="Node2D"]
+[node name="FlameSmall" type="AnimatedSprite" parent="Character"]
 position = Vector2( -4, -32 )
 frames = ExtResource( 12 )
-playing = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Character"]
+polygon = PoolVector2Array( 3, 2, -3, 2, -4, 1, -4, -1, -3, -2, 3, -2, 4, -1, 4, 1 )
+
+[node name="CharacterControl" type="Node2D" parent="Character"]
+script = ExtResource( 13 )
+
+[node name="CharacterMotor" type="Node2D" parent="Character"]
+script = ExtResource( 15 )
