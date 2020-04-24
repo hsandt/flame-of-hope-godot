@@ -40,7 +40,7 @@ func ignite():
 	audio_stream_player.stream = fire_pit_light_on_sound
 	audio_stream_player.play()
 
-func _set_lit_on_start(new_lit_on_start):
+func _set_lit_on_start(new_lit_on_start: bool):
 	lit_on_start = new_lit_on_start
 	
 	if Engine.editor_hint:

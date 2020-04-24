@@ -33,7 +33,7 @@ func _setup():
 	# makes sure hitbox is disabled on start, in case we were testing swing anims in the Editor
 	swing_hitbowing_hitbox_shape.disabled = true
 
-func _physics_process(_delta):
+func _physics_process(_delta: float):
 	# consume swing intention even if cannot swing now (no input buffering)
 	if character_control.consume_swing_intention():
 		# check if character can swing
@@ -90,6 +90,6 @@ func _on_SwingHitBox_area_entered(area: Area2D):
 			var fire_pit := area.get_parent() as FirePit
 			fire_pit.ignite()
 
-func _on_AnimationPlayer_animation_finished(anim_name):
+func _on_AnimationPlayer_animation_finished(anim_name: String):
 	if anim_name.begins_with("Character_Swing_"):
 		_stop_swing()

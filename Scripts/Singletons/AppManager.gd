@@ -27,7 +27,7 @@ func _ready():
 			print("[AppManager] Playing standalone game with auto-fullscreen ON, enabling fullscreen")
 			call_deferred("toggle_fullscreen")
 
-func _unhandled_input(event):
+func _unhandled_input(event: InputEvent):
 	# let user toggle hi-dpi resolution freely
 	# (hi-dpi is hard to detect and resize is hard to force on start)
 	if event.is_action_pressed("app_toggle_hidpi"):
@@ -76,7 +76,7 @@ func take_screenshot():
 	
 	save_screenshot_in(screenshot_filepath)
 
-func save_screenshot_in(screenshot_filepath):
+func save_screenshot_in(screenshot_filepath: String):
 	var image = get_viewport().get_texture().get_data()
 	# In OpenGL, viewport data is vertically reversed
 	image.flip_y()
