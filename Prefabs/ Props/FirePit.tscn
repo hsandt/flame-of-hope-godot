@@ -5,18 +5,17 @@
 [ext_resource path="res://Scripts/PlayOnStart.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/FirePit.gd" type="Script" id=4]
 [ext_resource path="res://Anims/Props/ANIM_FirePit_Unlit.tres" type="Animation" id=5]
-
-[sub_resource type="StreamTexture" id=1]
-load_path = "res://.import/fire_pit_unlit.png-3b57df56aae2075d9465a0ea9c62e495.stex"
+[ext_resource path="res://Sprites/Props/fire_pit_lit.png" type="Texture" id=6]
 
 [node name="FirePit" type="Node2D"]
 position = Vector2( 208, 175 )
 script = ExtResource( 4 )
 
 [node name="Body" type="Sprite" parent="."]
-texture = SubResource( 1 )
+texture = ExtResource( 6 )
 
 [node name="FlameBig" type="AnimatedSprite" parent="."]
+visible = false
 position = Vector2( 0, -14 )
 frames = ExtResource( 2 )
 script = ExtResource( 3 )
