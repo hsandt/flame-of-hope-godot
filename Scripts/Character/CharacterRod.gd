@@ -18,7 +18,9 @@ onready var rod_flame: CanvasItem = $"../RodFlame"
 onready var animation_player: AnimationPlayer = $"../AnimationPlayer"
 #onready var audio_stream_player: AudioStreamPlayer = $"../AudioStreamPlayer"
 onready var character_control: CharacterControl = $"../CharacterControl"
-onready var character_anim: CharacterAnim = $"../CharacterAnim"
+#onready var character_anim: CharacterAnim = $"../CharacterAnim"
+onready var character_anim = $"../CharacterAnim"
+
 func _ready():
 	_setup()
 
@@ -44,7 +46,7 @@ func _start_swing():
 	is_swinging = true
 	
 	# animation
-	character_anim.anim_base_name = "Swing"
+	character_anim.is_swinging = true
 	
 	# audio
 #	audio_stream_player.stream = swing_sound
@@ -87,7 +89,7 @@ func _stop_swing():
 	is_swinging = false
 
 	# animation
-	character_anim.anim_base_name = "Idle"
+	character_anim.is_swinging = false
 
 func _light_on():
 	_is_lit = true

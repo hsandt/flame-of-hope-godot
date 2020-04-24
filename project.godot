@@ -28,12 +28,18 @@ _global_script_classes=[ {
 "class": "CharacterRod",
 "language": "GDScript",
 "path": "res://Scripts/Character/CharacterRod.gd"
+}, {
+"base": "Reference",
+"class": "Enum",
+"language": "GDScript",
+"path": "res://Scripts/Enums/Enum.gd"
 } ]
 _global_script_class_icons={
 "CharacterAnim": "",
 "CharacterControl": "",
 "CharacterMotor": "",
-"CharacterRod": ""
+"CharacterRod": "",
+"Enum": ""
 }
 
 [application]
