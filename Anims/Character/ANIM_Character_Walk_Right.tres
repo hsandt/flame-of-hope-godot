@@ -4,8 +4,9 @@
 
 [resource]
 resource_name = "Character_Walk_Right"
-length = 0.9
+length = 0.5
 loop = true
+step = 0.0333333
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
 tracks/0/interp = 1
@@ -37,8 +38,20 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6 ),
+"times": PoolRealArray( 0, 0.166667, 0.333333 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ 6, 7, 8 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("RodFlame:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.166667, 0.333333 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -3, -26 ), Vector2( 0, -27 ), Vector2( -3, -27 ) ]
 }

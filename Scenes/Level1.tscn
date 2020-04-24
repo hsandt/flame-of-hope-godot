@@ -9,7 +9,7 @@
 [ext_resource path="res://Anims/Character/ANIM_Character_Idle_Left.tres" type="Animation" id=7]
 [ext_resource path="res://Scripts/Character/CharacterAnim.gd" type="Script" id=8]
 [ext_resource path="res://Anims/Character/ANIM_Character_Walk_Down.tres" type="Animation" id=9]
-[ext_resource path="res://Sprites/Character/character_swing_spritesheet.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Character/character_walk_spritesheet.png" type="Texture" id=10]
 [ext_resource path="res://Anims/Character/ANIM_Character_Walk_Right.tres" type="Animation" id=11]
 [ext_resource path="res://Anims/FX/SF_FlameSmall.tres" type="SpriteFrames" id=12]
 [ext_resource path="res://Scripts/Character/CharacterControl.gd" type="Script" id=13]
@@ -83,8 +83,8 @@ collision_mask = 4
 [node name="Sprite" type="Sprite" parent="Character"]
 position = Vector2( 0, -13 )
 texture = ExtResource( 10 )
-hframes = 16
-frame = 4
+hframes = 12
+frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Character"]
 anims/Character_Idle_Down = ExtResource( 4 )
