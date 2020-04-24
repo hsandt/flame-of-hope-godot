@@ -7,7 +7,10 @@ export var swing_sound: AudioStream
 # Rod Light On Audio Clip
 export var rod_light_on_sound: AudioStream
 
+# Is the rod in fire?
 var _is_lit: bool
+
+# Is the character swinging the rod?
 var is_swinging: bool
 
 # Swing Hitbox, used in Circle Overlap test
@@ -18,15 +21,14 @@ onready var rod_flame: CanvasItem = $"../RodFlame"
 onready var animation_player: AnimationPlayer = $"../AnimationPlayer"
 #onready var audio_stream_player: AudioStreamPlayer = $"../AudioStreamPlayer"
 onready var character_control: CharacterControl = $"../CharacterControl"
-#onready var character_anim: CharacterAnim = $"../CharacterAnim"
-onready var character_anim = $"../CharacterAnim"
+onready var character_anim: CharacterAnim = $"../CharacterAnim"
 
 func _ready():
 	_setup()
 
 func _setup():
 	# allows to work with Flame active in the editor, but deactivate on start
-	call_deferred("_light_off")
+	_light_off()
 	is_swinging = false
 
 func _physics_process(_delta):
@@ -93,7 +95,7 @@ func _stop_swing():
 
 func _light_on():
 	_is_lit = true
-	rod_flame.SetActive(true)
+	rod_flame.visible = true
 	
 	# audio
 	# note we use the same source for all Character SFX, so this will cover the Swing sound (a few frames after)
@@ -102,10 +104,10 @@ func _light_on():
 
 func _light_off():
 	_is_lit = false
+	# do not play animated sprite in the background while invisible
 	rod_flame.playing = false
 	rod_flame.visible = false
 
 func _on_AnimationPlayer_animation_finished(anim_name):
-	print(anim_name)
 	if anim_name.begins_with("Character_Swing_"):
 		_stop_swing()
