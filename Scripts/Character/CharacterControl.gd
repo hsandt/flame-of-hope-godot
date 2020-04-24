@@ -1,5 +1,5 @@
 class_name CharacterControl
-extends Node2D
+extends Node
 
 # Input binarization min threshold. Values below (in abs) are cut, values above clamped to -1 or +1.
 # Note that this should be higher than the deadzone set in Project Settings for move_ actions to affect input
@@ -22,7 +22,6 @@ func _process(_delta: float):
 	var horizontal_input = - Input.get_action_strength("move_left") + Input.get_action_strength("move_right")
 	var vertical_input = - Input.get_action_strength("move_up") + Input.get_action_strength("move_down")
 	move_intention = Vector2(_get_binarized_value(horizontal_input), _get_binarized_value(vertical_input))
-	print(move_intention)
 
 	_swing_intention = Input.is_action_pressed("swing")
 
