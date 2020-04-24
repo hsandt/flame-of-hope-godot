@@ -31,7 +31,6 @@ anims/FirePit_Lit = ExtResource( 1 )
 anims/FirePit_Unlit = ExtResource( 5 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-volume_db = -80.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 4
