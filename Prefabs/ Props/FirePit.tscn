@@ -7,10 +7,10 @@
 [ext_resource path="res://Anims/Props/ANIM_FirePit_Unlit.tres" type="Animation" id=5]
 [ext_resource path="res://Audio/SFX/fire_pit_light_on.ogg" type="AudioStream" id=6]
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=1]
 radius = 14.0
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=2]
 radius = 12.0
 
 [node name="FirePit" type="Node2D"]
@@ -31,6 +31,7 @@ anims/FirePit_Lit = ExtResource( 1 )
 anims/FirePit_Unlit = ExtResource( 5 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 4
@@ -38,7 +39,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 0, 2 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="FireSourceArea2D" type="Area2D" parent="."]
 collision_layer = 8
@@ -46,7 +47,7 @@ collision_mask = 16
 
 [node name="FireSourceCollisionShape2D" type="CollisionShape2D" parent="FireSourceArea2D"]
 position = Vector2( 0, 2 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="IgnitableArea2D" type="Area2D" parent="."]
 collision_layer = 32
@@ -54,5 +55,5 @@ collision_mask = 16
 
 [node name="IgnitableCollisionShape2D" type="CollisionShape2D" parent="IgnitableArea2D"]
 position = Vector2( 0, 2 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 disabled = true
