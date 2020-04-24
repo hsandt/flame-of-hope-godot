@@ -108,7 +108,7 @@ anims/Character_Walk_Up = ExtResource( 3 )
 [node name="RodFlame" type="AnimatedSprite" parent="Character"]
 position = Vector2( -3, -27 )
 frames = ExtResource( 12 )
-offset = Vector2( -2, -5 )
+offset = Vector2( -1, -4 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Character"]
 volume_db = -10.0

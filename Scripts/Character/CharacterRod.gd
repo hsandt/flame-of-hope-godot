@@ -66,7 +66,7 @@ func _stop_swing():
 func _light_on():
 	_is_lit = true
 	rod_flame.visible = true
-	rod_flame.playing = true
+	rod_flame.play()
 	
 	# audio
 	# note we use the same source for all Character SFX, so this will cover the Swing sound (a few frames after)
@@ -77,7 +77,7 @@ func _light_off():
 	_is_lit = false
 	rod_flame.visible = false
 	# do not play animated sprite in the background while invisible
-	rod_flame.playing = false
+	rod_flame.stop()
 
 func _on_SwingHitBox_area_entered(area: Area2D):
 	if not _is_lit:
