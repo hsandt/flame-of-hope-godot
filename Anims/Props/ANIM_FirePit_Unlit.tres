@@ -1,6 +1,6 @@
 [gd_resource type="Animation" load_steps=2 format=2]
 
-[sub_resource type="StreamTexture" id=1]
+[sub_resource type="StreamTexture" id=3]
 load_path = "res://.import/fire_pit_unlit.png-3b57df56aae2075d9465a0ea9c62e495.stex"
 
 [resource]
@@ -27,5 +27,29 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ SubResource( 1 ) ]
+"values": [ SubResource( 3 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("FireSourceArea2D/FireSourceCollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("IgnitableArea2D/IgnitableCollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }

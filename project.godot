@@ -33,13 +33,25 @@ _global_script_classes=[ {
 "class": "Enum",
 "language": "GDScript",
 "path": "res://Scripts/Enums/Enum.gd"
+}, {
+"base": "Node2D",
+"class": "FirePit",
+"language": "GDScript",
+"path": "res://Scripts/Props/FirePit.gd"
+}, {
+"base": "Reference",
+"class": "Layer",
+"language": "GDScript",
+"path": "res://Scripts/Constants/Layer.gd"
 } ]
 _global_script_class_icons={
 "CharacterAnim": "",
 "CharacterControl": "",
 "CharacterMotor": "",
 "CharacterRod": "",
-"Enum": ""
+"Enum": "",
+"FirePit": "",
+"Layer": ""
 }
 
 [application]
@@ -135,6 +147,7 @@ swing={
 2d_physics/layer_3="Obstacle"
 2d_physics/layer_4="FireSource"
 2d_physics/layer_5="Ignitor"
+2d_physics/layer_6="Ignitable"
 
 [rendering]
 

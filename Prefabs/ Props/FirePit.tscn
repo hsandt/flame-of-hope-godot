@@ -1,25 +1,56 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Anims/Props/ANIM_FirePit_Lit.tres" type="Animation" id=1]
 [ext_resource path="res://Anims/FX/SF_FlameBig.tres" type="SpriteFrames" id=2]
-[ext_resource path="res://Scripts/PlayOnStart.gd" type="Script" id=3]
-[ext_resource path="res://Scenes/FirePit.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/Props/FirePit.gd" type="Script" id=4]
 [ext_resource path="res://Anims/Props/ANIM_FirePit_Unlit.tres" type="Animation" id=5]
-[ext_resource path="res://Sprites/Props/fire_pit_lit.png" type="Texture" id=6]
+
+[sub_resource type="StreamTexture" id=1]
+load_path = "res://.import/fire_pit_unlit.png-3b57df56aae2075d9465a0ea9c62e495.stex"
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 14.0
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 12.0
 
 [node name="FirePit" type="Node2D"]
 position = Vector2( 208, 175 )
 script = ExtResource( 4 )
 
 [node name="Body" type="Sprite" parent="."]
-texture = ExtResource( 6 )
+texture = SubResource( 1 )
 
 [node name="FlameBig" type="AnimatedSprite" parent="."]
 visible = false
 position = Vector2( 0, -14 )
 frames = ExtResource( 2 )
-script = ExtResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/FirePit_Lit = ExtResource( 1 )
 anims/FirePit_Unlit = ExtResource( 5 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 0, 2 )
+shape = SubResource( 2 )
+
+[node name="FireSourceArea2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 16
+
+[node name="FireSourceCollisionShape2D" type="CollisionShape2D" parent="FireSourceArea2D"]
+position = Vector2( 0, 2 )
+shape = SubResource( 3 )
+disabled = true
+
+[node name="IgnitableArea2D" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 16
+
+[node name="IgnitableCollisionShape2D" type="CollisionShape2D" parent="IgnitableArea2D"]
+position = Vector2( 0, 2 )
+shape = SubResource( 3 )

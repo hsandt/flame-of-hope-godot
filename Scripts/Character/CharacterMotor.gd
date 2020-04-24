@@ -37,7 +37,6 @@ func _physics_process(_delta: float):
 		character_anim.direction = direction
 		character_anim.is_walking = true
 	elif not character_rod.is_swinging:
-		character_anim.direction = direction
 		character_anim.is_walking = false
 
 func _can_move() -> bool:

@@ -13,8 +13,8 @@ var _is_lit: bool
 # Is the character swinging the rod?
 var is_swinging: bool
 
-# Swing Hitbox, used in Circle Overlap test
-onready var swing_hitbox: Area2D = $"../SwingHitBox"
+# Swing Hitbox shape. Only enabled during hit.
+onready var swing_hitbowing_hitbox_shape: CollisionShape2D = $"../SwingHitBox/CollisionShape2D"
 	
 # Rod Flame, activated when rod is lit
 onready var rod_flame: CanvasItem = $"../RodFlame"
@@ -30,6 +30,8 @@ func _setup():
 	# allows to work with Flame active in the editor, but deactivate on start
 	_light_off()
 	is_swinging = false
+	# makes sure hitbox is disabled on start, in case we were testing swing anims in the Editor
+	swing_hitbowing_hitbox_shape.disabled = true
 
 func _physics_process(_delta):
 	# consume swing intention even if cannot swing now (no input buffering)
@@ -54,38 +56,6 @@ func _start_swing():
 #	audio_stream_player.stream = swing_sound
 #	audio_stream_player.play()
 
-func _swing_hit():
-	swing_hitbox.set_block_signals(false)
-	# if not _is_lit:
-	# 	# we don't check for triggers specifically, anyway all Fire Sources should be triggers
-	# 	int resultsCount = Physics2D.OverlapCircleNonAlloc(
-	# 		(Vector2)swing_hitbox.transform.position + swing_hitbox.offset,
-	# 		swing_hitbox.radius, PhysicsResults,
-	# 		Layers.FireSourceMask)
-	# 	if resultsCount > 0:
-
-	# else
-	# 	# rod is lit, it can ignite via ignitors
-	# 	# we don't check for triggers specifically, anyway all Ignitors should be triggers
-	# 	int resultsCount = Physics2D.OverlapCircleNonAlloc(
-	# 		(Vector2)swing_hitbox.transform.position + swing_hitbox.offset,
-	# 		swing_hitbox.radius, PhysicsResults,
-	# 		Layers.IgnitorMask)
-		
-	# 	for (int i = 0 i < resultsCount i++)
-	# 		var ignitor = PhysicsResults[i].GetComponentOrFail<Ignitor>()
-	# 		ignitor.Ignite()
-
-func _on_swing_hitbox_enter(other):
-	if not _is_lit:
-		if other.layer == "FireSource":
-			# we touched a fire source, light rod on
-			_light_on()
-	else:
-		if other.layer == "Ignitor":
-			# we touched a fire source, light rod on
-			other.Ignite()
-
 # Anim event callback
 func _stop_swing():
 	is_swinging = false
@@ -96,6 +66,7 @@ func _stop_swing():
 func _light_on():
 	_is_lit = true
 	rod_flame.visible = true
+	rod_flame.playing = true
 	
 	# audio
 	# note we use the same source for all Character SFX, so this will cover the Swing sound (a few frames after)
@@ -104,9 +75,21 @@ func _light_on():
 
 func _light_off():
 	_is_lit = false
+	rod_flame.visible = false
 	# do not play animated sprite in the background while invisible
 	rod_flame.playing = false
-	rod_flame.visible = false
+
+func _on_SwingHitBox_area_entered(area: Area2D):
+	print("_on_SwingHitBox_area_entered: %s" % str(area))
+	if not _is_lit:
+		if area.get_collision_layer_bit(Layer.FIRE_SOURCE):
+			# we touched a fire source, light rod on
+			_light_on()
+	else:
+		if area.get_collision_layer_bit(Layer.IGNITABLE):
+			# we touched a fire source, light rod on
+			var fire_pit := area.get_parent() as FirePit
+			fire_pit.ignite()
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name.begins_with("Character_Swing_"):
