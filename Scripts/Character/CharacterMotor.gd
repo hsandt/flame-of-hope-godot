@@ -1,3 +1,4 @@
+class_name CharacterMotor
 extends Node
 
 # Character speed
@@ -10,20 +11,19 @@ enum CardinalDirection {
 	RIGHT,
 }
 
-const CARDINAL_DIRECTION_NAMES = ["Down", "Left", "Up", "Right"]
-
-var _direction: int # enum CardinalDirection
+var direction: int # enum CardinalDirection
 
 onready var character: KinematicBody2D = $".."
 onready var animation_player: AnimationPlayer = $"../AnimationPlayer"
 onready var character_control: CharacterControl = $"../CharacterControl"
 onready var character_rod: CharacterRod = $"../CharacterRod"
+onready var character_anim: CharacterAnim = $"../CharacterAnim"
 
 func _ready():
 	_setup()
 
 func _setup():
-	_direction = CardinalDirection.DOWN
+	direction = CardinalDirection.DOWN
 
 func _physics_process(_delta: float):
 	var move_intention := Vector2.ZERO
@@ -44,9 +44,10 @@ func _physics_process(_delta: float):
 	# manually
 	if is_walking_anim:
 		_update_direction(move_intention)
-		animation_player.play("Character_Walk_%s" % CARDINAL_DIRECTION_NAMES[_direction])
-	# elif not character_rod.is_swinging:
-	# 	animation_player.play("Character_Idle_%s" % CARDINAL_DIRECTION_NAMES[_direction])
+		character_anim.set_anim_dir(direction)
+		character_anim.anim_base_name = "Walk"
+	elif not character_rod.is_swinging:
+		character_anim.anim_base_name = "Idle"
 
 func _can_move() -> bool:
 #	# character cannot move during Swing
@@ -57,23 +58,23 @@ func _update_direction(move_intention: Vector2):
 		# diagonal motion:
 		# if one of the two directions is the current direction, preserve it
 		# else, give priority to vertical direction
-		if move_intention.x < 0.0 && _direction == CardinalDirection.LEFT:
-			_direction = CardinalDirection.LEFT
-		elif move_intention.x > 0.0 && _direction == CardinalDirection.RIGHT:
-			_direction = CardinalDirection.RIGHT
-		elif move_intention.y < 0.0 && _direction == CardinalDirection.UP:
-			_direction = CardinalDirection.UP
-		elif move_intention.y > 0.0 && _direction == CardinalDirection.DOWN:
-			_direction = CardinalDirection.DOWN
+		if move_intention.x < 0.0 && direction == CardinalDirection.LEFT:
+			direction = CardinalDirection.LEFT
+		elif move_intention.x > 0.0 && direction == CardinalDirection.RIGHT:
+			direction = CardinalDirection.RIGHT
+		elif move_intention.y < 0.0 && direction == CardinalDirection.UP:
+			direction = CardinalDirection.UP
+		elif move_intention.y > 0.0 && direction == CardinalDirection.DOWN:
+			direction = CardinalDirection.DOWN
 		elif move_intention.y < 0.0:
-			_direction = CardinalDirection.UP
+			direction = CardinalDirection.UP
 		else: # if move_intention.y > 0.0
-			_direction = CardinalDirection.DOWN
+			direction = CardinalDirection.DOWN
 	elif move_intention.x < 0.0:
-		_direction = CardinalDirection.LEFT
+		direction = CardinalDirection.LEFT
 	elif move_intention.x > 0.0:
-		_direction = CardinalDirection.RIGHT
+		direction = CardinalDirection.RIGHT
 	elif move_intention.y < 0.0:
-		_direction = CardinalDirection.UP
+		direction = CardinalDirection.UP
 	else: # if move_intention.y > 0.0
-		_direction = CardinalDirection.DOWN
+		direction = CardinalDirection.DOWN

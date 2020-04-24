@@ -10,9 +10,19 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
+"class": "CharacterAnim",
+"language": "GDScript",
+"path": "res://Scripts/Character/CharacterAnim.gd"
+}, {
+"base": "Node",
 "class": "CharacterControl",
 "language": "GDScript",
 "path": "res://Scripts/Character/CharacterControl.gd"
+}, {
+"base": "Node",
+"class": "CharacterMotor",
+"language": "GDScript",
+"path": "res://Scripts/Character/CharacterMotor.gd"
 }, {
 "base": "Node",
 "class": "CharacterRod",
@@ -20,7 +30,9 @@ _global_script_classes=[ {
 "path": "res://Scripts/Character/CharacterRod.gd"
 } ]
 _global_script_class_icons={
+"CharacterAnim": "",
 "CharacterControl": "",
+"CharacterMotor": "",
 "CharacterRod": ""
 }
 

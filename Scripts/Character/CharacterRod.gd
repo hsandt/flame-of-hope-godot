@@ -18,7 +18,7 @@ onready var rod_flame: CanvasItem = $"../RodFlame"
 onready var animation_player: AnimationPlayer = $"../AnimationPlayer"
 #onready var audio_stream_player: AudioStreamPlayer = $"../AudioStreamPlayer"
 onready var character_control: CharacterControl = $"../CharacterControl"
-
+onready var character_anim: CharacterAnim = $"../CharacterAnim"
 func _ready():
 	_setup()
 
@@ -44,7 +44,7 @@ func _start_swing():
 	is_swinging = true
 	
 	# animation
-	animation_player.play("Character_Swing_%s" % CARDINAL_DIRECTION_NAMES[$"../CharacterMotor"._direction])
+	character_anim.anim_base_name = "Swing"
 	
 	# audio
 #	audio_stream_player.stream = swing_sound
@@ -87,7 +87,7 @@ func _stop_swing():
 	is_swinging = false
 
 	# animation
-	animation_player.play("Character_Idle_%s" % CARDINAL_DIRECTION_NAMES[$"../CharacterMotor"._direction])
+	character_anim.anim_base_name = "Idle"
 
 func _light_on():
 	_is_lit = true
