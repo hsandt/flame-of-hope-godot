@@ -35,16 +35,16 @@ func _update_anim():
 	animation_player.play(new_anim)
 	
 func _set_direction(new_direction: int): # direction: Enum.CardinalDirection
-	direction = new_direction
 	if direction != new_direction:
+		direction = new_direction
 		_update_anim()
 
-func _set_is_walking(new_is_walking):
+func _set_is_walking(new_is_walking: bool):
 	if is_walking != new_is_walking:
 		is_walking = new_is_walking
 		_update_anim()
 
-func _set_is_swinging(new_is_swinging):
+func _set_is_swinging(new_is_swinging: bool):
 	if is_swinging != new_is_swinging:
 		is_swinging = new_is_swinging
 		_update_anim()
