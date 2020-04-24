@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/fire_pit_light_on.ogg-9e53ecc54eaa75ba25e89b47ea994482.oggstr"
+
+[deps]
+
+source_file="res://Audio/SFX/fire_pit_light_on.ogg"
+dest_files=[ "res://.import/fire_pit_light_on.ogg-9e53ecc54eaa75ba25e89b47ea994482.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0.0

@@ -9,7 +9,7 @@ export var fire_pit_light_on_sound: AudioStream
 export var lit_on_start := false setget _set_lit_on_start
 
 onready var animation_player: AnimationPlayer = $AnimationPlayer
-#onready var audio_stream_player: AudioStreamPlayer = $"../AudioStreamPlayer"
+onready var audio_stream_player: AudioStreamPlayer = $"AudioStreamPlayer"
 onready var flame_big: AnimatedSprite = $FlameBig
 
 func _ready():
@@ -37,8 +37,8 @@ func ignite():
 	_set_lit()
 
 	# audio
-#	audio_stream_player.stream = fire_pit_light_on_sound
-#	audio_stream_player.play()
+	audio_stream_player.stream = fire_pit_light_on_sound
+	audio_stream_player.play()
 
 func _set_lit_on_start(new_lit_on_start):
 	lit_on_start = new_lit_on_start
