@@ -30,7 +30,6 @@ radius = 8.06226
 [node name="Node2D" type="Node2D"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 0
 
 [node name="Title" type="Label" parent="CanvasLayer"]
 margin_left = 20.0
