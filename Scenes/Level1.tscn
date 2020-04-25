@@ -28,6 +28,39 @@ radius = 8.06226
 
 [node name="Node2D" type="Node2D"]
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="Title" type="Label" parent="CanvasLayer"]
+margin_left = 20.0
+margin_top = 21.0
+margin_right = 66.0
+margin_bottom = 35.0
+text = "Flame of Hope - Godot"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Version" type="Label" parent="CanvasLayer"]
+margin_left = 20.0
+margin_top = 42.0
+margin_right = 165.0
+margin_bottom = 56.0
+text = "v0.1.0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="CanvasLayer"]
+margin_left = 406.0
+margin_top = 21.0
+margin_right = 452.0
+margin_bottom = 35.0
+text = "Level 1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="TileMaps" type="Node2D" parent="."]
 position = Vector2( 0, -1 )
 
@@ -69,16 +102,6 @@ position = Vector2( 280, 79 )
 [node name="FirePit_Source" parent="." instance=ExtResource( 2 )]
 position = Vector2( 240, 127 )
 lit_on_start = true
-
-[node name="Label" type="Label" parent="."]
-margin_left = 93.0
-margin_top = 66.0
-margin_right = 133.0
-margin_bottom = 80.0
-text = "Level 1"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Character" type="KinematicBody2D" parent="."]
 position = Vector2( 241, 206 )
