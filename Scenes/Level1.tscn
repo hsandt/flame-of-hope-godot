@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Tilemap/Environment.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/ Props/FirePit.tscn" type="PackedScene" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://Anims/Character/ANIM_Character_Swing_Right.tres" type="Animation" id=20]
 [ext_resource path="res://Audio/SFX/rod_light_on.ogg" type="AudioStream" id=21]
 [ext_resource path="res://Audio/SFX/swing.ogg" type="AudioStream" id=22]
+[ext_resource path="res://Audio/BGM/theme_neutral.ogg" type="AudioStream" id=23]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 8.06226
@@ -60,6 +61,10 @@ text = "Level 1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 23 )
+autoplay = true
 
 [node name="TileMaps" type="Node2D" parent="."]
 position = Vector2( 0, -1 )
