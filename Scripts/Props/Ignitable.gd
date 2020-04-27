@@ -51,5 +51,6 @@ func _set_lit_on_start(new_lit_on_start: bool):
 	lit_on_start = new_lit_on_start
 	
 	if Engine.editor_hint:
-		_tool_update_preview(new_lit_on_start)
+		# defer to let child be loaded if this is called on start/save scene
+		call_deferred("_tool_update_preview", new_lit_on_start)
 

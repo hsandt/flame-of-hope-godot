@@ -11,5 +11,4 @@ func _tool_update_preview(new_lit_on_start: bool):
 	# in game runtime we play FirePit_Lit/Unlit which also changes the Body
 	# sprite, but for preview in editor, showing/hiding Flame is enough
 	# also, children are not ready on save, so check for node existence
-	if has_node("FlameBig"):
-		$FlameBig.visible = new_lit_on_start
+	$FlameBig.visible = new_lit_on_start
