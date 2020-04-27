@@ -10,7 +10,7 @@ export(AudioStream) var light_on_sound
 export(bool) var lit_on_start = false setget _set_lit_on_start
 
 onready var animation_player: AnimationPlayer = $AnimationPlayer
-onready var audio_stream_player: AudioStreamPlayer = $"SFXPlayer"
+onready var sfx_player: AudioStreamPlayer = $"SFXPlayer"
 
 func _ready():
 	if Engine.editor_hint:
@@ -29,8 +29,8 @@ func ignite():
 	_lit()
 
 	# audio
-	audio_stream_player.stream = light_on_sound
-	audio_stream_player.play()
+	sfx_player.stream = light_on_sound
+	sfx_player.play()
 
 # virtual
 func _get_anim_prefix():

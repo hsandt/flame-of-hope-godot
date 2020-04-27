@@ -19,7 +19,7 @@ onready var swing_hitbowing_hitbox_shape: CollisionShape2D = $"../SwingHitBox/Co
 # Rod Flame, activated when rod is lit
 onready var rod_flame: CanvasItem = $"../RodFlame"
 onready var animation_player: AnimationPlayer = $"../AnimationPlayer"
-onready var audio_stream_player: AudioStreamPlayer = $"../SFXPlayer"
+onready var sfx_player: AudioStreamPlayer = $"../SFXPlayer"
 onready var character_control: CharacterControl = $"../CharacterControl"
 onready var character_anim: CharacterAnim = $"../CharacterAnim"
 
@@ -53,8 +53,8 @@ func _start_swing():
 	character_anim.is_swinging = true
 	
 	# audio
-	audio_stream_player.stream = swing_sound
-	audio_stream_player.play()
+	sfx_player.stream = swing_sound
+	sfx_player.play()
 
 # Anim event callback
 func _stop_swing():
@@ -70,8 +70,8 @@ func _light_on():
 	
 	# audio
 	# note we use the same source for all Character SFX, so this will cover the Swing sound (a few frames after)
-	audio_stream_player.stream = rod_light_on_sound
-	audio_stream_player.play()
+	sfx_player.stream = rod_light_on_sound
+	sfx_player.play()
 
 func _light_off():
 	_is_lit = false

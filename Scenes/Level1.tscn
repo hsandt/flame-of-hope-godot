@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Tilemap/Environment.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Props/FirePit.tscn" type="PackedScene" id=2]
@@ -26,6 +26,7 @@
 [ext_resource path="res://Prefabs/Props/Torch.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Sprites/Tiles/Wall/invisible_wall.png" type="Texture" id=25]
 [ext_resource path="res://Scripts/Props/Door.gd" type="Script" id=26]
+[ext_resource path="res://Audio/Jingle/victory_jingle.ogg" type="AudioStream" id=27]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -71,6 +72,11 @@ __meta__ = {
 stream = ExtResource( 23 )
 autoplay = true
 bus = "Music"
+
+[node name="JinglePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 23 )
+autoplay = true
+bus = "Jingle"
 
 [node name="TileMaps" type="Node2D" parent="."]
 position = Vector2( 0, -1 )
@@ -137,6 +143,7 @@ lit_on_start = true
 position = Vector2( 240, 6 )
 texture = ExtResource( 25 )
 script = ExtResource( 26 )
+victory_jingle = ExtResource( 27 )
 opening_ignitable_paths = [ NodePath("../Torch"), NodePath("../Torch2"), NodePath("../Torch3"), NodePath("../Torch4") ]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Door"]
