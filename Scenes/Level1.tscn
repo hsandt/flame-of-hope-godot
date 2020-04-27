@@ -86,7 +86,7 @@ tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
 collision_mask = 2
 format = 1
-tile_data = PoolIntArray( 786444, 7, 0, 786445, 9, 1, 786448, 9, 1, 786449, 536870918, 0, 851980, 9, 2, 851981, 9, 3, 851984, 9, 3, 851985, 536870921, 2 )
+tile_data = PoolIntArray( 786444, 7, 0, 786445, 11, 0, 786448, 11, 0, 786449, 536870918, 0, 851980, 9, 2, 851981, 9, 3, 851984, 9, 3, 851985, 536870921, 2 )
 
 [node name="Ground" type="TileMap" parent="TileMaps"]
 tile_set = ExtResource( 1 )
