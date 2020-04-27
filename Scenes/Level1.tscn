@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Tilemap/Environment.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Props/FirePit.tscn" type="PackedScene" id=2]
@@ -24,8 +24,13 @@
 [ext_resource path="res://Audio/SFX/swing.ogg" type="AudioStream" id=22]
 [ext_resource path="res://Audio/BGM/theme_neutral.ogg" type="AudioStream" id=23]
 [ext_resource path="res://Prefabs/Props/Torch.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Sprites/Tiles/Wall/invisible_wall.png" type="Texture" id=25]
+[ext_resource path="res://Scripts/Props/Door.gd" type="Script" id=26]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8 )
+
+[sub_resource type="CircleShape2D" id=2]
 radius = 8.06226
 
 [node name="Level1" type="Node2D"]
@@ -127,6 +132,19 @@ position = Vector2( 279, 83 )
 position = Vector2( 240, 127 )
 lit_on_start = true
 
+[node name="Door" type="Sprite" parent="."]
+position = Vector2( 240, 6 )
+texture = ExtResource( 25 )
+script = ExtResource( 26 )
+opening_ignitable_paths = [ NodePath("../Torch"), NodePath("../Torch2"), NodePath("../Torch3"), NodePath("../Torch4") ]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Door"]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door/StaticBody2D"]
+shape = SubResource( 1 )
+
 [node name="Character" type="KinematicBody2D" parent="."]
 position = Vector2( 241, 206 )
 z_index = 1
@@ -170,7 +188,7 @@ collision_mask = 40
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Character/SwingHitBox"]
 position = Vector2( 0, -26 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 disabled = true
 
 [node name="CharacterControl" type="Node" parent="Character"]

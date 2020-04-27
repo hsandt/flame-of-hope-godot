@@ -1,11 +1,13 @@
 class_name Ignitable
 extends Node2D
 
+signal lit
+
 # Light On Audio Clip
-export var light_on_sound: AudioStream
+export(AudioStream) var light_on_sound
 
 # Is the fire pit lit on level start?
-export var lit_on_start := false setget _set_lit_on_start
+export(bool) var lit_on_start = false setget _set_lit_on_start
 
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var audio_stream_player: AudioStreamPlayer = $"AudioStreamPlayer"
@@ -40,6 +42,7 @@ func _tool_update_preview(_new_lit_on_start: bool):
 
 func _lit():
 	animation_player.play("%s_Lit" % _get_anim_prefix())
+	emit_signal("lit")
 
 func _unlit():
 	animation_player.play("%s_Unlit"  % _get_anim_prefix())
