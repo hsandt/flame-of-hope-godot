@@ -19,4 +19,3 @@ func _tool_update_preview(new_lit_on_start: bool):
 			$AnimatedSprite.frames = sf_torch_lit
 		else:
 			$AnimatedSprite.frames = sf_torch_unlit
-	

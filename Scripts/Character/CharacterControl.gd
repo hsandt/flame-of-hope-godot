@@ -3,7 +3,7 @@ extends Node
 
 # Input binarization min threshold. Values below (in abs) are cut, values above clamped to -1 or +1.
 # Note that this should be higher than the deadzone set in Project Settings for move_ actions to affect input
-export var input_min_threshold := 0.125
+export(float) var input_min_threshold = 0.125
 
 # Move intention vector, exposed for CharacterMotor
 var move_intention : Vector2

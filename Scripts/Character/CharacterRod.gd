@@ -2,10 +2,10 @@ class_name CharacterRod
 extends Node
 
 # Swing Audio Clip
-export var swing_sound: AudioStream
+export(AudioStream) var swing_sound
 	
 # Rod Light On Audio Clip
-export var rod_light_on_sound: AudioStream
+export(AudioStream) var rod_light_on_sound
 
 # Is the rod in fire?
 var _is_lit: bool

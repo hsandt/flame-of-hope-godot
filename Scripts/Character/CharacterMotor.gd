@@ -2,7 +2,7 @@ class_name CharacterMotor
 extends Node
 
 # Character speed
-export var speed := 32.0
+export(float) var speed = 32.0
 
 # Character direction
 var direction: int # enum CardinalDirection
