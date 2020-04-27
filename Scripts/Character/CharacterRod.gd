@@ -19,7 +19,7 @@ onready var swing_hitbowing_hitbox_shape: CollisionShape2D = $"../SwingHitBox/Co
 # Rod Flame, activated when rod is lit
 onready var rod_flame: CanvasItem = $"../RodFlame"
 onready var animation_player: AnimationPlayer = $"../AnimationPlayer"
-onready var audio_stream_player: AudioStreamPlayer = $"../AudioStreamPlayer"
+onready var audio_stream_player: AudioStreamPlayer = $"../SFXPlayer"
 onready var character_control: CharacterControl = $"../CharacterControl"
 onready var character_anim: CharacterAnim = $"../CharacterAnim"
 

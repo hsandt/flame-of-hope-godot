@@ -72,6 +72,10 @@ config/name="Flame of Hope Godot"
 run/main_scene="res://Scenes/Level1.tscn"
 config/icon="res://icon.png"
 
+[audio]
+
+default_bus_layout="res://Audio/default_bus_layout.tres"
+
 [autoload]
 
 VDGlobal="*res://VisualDebugger/VDGlobal.gd"
