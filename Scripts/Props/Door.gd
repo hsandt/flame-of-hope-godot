@@ -14,7 +14,8 @@ func _ready():
 	for ignitable_path in opening_ignitable_paths:
 		var ignitable = get_node(ignitable_path) as Ignitable
 		if ignitable:
-			var error = ignitable.connect("lit", self, "_on_opening_ignitable_lit")
+			# deferred connection to avoid disabling collision during physics process
+			var error = ignitable.connect("lit", self, "_on_opening_ignitable_lit", [], CONNECT_DEFERRED)
 			if not error:
 				_opening_ignitable_count += 1
 			else:
