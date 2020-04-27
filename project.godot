@@ -34,15 +34,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Enums/Enum.gd"
 }, {
-"base": "Node2D",
+"base": "Ignitable",
 "class": "FirePit",
 "language": "GDScript",
 "path": "res://Scripts/Props/FirePit.gd"
+}, {
+"base": "Node2D",
+"class": "Ignitable",
+"language": "GDScript",
+"path": "res://Scripts/Props/Ignitable.gd"
 }, {
 "base": "Reference",
 "class": "Layer",
 "language": "GDScript",
 "path": "res://Scripts/Constants/Layer.gd"
+}, {
+"base": "Ignitable",
+"class": "Torch",
+"language": "GDScript",
+"path": "res://Scripts/Props/Torch.gd"
 } ]
 _global_script_class_icons={
 "CharacterAnim": "",
@@ -51,7 +61,9 @@ _global_script_class_icons={
 "CharacterRod": "",
 "Enum": "",
 "FirePit": "",
-"Layer": ""
+"Ignitable": "",
+"Layer": "",
+"Torch": ""
 }
 
 [application]

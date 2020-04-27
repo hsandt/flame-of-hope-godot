@@ -1,0 +1,104 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Anims/Props/ANIM_Torch_Unlit.tres" type="Animation" id=1]
+[ext_resource path="res://Anims/Props/SF_Torch_Unlit.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Scripts/Props/Torch.gd" type="Script" id=3]
+[ext_resource path="res://Audio/SFX/fire_pit_light_on.ogg" type="AudioStream" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Torch_Unlit"
+tracks/0/type = "value"
+tracks/0/path = NodePath("FireSourceArea2D/FireSourceCollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("IgnitableArea2D/IgnitableCollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedSprite:frames")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 2 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedSprite:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 9.05539
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 6.0
+
+[node name="Torch" type="Node2D"]
+position = Vector2( 208, 175 )
+script = ExtResource( 3 )
+light_on_sound = ExtResource( 4 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 2 )
+offset = Vector2( 0, -16 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Torch_Lit = ExtResource( 1 )
+anims/Torch_Unlit = SubResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -15.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 0, 2 )
+shape = SubResource( 2 )
+
+[node name="FireSourceArea2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 16
+
+[node name="FireSourceCollisionShape2D" type="CollisionShape2D" parent="FireSourceArea2D"]
+position = Vector2( 0, 2 )
+shape = SubResource( 3 )
+disabled = true
+
+[node name="IgnitableArea2D" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 16
+
+[node name="IgnitableCollisionShape2D" type="CollisionShape2D" parent="IgnitableArea2D"]
+position = Vector2( 0, 2 )
+shape = SubResource( 3 )

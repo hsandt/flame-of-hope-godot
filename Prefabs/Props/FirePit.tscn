@@ -2,13 +2,13 @@
 
 [ext_resource path="res://Anims/Props/ANIM_FirePit_Lit.tres" type="Animation" id=1]
 [ext_resource path="res://Anims/FX/SF_FlameBig.tres" type="SpriteFrames" id=2]
-[ext_resource path="res://Sprites/Props/fire_pit_lit.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Props/firepit_unlit.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/Props/FirePit.gd" type="Script" id=4]
 [ext_resource path="res://Anims/Props/ANIM_FirePit_Unlit.tres" type="Animation" id=5]
 [ext_resource path="res://Audio/SFX/fire_pit_light_on.ogg" type="AudioStream" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 14.0
+radius = 15.0
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 12.0
@@ -16,12 +16,15 @@ radius = 12.0
 [node name="FirePit" type="Node2D"]
 position = Vector2( 208, 175 )
 script = ExtResource( 4 )
-fire_pit_light_on_sound = ExtResource( 6 )
+light_on_sound = ExtResource( 6 )
 
 [node name="Body" type="Sprite" parent="."]
 texture = ExtResource( 3 )
+offset = Vector2( 0, -4 )
 
 [node name="FlameBig" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 0, -4 )
 frames = ExtResource( 2 )
 offset = Vector2( 1, -14 )
 
@@ -33,12 +36,10 @@ anims/FirePit_Unlit = ExtResource( 5 )
 volume_db = -10.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-visible = false
 collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 0, 2 )
 shape = SubResource( 1 )
 
 [node name="FireSourceArea2D" type="Area2D" parent="."]
@@ -47,8 +48,8 @@ collision_layer = 8
 collision_mask = 16
 
 [node name="FireSourceCollisionShape2D" type="CollisionShape2D" parent="FireSourceArea2D"]
-position = Vector2( 0, 2 )
 shape = SubResource( 2 )
+disabled = true
 
 [node name="IgnitableArea2D" type="Area2D" parent="."]
 visible = false
@@ -56,6 +57,4 @@ collision_layer = 32
 collision_mask = 16
 
 [node name="IgnitableCollisionShape2D" type="CollisionShape2D" parent="IgnitableArea2D"]
-position = Vector2( 0, 2 )
 shape = SubResource( 2 )
-disabled = true

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/fire_pit_unlit.png-261780b85400a4487f53342a2c5bd7ce.stex"
+path="res://.import/firepit_unlit.png-838269ca617e2a99ea595d44a63b3881.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Props/fire_pit_unlit.png"
-dest_files=[ "res://.import/fire_pit_unlit.png-261780b85400a4487f53342a2c5bd7ce.stex" ]
+source_file="res://Sprites/Props/firepit_unlit.png"
+dest_files=[ "res://.import/firepit_unlit.png-838269ca617e2a99ea595d44a63b3881.stex" ]
 
 [params]
 

@@ -87,8 +87,8 @@ func _on_SwingHitBox_area_entered(area: Area2D):
 	else:
 		if area.get_collision_layer_bit(Layer.IGNITABLE):
 			# we touched a fire source, light rod on
-			var fire_pit := area.get_parent() as FirePit
-			fire_pit.ignite()
+			var ignitable := area.get_parent() as Ignitable
+			ignitable.ignite()
 
 func _on_AnimationPlayer_animation_finished(anim_name: String):
 	if anim_name.begins_with("Character_Swing_"):
