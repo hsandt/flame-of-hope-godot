@@ -23,7 +23,10 @@ func _process(_delta: float):
 	var vertical_input = - Input.get_action_strength("move_up") + Input.get_action_strength("move_down")
 	move_intention = Vector2(_get_binarized_value(horizontal_input), _get_binarized_value(vertical_input))
 
-	_swing_intention = Input.is_action_just_pressed("swing")
+	# "sticky" input since process may be called twice before physics process and we don't want to clear buffer
+	# before consume
+	if not _swing_intention:
+		_swing_intention = Input.is_action_just_pressed("swing")
 
 func _get_binarized_value(value: float) -> float:
 	# Process input so that each coordinate is 0/1 as in old school games with D-pad,
