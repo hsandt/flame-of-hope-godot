@@ -18,15 +18,16 @@ func _setup():
 	move_intention = Vector2.ZERO
 	_swing_intention = false
 
+func _unhandled_input(event: InputEvent):
+	# one-time press actions are handled here instead of _process + is_action_just_pressed, so they become
+	# true on press until consumed, and never cleared due to _process being called 2x before _physics_process
+	if event.is_action_pressed("swing"):
+		_swing_intention = true
+
 func _process(_delta: float):
 	var horizontal_input = - Input.get_action_strength("move_left") + Input.get_action_strength("move_right")
 	var vertical_input = - Input.get_action_strength("move_up") + Input.get_action_strength("move_down")
 	move_intention = Vector2(_get_binarized_value(horizontal_input), _get_binarized_value(vertical_input))
-
-	# "sticky" input since process may be called twice before physics process and we don't want to clear buffer
-	# before consume
-	if not _swing_intention:
-		_swing_intention = Input.is_action_just_pressed("swing")
 
 func _get_binarized_value(value: float) -> float:
 	# Process input so that each coordinate is 0/1 as in old school games with D-pad,
