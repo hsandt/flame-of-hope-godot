@@ -12,7 +12,7 @@ var _opening_ignitable_count := 0
 # Number of ignitables already lit
 var _opening_ignitable_lit_count := 0
 
-onready var jingle_player := $"/root/Level1/JinglePlayer" as AudioStreamPlayer
+onready var jingle_player := $"/root/Dungeon/JinglePlayer" as AudioStreamPlayer
 onready var collision_shape := $StaticBody2D/CollisionShape2D as CollisionShape2D
 
 func _ready():
