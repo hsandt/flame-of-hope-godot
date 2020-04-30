@@ -166,6 +166,7 @@ swing={
 2d_physics/layer_4="FireSource"
 2d_physics/layer_5="Ignitor"
 2d_physics/layer_6="Ignitable"
+2d_physics/layer_7="EventTrigger"
 
 [rendering]
 
