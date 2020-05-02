@@ -70,18 +70,33 @@ func _stop_swing():
 	# animation
 	character_anim.is_swinging = false
 
-func _light_on():
-	_is_lit = true
-	rod_flame.visible = true
-	rod_flame.play()
-	
-	# start timer before flame goes off (duration is set in Inspector on FlameTimer)
-	flame_timer.start()
+# light rod on during game, with SFX
+func _ignite():
+	_light_on()
 	
 	# audio
 	# note we use the same source for all Character SFX, so this will cover the Swing sound (a few frames after)
 	_play_sfx(rod_light_on_sound)
 
+# silently set rod lit state to on (logical and visual), useful on setup
+# and also during game when combined with SFX
+func _light_on():
+	_is_lit = true
+	rod_flame.visible = true
+	rod_flame.play()
+	
+	# start timer until flame goes off (duration is set in Inspector on FlameTimer)
+	flame_timer.start()
+
+# reverse of ignite, light rod off during game, with SFX
+func _go_off():
+	_light_off()
+	
+	# audio
+	_play_sfx(rod_light_off_sound)	
+
+# silently set rod lit state to off (logical and visual), useful on setup
+# and also during game when combined with SFX
 func _light_off():
 	_is_lit = false
 	rod_flame.visible = false
@@ -90,28 +105,27 @@ func _light_off():
 	
 	# stop timer to avoid warning on timeout
 	flame_timer.stop()
-	
-	# audio
-	_play_sfx(rod_light_off_sound)	
 
 func _on_SwingHitBox_area_entered(area: Area2D):
 	if not _is_lit:
 		if area.get_collision_layer_bit(Layer.FIRE_SOURCE):
-			# we touched a fire source, light rod on
-			_light_on()
+			# we touched a fire source, ignite rod
+			_ignite()
 	else:
 		if area.get_collision_layer_bit(Layer.IGNITABLE):
 			# we touched a fire source, light rod on
 			var ignitable := area.get_parent() as Ignitable
 			ignitable.ignite()
+			# since we just touched what is now a fire source,
+			# restart the flame timer
+			flame_timer.start()
 
 func _on_AnimationPlayer_animation_finished(anim_name: String):
 	if anim_name.begins_with("Character_Swing_"):
 		_stop_swing()
 
-
 func _on_FlameTimer_timeout():
 	if _is_lit:
-		_light_off()
+		_go_off()
 	else:
 		print("WARNING: FlameTimer timed out while Rod was not lit, nothing will happen.")

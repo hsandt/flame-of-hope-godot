@@ -79,6 +79,10 @@ anims/Torch_Unlit = SubResource( 1 )
 volume_db = -15.0
 bus = "SFX"
 
+[node name="FlameTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 4
 collision_mask = 2
@@ -103,3 +107,6 @@ collision_mask = 16
 [node name="IgnitableCollisionShape2D" type="CollisionShape2D" parent="IgnitableArea2D"]
 position = Vector2( 0, 2 )
 shape = SubResource( 3 )
+[connection signal="lit" from="." to="." method="_on_Torch_lit"]
+[connection signal="unlit" from="." to="." method="_on_Torch_unlit"]
+[connection signal="timeout" from="FlameTimer" to="." method="_on_FlameTimer_timeout"]
