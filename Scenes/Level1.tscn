@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Tilemap/Environment.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Props/FirePit.tscn" type="PackedScene" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://Scripts/Props/Door.gd" type="Script" id=26]
 [ext_resource path="res://Audio/Jingle/victory_jingle.ogg" type="AudioStream" id=27]
 [ext_resource path="res://Prefabs/EventTriggers/RoomEntrance.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Audio/SFX/flame_light_off.ogg" type="AudioStream" id=29]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 8.06226
@@ -139,6 +140,11 @@ script = ExtResource( 15 )
 script = ExtResource( 16 )
 swing_sound = ExtResource( 22 )
 rod_light_on_sound = ExtResource( 21 )
+rod_light_off_sound = ExtResource( 29 )
+
+[node name="FlameTimer" type="Timer" parent="Character/CharacterRod"]
+wait_time = 5.0
+one_shot = true
 
 [node name="CharacterAnim" type="Node" parent="Character"]
 script = ExtResource( 8 )
@@ -307,3 +313,4 @@ collision_mask = 2
 shape = SubResource( 2 )
 [connection signal="animation_finished" from="Character/AnimationPlayer" to="Character/CharacterRod" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="area_entered" from="Character/SwingHitBox" to="Character/CharacterRod" method="_on_SwingHitBox_area_entered"]
+[connection signal="timeout" from="Character/CharacterRod/FlameTimer" to="Character/CharacterRod" method="_on_FlameTimer_timeout"]

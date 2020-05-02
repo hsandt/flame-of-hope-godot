@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/flame_light_off.ogg-d1231c51a12d15e2d4abe96f0d48049c.oggstr"
+
+[deps]
+
+source_file="res://Audio/SFX/flame_light_off.ogg"
+dest_files=[ "res://.import/flame_light_off.ogg-d1231c51a12d15e2d4abe96f0d48049c.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
