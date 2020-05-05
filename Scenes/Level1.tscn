@@ -146,7 +146,7 @@ __meta__ = {
 "_edit_group_": true
 }
 victory_jingle = ExtResource( 27 )
-opening_ignitable_paths = [ NodePath("../Torch"), NodePath("../Torch2"), NodePath("../Torch3"), NodePath("../Torch4") ]
+opening_ignitable_paths = [ NodePath("../Torch"), NodePath("../Torch2"), NodePath("../Torch3"), NodePath("../Torch4"), NodePath("../../CanvasLayer/Title"), NodePath("") ]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Room1/Door"]
 collision_layer = 4
