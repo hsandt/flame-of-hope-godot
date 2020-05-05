@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/RoomEntrance.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 1 )
+extents = Vector2( 16, 2 )
 
 [node name="RoomEntrance" type="Area2D"]
 z_index = 1
