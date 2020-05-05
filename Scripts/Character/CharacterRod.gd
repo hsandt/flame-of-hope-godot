@@ -45,6 +45,10 @@ func _physics_process(_delta: float):
 			_start_swing()
 
 func _play_sfx(stream: AudioStream):
+	if not stream:
+		print("ERROR: '%s' _play_sfx stream argument is null, will not play" % get_path())
+		return
+		
 	sfx_player.stream = stream
 	sfx_player.play()
 

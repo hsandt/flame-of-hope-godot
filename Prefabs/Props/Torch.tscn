@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Anims/Props/ANIM_Torch_Unlit.tres" type="Animation" id=1]
 [ext_resource path="res://Anims/Props/SF_Torch_Unlit.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://Scripts/Props/Torch.gd" type="Script" id=3]
 [ext_resource path="res://Audio/SFX/fire_pit_light_on.ogg" type="AudioStream" id=4]
+[ext_resource path="res://Audio/SFX/flame_light_off.ogg" type="AudioStream" id=5]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Torch_Unlit"
@@ -66,6 +67,7 @@ radius = 9.0
 position = Vector2( 208, 175 )
 script = ExtResource( 3 )
 light_on_sound = ExtResource( 4 )
+light_off_sound = ExtResource( 5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 2 )

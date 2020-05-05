@@ -50,6 +50,10 @@ func _tool_update_preview(_new_lit_on_start: bool):
 	return
 
 func _play_sfx(stream: AudioStream):
+	if not stream:
+		print("ERROR: '%s' _play_sfx stream argument is null, will not play" % get_path())
+		return
+		
 	sfx_player.stream = stream
 	sfx_player.play()
 
