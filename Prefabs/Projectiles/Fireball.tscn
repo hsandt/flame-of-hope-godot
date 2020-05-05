@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Anims/FX/SF_Fireball.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Scripts/Projectiles/Fireball.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 5.0
+
+[node name="Fireball" type="KinematicBody2D"]
+z_index = 2
+collision_layer = 16
+collision_mask = 36
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 1 )
+offset = Vector2( 0, -2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )

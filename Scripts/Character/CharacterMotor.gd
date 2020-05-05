@@ -10,7 +10,7 @@ var direction: int # enum CardinalDirection
 onready var character: KinematicBody2D = $".."
 onready var animation_player: AnimationPlayer = $"../AnimationPlayer"
 onready var character_control: CharacterControl = $"../CharacterControl"
-onready var character_rod: CharacterRod = $"../CharacterRod"
+onready var character_rod = $"../CharacterRod"
 onready var character_anim: CharacterAnim = $"../CharacterAnim"
 
 func _ready():

@@ -1,6 +1,9 @@
 class_name CharacterRod
 extends Node
 
+# Fireball prefab
+export(PackedScene) var fireball_prefab
+
 # Rod Swing Audio Clip
 export(AudioStream) var swing_sound
 
@@ -22,13 +25,16 @@ var is_swinging: bool
 # Is the character throwing a fireball
 var is_throwing_fireball: bool
 
+onready var dungeon = $"/root/Dungeon" as Node2D
+onready var fireball_spawn_point = $"../FireballSpawnPoint" as Node2D
+# Rod Flame, activated when rod is lit
+onready var animation_player := $"../AnimationPlayer" as AnimationPlayer
+onready var rod_flame := $"../RodFlame" as CanvasItem
+onready var sfx_player := $"../SFXPlayer" as AudioStreamPlayer
 # Swing Hitbox shape. Only enabled during hit.
 onready var swing_hitbowing_hitbox_shape := $"../SwingHitBox/CollisionShape2D" as CollisionShape2D
-# Rod Flame, activated when rod is lit
-onready var rod_flame := $"../RodFlame" as CanvasItem
-onready var animation_player := $"../AnimationPlayer" as AnimationPlayer
-onready var sfx_player := $"../SFXPlayer" as AudioStreamPlayer
 onready var character_control := $"../CharacterControl" as CharacterControl
+onready var character_motor := $"../CharacterMotor" as CharacterMotor
 onready var character_anim := $"../CharacterAnim" as CharacterAnim
 onready var flame_timer := $FlameTimer as Timer
 
@@ -108,9 +114,14 @@ func _stop_throw_fireball():
 
 # Anim Call Method event
 func _spawn_fireball():
+	# consume current flame
 	_light_off()
 	
-	print("spawn fireball")
+	# instantiate fireball and setup position and velocity
+	# add to current level, not root, so projectiles are removed on scene change
+	var fireball: Fireball = fireball_prefab.instance()
+	dungeon.add_child(fireball)
+	fireball.setup(fireball_spawn_point.global_position, character_motor.direction)
 	
 	# audio
 	_play_sfx(throw_fireball_sound)

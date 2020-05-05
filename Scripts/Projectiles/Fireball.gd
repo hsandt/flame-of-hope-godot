@@ -1,0 +1,52 @@
+extends KinematicBody2D
+class_name Fireball
+
+# Travel speed
+export(float) var speed = 64.0
+
+# Current velocity for manual kinematic motion
+var velocity : Vector2
+
+func _physics_process(delta):
+	var kinematic_collision2d: KinematicCollision2D = move_and_collide(velocity * delta)
+	if kinematic_collision2d:
+		# fireball ignites any ignitable
+		var ignitable := kinematic_collision2d.collider.get_parent() as Ignitable
+		if ignitable:
+			ignitable.ignite()
+			
+		# fireball disappears whether it hit an ignitable or some obstacle
+		queue_free()
+
+func setup(init_position, direction):
+	global_position = init_position
+	# we assume no parent is rotated, so rotation = rotation_global
+	rotation_degrees = _get_rotation_degrees(direction)
+	velocity = speed * _get_direction_vector(direction)
+
+func _get_rotation_degrees(direction: int) -> float:  # direction: CardinalDirection
+	var quarter_index: int
+	
+	# fireball sprite is originally downward, then turn clockwise by step of 90 degrees
+	match direction:
+		Enum.CardinalDirection.DOWN:
+			quarter_index = 0
+		Enum.CardinalDirection.LEFT:
+			quarter_index = 1
+		Enum.CardinalDirection.UP:
+			quarter_index = 2
+		_: # Enum.CardinalDirection.RIGHT:
+			quarter_index = 3
+	
+	return 90.0 * quarter_index
+	
+func _get_direction_vector(direction: int) -> Vector2:  # direction: CardinalDirection
+	match direction:
+		Enum.CardinalDirection.DOWN:
+			return Vector2.DOWN
+		Enum.CardinalDirection.LEFT:
+			return Vector2.LEFT
+		Enum.CardinalDirection.UP:
+			return Vector2.UP
+		_: # Enum.CardinalDirection.RIGHT:
+			return Vector2.RIGHT
