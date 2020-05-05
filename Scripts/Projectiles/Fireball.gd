@@ -7,6 +7,12 @@ export(float) var speed = 64.0
 # Current velocity for manual kinematic motion
 var velocity : Vector2
 
+# Animated sprite (flame)
+onready var animated_sprite := $AnimatedSprite as AnimatedSprite
+
+func _ready():
+	animated_sprite.play()
+
 func _physics_process(delta):
 	var kinematic_collision2d: KinematicCollision2D = move_and_collide(velocity * delta)
 	if kinematic_collision2d:
@@ -20,8 +26,11 @@ func _physics_process(delta):
 
 func setup(init_position, direction):
 	global_position = init_position
+	# rotate the flame sprite (not the Fireball root, else the sprite will rotate
+	# around the ground center instead of its own center, due to the animated sprite's
+	# Transform Position offset to make it look above the ground)
 	# we assume no parent is rotated, so rotation = rotation_global
-	rotation_degrees = _get_rotation_degrees(direction)
+	animated_sprite.rotation_degrees = _get_rotation_degrees(direction)
 	velocity = speed * _get_direction_vector(direction)
 
 func _get_rotation_degrees(direction: int) -> float:  # direction: CardinalDirection

@@ -49,10 +49,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.0333333, 0.0666667, 0.2 ),
+"times": PoolRealArray( 0, 0.0333333, 0.0666666, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( -3, -27 ), Vector2( -3, -38 ), Vector2( -3, -43 ), Vector2( -3, -27 ) ]
+"values": [ Vector2( -3, -27 ), Vector2( -3, -33 ), Vector2( -3, -38 ), Vector2( -3, -27 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("SwingHitBox/CollisionShape2D:disabled")

@@ -70,10 +70,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.0333333 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.0333333, 0.0666666, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( -3, -27 ), Vector2( -3, 17 ) ]
+"values": [ Vector2( -3, -27 ), Vector2( -3, 17 ), Vector2( -3, 20 ), Vector2( -3, -27 ) ]
 }
 tracks/4/type = "method"
 tracks/4/path = NodePath("CharacterRod")
@@ -82,7 +82,7 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0.033 ),
+"times": PoolRealArray( 0.066 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -99,7 +99,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector2( 0, 26 ) ]
+"values": [ Vector2( -3, 34 ) ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -149,10 +149,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.0333333 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.0333333, 0.0666666, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( 4, -27 ), Vector2( -21, -7 ) ]
+"values": [ Vector2( 4, -27 ), Vector2( -21, -7 ), Vector2( -29, -7 ), Vector2( 4, -27 ) ]
 }
 tracks/4/type = "method"
 tracks/4/path = NodePath("CharacterRod")
@@ -161,7 +161,7 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0.033 ),
+"times": PoolRealArray( 0.066 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -178,7 +178,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector2( -26, 0 ) ]
+"values": [ Vector2( -34, 0 ) ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -228,10 +228,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.0333333 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.0333333, 0.0666666, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( -3, -27 ), Vector2( 21, -7 ) ]
+"values": [ Vector2( -3, -27 ), Vector2( 21, -7 ), Vector2( 29, -7 ), Vector2( -3, -27 ) ]
 }
 tracks/4/type = "method"
 tracks/4/path = NodePath("CharacterRod")
@@ -240,7 +240,7 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0.033 ),
+"times": PoolRealArray( 0.066 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -257,7 +257,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector2( 26, 0 ) ]
+"values": [ Vector2( 34, 0 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -307,10 +307,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.0333333 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.0333333, 0.0666666, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( -3, -27 ), Vector2( -3, -38 ) ]
+"values": [ Vector2( -3, -27 ), Vector2( -3, -33 ), Vector2( -3, -38 ), Vector2( -3, -27 ) ]
 }
 tracks/4/type = "method"
 tracks/4/path = NodePath("CharacterRod")
@@ -319,7 +319,7 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0.033 ),
+"times": PoolRealArray( 0.066 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -336,7 +336,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, -26 ) ]
+"values": [ Vector2( -4, -34 ) ]
 }
 
 [sub_resource type="CircleShape2D" id=5]
@@ -348,13 +348,12 @@ collision_layer = 2
 collision_mask = 4
 
 [node name="FireballSpawnPoint" type="Node2D" parent="."]
-position = Vector2( 26, 0 )
+position = Vector2( -3, 34 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -13 )
 texture = ExtResource( 14 )
 hframes = 16
-frame = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Character_Idle_Down = ExtResource( 9 )
@@ -377,7 +376,7 @@ anims/Character_Walk_Up = ExtResource( 7 )
 [node name="RodFlame" type="AnimatedSprite" parent="."]
 position = Vector2( -3, -27 )
 frames = ExtResource( 3 )
-offset = Vector2( -1, -4 )
+offset = Vector2( 0, -4 )
 
 [node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -10.0
@@ -391,9 +390,8 @@ collision_layer = 16
 collision_mask = 40
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwingHitBox"]
-position = Vector2( -26, 0 )
+position = Vector2( 0, -26 )
 shape = SubResource( 5 )
-disabled = true
 
 [node name="CharacterControl" type="Node" parent="."]
 script = ExtResource( 8 )
