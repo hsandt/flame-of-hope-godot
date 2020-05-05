@@ -1,9 +1,12 @@
 class_name CharacterRod
 extends Node
 
-# Swing Audio Clip
+# Rod Swing Audio Clip
 export(AudioStream) var swing_sound
-	
+
+# Rod Throw Fireball Audio Clip (we use rod_light_on)
+export(AudioStream) var throw_fireball_sound
+
 # Rod Light On Audio Clip
 export(AudioStream) var rod_light_on_sound
 
@@ -15,6 +18,9 @@ var _is_lit: bool
 
 # Is the character swinging the rod?
 var is_swinging: bool
+
+# Is the character throwing a fireball
+var is_throwing_fireball: bool
 
 # Swing Hitbox shape. Only enabled during hit.
 onready var swing_hitbowing_hitbox_shape := $"../SwingHitBox/CollisionShape2D" as CollisionShape2D
@@ -33,16 +39,24 @@ func _setup():
 	# allows to work with Flame active in the editor, but deactivate on start
 	_light_off()
 	is_swinging = false
+	is_throwing_fireball = false
 	
 	# makes sure hitbox is disabled on start, in case we were testing swing anims in the Editor
 	swing_hitbowing_hitbox_shape.disabled = true
 
 func _physics_process(_delta: float):
-	# consume swing intention even if cannot swing now (no input buffering)
-	if character_control.consume_swing_intention():
-		# check if character can swing
+	# consume all one-shot intentions even if we cannot execute them
+	# or there are multiple intentions, to avoid sticky input later
+	var swing_intention = character_control.consume_swing_intention()
+	var throw_fireball_intention = character_control.consume_throw_fireball_intention()
+	
+	if swing_intention:
 		if _can_swing():
 			_start_swing()
+	
+	elif throw_fireball_intention:
+		if _can_throw_fireball():
+			_start_throw_fireball()
 
 func _play_sfx(stream: AudioStream):
 	if not stream:
@@ -53,26 +67,53 @@ func _play_sfx(stream: AudioStream):
 	sfx_player.play()
 
 func _can_swing() -> bool:
-	# character cannot interrupt Swing for another Swing (unlike Zelda GB)
-	return !is_swinging
+	# character cannot interrupt Swing for another Swing (unlike Zelda GB),
+	# nor any other Rod action
+	return !is_swinging and !is_throwing_fireball
+	
+func _can_throw_fireball() -> bool:
+	return !is_swinging and !is_throwing_fireball and _is_lit
 	
 const CARDINAL_DIRECTION_NAMES = ["Down", "Left", "Up", "Right"]
 
+# Start swing animation with SFX
 func _start_swing():
+	# logic & animation
 	is_swinging = true
-	
-	# animation
 	character_anim.is_swinging = true
 	
 	# audio
 	_play_sfx(swing_sound)
 
-# Anim event callback
+# Stop swing animation (called on swing anim end)
 func _stop_swing():
+	# logic & animation
 	is_swinging = false
-
-	# animation
 	character_anim.is_swinging = false
+
+# Start throw fireball animation with SFX 
+func _start_throw_fireball():
+	# logic & animation
+	is_throwing_fireball = true
+	character_anim.is_throwing_fireball = true
+	
+	# audio
+	_play_sfx(swing_sound)
+
+# Stop throw fireball animation (called on throw fireball anim end)
+func _stop_throw_fireball():
+	# logic & animation
+	is_throwing_fireball = false
+	character_anim.is_throwing_fireball = false
+
+# Anim Call Method event
+func _spawn_fireball():
+	_light_off()
+	
+	print("spawn fireball")
+	
+	# audio
+	_play_sfx(throw_fireball_sound)
 
 # light rod on during game, with SFX
 func _ignite():
@@ -127,6 +168,8 @@ func _on_SwingHitBox_area_entered(area: Area2D):
 func _on_AnimationPlayer_animation_finished(anim_name: String):
 	if anim_name.begins_with("Character_Swing_"):
 		_stop_swing()
+	elif anim_name.begins_with("Character_Throw_Fireball_"):
+		_stop_throw_fireball()
 
 func _on_FlameTimer_timeout():
 	if _is_lit:

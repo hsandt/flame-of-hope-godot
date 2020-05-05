@@ -11,18 +11,25 @@ var move_intention : Vector2
 # True iff character wants to swing this frame (until consumed)
 var _swing_intention : bool
 
+# True iff character wants to throw fireball this frame (until consumed)
+var _throw_fireball_intention : bool
+
 func _ready():
 	_setup()
 
 func _setup():
 	move_intention = Vector2.ZERO
 	_swing_intention = false
+	_throw_fireball_intention = false
 
 func _unhandled_input(event: InputEvent):
-	# one-time press actions are handled here instead of _process + is_action_just_pressed, so they become
-	# true on press until consumed, and never cleared due to _process being called 2x before _physics_process
+	# one-time press actions are handled here instead of _process + is_action_just_pressed
+	# in both cases, never clear if not pressing this frame, or we may miss the input entirely
+	# due to this _process being called 2x before CharacterRod._physics_process
 	if event.is_action_pressed("swing"):
 		_swing_intention = true
+	if event.is_action_pressed("throw_fireball"):
+		_throw_fireball_intention = true
 
 func _process(_delta: float):
 	var horizontal_input = - Input.get_action_strength("move_left") + Input.get_action_strength("move_right")
@@ -43,6 +50,13 @@ func _get_binarized_value(value: float) -> float:
 func consume_swing_intention() -> bool:
 	if _swing_intention:
 		_swing_intention = false
+		return true
+	else:
+		return false
+
+func consume_throw_fireball_intention() -> bool:
+	if _throw_fireball_intention:
+		_throw_fireball_intention = false
 		return true
 	else:
 		return false

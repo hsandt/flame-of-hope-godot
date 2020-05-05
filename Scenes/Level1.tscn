@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Tilemap/Environment.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Props/FirePit.tscn" type="PackedScene" id=2]
@@ -9,7 +9,7 @@
 [ext_resource path="res://Anims/Character/ANIM_Character_Idle_Left.tres" type="Animation" id=7]
 [ext_resource path="res://Scripts/Character/CharacterAnim.gd" type="Script" id=8]
 [ext_resource path="res://Anims/Character/ANIM_Character_Walk_Down.tres" type="Animation" id=9]
-[ext_resource path="res://Sprites/Character/character_walk_spritesheet.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Character/character_swing_spritesheet.png" type="Texture" id=10]
 [ext_resource path="res://Anims/Character/ANIM_Character_Walk_Right.tres" type="Animation" id=11]
 [ext_resource path="res://Anims/FX/SF_FlameSmall.tres" type="SpriteFrames" id=12]
 [ext_resource path="res://Scripts/Character/CharacterControl.gd" type="Script" id=13]
@@ -29,6 +29,274 @@
 [ext_resource path="res://Audio/Jingle/victory_jingle.ogg" type="AudioStream" id=27]
 [ext_resource path="res://Prefabs/EventTriggers/RoomEntrance.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Audio/SFX/flame_light_off.ogg" type="AudioStream" id=29]
+
+[sub_resource type="Animation" id=6]
+resource_name = "Character_Throw_Fireball_Down"
+length = 0.233333
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 10 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 16 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.0333333, 0.0666667, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("RodFlame:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.0333333 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -3, -27 ), Vector2( -3, 17 ) ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("CharacterRod")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.033 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_spawn_fireball"
+} ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Character_Throw_Fireball_Left"
+length = 0.233333
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 10 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 16 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.0333333, 0.0666667, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 12, 13, 14, 15 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("RodFlame:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.0333333 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 4, -27 ), Vector2( -21, -7 ) ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("CharacterRod")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.033 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_spawn_fireball"
+} ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Character_Throw_Fireball_Right"
+length = 0.233333
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 10 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 16 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.0333333, 0.0666667, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10, 11 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("RodFlame:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.0333333 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -3, -27 ), Vector2( 21, -7 ) ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("CharacterRod")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.033 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_spawn_fireball"
+} ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Character_Throw_Fireball_Up"
+length = 0.233333
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 10 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 16 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.0333333, 0.0666667, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 6, 7 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("RodFlame:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.0333333 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( -3, -27 ), Vector2( -3, -38 ) ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("CharacterRod")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.033 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_spawn_fireball"
+} ]
+}
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 8.06226
@@ -84,7 +352,7 @@ bus = "Music"
 bus = "Jingle"
 
 [node name="Character" type="KinematicBody2D" parent="."]
-position = Vector2( 240, -4 )
+position = Vector2( 240, 268 )
 z_index = 1
 collision_layer = 2
 collision_mask = 4
@@ -95,8 +363,8 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="Character"]
 position = Vector2( 0, -13 )
 texture = ExtResource( 10 )
-hframes = 12
-frame = 3
+hframes = 16
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Character"]
 anims/Character_Idle_Down = ExtResource( 4 )
@@ -107,13 +375,17 @@ anims/Character_Swing_Down = ExtResource( 17 )
 anims/Character_Swing_Left = ExtResource( 19 )
 anims/Character_Swing_Right = ExtResource( 20 )
 anims/Character_Swing_Up = ExtResource( 18 )
+anims/Character_Throw_Fireball_Down = SubResource( 6 )
+anims/Character_Throw_Fireball_Left = SubResource( 3 )
+anims/Character_Throw_Fireball_Right = SubResource( 4 )
+anims/Character_Throw_Fireball_Up = SubResource( 5 )
 anims/Character_Walk_Down = ExtResource( 9 )
 anims/Character_Walk_Left = ExtResource( 14 )
 anims/Character_Walk_Right = ExtResource( 11 )
 anims/Character_Walk_Up = ExtResource( 3 )
 
 [node name="RodFlame" type="AnimatedSprite" parent="Character"]
-position = Vector2( -3, -27 )
+position = Vector2( -3, 17 )
 frames = ExtResource( 12 )
 offset = Vector2( -1, -4 )
 
@@ -129,9 +401,8 @@ collision_layer = 16
 collision_mask = 40
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Character/SwingHitBox"]
-position = Vector2( 0, -26 )
+position = Vector2( 0, 26 )
 shape = SubResource( 1 )
-disabled = true
 
 [node name="CharacterControl" type="Node" parent="Character"]
 script = ExtResource( 13 )
@@ -143,6 +414,7 @@ speed = 40.0
 [node name="CharacterRod" type="Node" parent="Character"]
 script = ExtResource( 16 )
 swing_sound = ExtResource( 22 )
+throw_fireball_sound = ExtResource( 21 )
 rod_light_on_sound = ExtResource( 21 )
 rod_light_off_sound = ExtResource( 29 )
 
@@ -191,7 +463,7 @@ cell_size = Vector2( 16, 16 )
 collision_layer = 4
 collision_mask = 2
 format = 1
-tile_data = PoolIntArray( 65549, 10, 0, 65552, 536870922, 0, 131085, 10, 0, 131088, 536870922, 0, 196621, 10, 0, 196624, 536870922, 0, 262156, 536870922, 0, 262157, 10, 0, 262160, 536870922, 0, 262161, 536870922, 0, 327691, 536870922, 0, 327698, 536870922, 0, 393227, 536870922, 0, 393234, 536870922, 0, 458763, 536870922, 0, 458770, 536870922, 0, 524299, 536870922, 0, 524306, 536870922, 0, 589835, 10, 0, 589842, 536870922, 0, 655371, 10, 0, 655378, 536870922, 0, 720907, 10, 0, 720908, 536870922, 0, 720909, 536870922, 0, 720912, 536870922, 0, 720913, 536870922, 0, 720914, 536870922, 0, 786445, 536870922, 0, 786448, 536870922, 0, 851981, 536870922, 0, 851984, 536870922, 0, 917517, 536870922, 0, 917520, 536870922, 0, 983053, 536870922, 0, 983056, 536870922, 0, 1114126, 536870922, 0, 1114127, 536870922, 0 )
+tile_data = PoolIntArray( 65549, 10, 0, 65552, 536870922, 0, 131085, 10, 0, 131088, 536870922, 0, 196621, 10, 0, 196624, 536870922, 0, 262156, 536870922, 0, 262157, 10, 0, 262160, 536870922, 0, 262161, 536870922, 0, 327691, 536870922, 0, 327698, 536870922, 0, 393227, 536870922, 0, 393234, 536870922, 0, 458763, 536870922, 0, 458770, 536870922, 0, 524299, 536870922, 0, 524306, 536870922, 0, 589835, 10, 0, 589842, 536870922, 0, 655371, 10, 0, 655378, 536870922, 0, 720908, 536870922, 0, 720909, 536870922, 0, 720912, 536870922, 0, 720913, 536870922, 0, 786445, 536870922, 0, 786448, 536870922, 0, 851981, 536870922, 0, 851984, 536870922, 0, 917517, 536870922, 0, 917520, 536870922, 0, 983053, 536870922, 0, 983056, 536870922, 0, 1114126, 536870922, 0, 1114127, 536870922, 0 )
 
 [node name="Wall" type="TileMap" parent="Room1/TileMaps"]
 tile_set = ExtResource( 1 )
