@@ -17,19 +17,30 @@ onready var collision_shape := $StaticBody2D/CollisionShape2D as CollisionShape2
 
 func _ready():
 	for ignitable_path in opening_ignitable_paths:
-		var ignitable = get_node(ignitable_path) as Ignitable
-		if ignitable:
+		if ignitable_path.is_empty():
+			print("WARNING: Door '%s' references opening ignitable with empty path. Delete it from the array for cleanup" % get_path())
+			continue
+		
+		var ignitable = get_node(ignitable_path)
+		if not ignitable:
+			print("WARNING: Door '%s' references opening ignitable with path: '%s', but it is null" % [get_path(), ignitable_path])
+			continue
+		
+		ignitable = ignitable as Ignitable
+		if not ignitable:
+			print("WARNING: Door '%s' references opening ignitable %s, but it is not an Ignitable" % [get_path(), ignitable_path])
+			continue
+
 			# deferred connection to avoid disabling collision during physics process (only matters for lit signal)
-			var error1 = ignitable.connect("lit", self, "_on_opening_ignitable_lit", [], CONNECT_DEFERRED)
-			var error2 = ignitable.connect("unlit", self, "_on_opening_ignitable_unlit", [], CONNECT_DEFERRED)
-			if not error1 and not error2:
-				# only count valid ignitables to avoid getting stuck in case
-				# we prepared an array too big (e.g. size = 4 but filled only 3)
-				_opening_ignitable_count += 1
-			else:
-				print("WARNING: Ignitable connection failed with error %s and %s" % [error1, error2])
-		else:
-			print("WARNING: Opening Ignitable on %s is not an Ignitable" % get_path())
+		var error1 = ignitable.connect("lit", self, "_on_opening_ignitable_lit", [], CONNECT_DEFERRED)
+		var error2 = ignitable.connect("unlit", self, "_on_opening_ignitable_unlit", [], CONNECT_DEFERRED)
+		if error1 or error2:
+			print("WARNING: Ignitable connection failed with error1: %s and error2: %s" % [error1, error2])
+			continue
+		
+		# only count valid ignitables to avoid getting stuck in case
+		# we prepared an array too big (e.g. size = 4 but filled only 3)
+		_opening_ignitable_count += 1
 
 func _on_opening_ignitable_lit():
 	# increment count, and open door if all connected ignitables have been lit
