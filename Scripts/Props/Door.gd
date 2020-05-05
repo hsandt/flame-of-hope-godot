@@ -40,7 +40,7 @@ func _ready():
 		var error1 = ignitable.connect("lit", self, "_on_opening_ignitable_lit", [], CONNECT_DEFERRED)
 		var error2 = ignitable.connect("unlit", self, "_on_opening_ignitable_unlit", [], CONNECT_DEFERRED)
 		if error1 or error2:
-			print("WARNING: Ignitable connection failed with error1: %s and error2: %s" % [error1, error2])
+			print("WARNING: Ignitable connection failed with error1: %s and error2: %s. Disconnect will fail later." % [error1, error2])
 			continue
 		
 		# only count valid ignitables to avoid getting stuck in case
@@ -68,7 +68,7 @@ func _open():
 	collision_shape.disabled = true
 	
 	for ignitable_path in opening_ignitable_paths:
-		var ignitable = get_node(ignitable_path)
+		var ignitable := get_node(ignitable_path)
 		ignitable.disconnect("lit", self, "_on_opening_ignitable_lit")
 		ignitable.disconnect("unlit", self, "_on_opening_ignitable_unlit")
 	

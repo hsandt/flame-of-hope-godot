@@ -348,13 +348,13 @@ collision_layer = 2
 collision_mask = 4
 
 [node name="FireballSpawnPoint" type="Node2D" parent="."]
-position = Vector2( 0, -26 )
+position = Vector2( 26, 0 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -13 )
 texture = ExtResource( 14 )
 hframes = 16
-frame = 4
+frame = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Character_Idle_Down = ExtResource( 9 )
@@ -391,7 +391,7 @@ collision_layer = 16
 collision_mask = 40
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwingHitBox"]
-position = Vector2( 0, -26 )
+position = Vector2( -26, 0 )
 shape = SubResource( 5 )
 disabled = true
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Tilemap/Environment.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Props/FirePit.tscn" type="PackedScene" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://Scripts/Props/Door.gd" type="Script" id=26]
 [ext_resource path="res://Audio/Jingle/victory_jingle.ogg" type="AudioStream" id=27]
 [ext_resource path="res://Prefabs/EventTriggers/RoomEntrance.tscn" type="PackedScene" id=28]
-[ext_resource path="res://Prefabs/Projectiles/Fireball.tscn" type="PackedScene" id=30]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8, 8 )
@@ -60,9 +59,6 @@ bus = "Music"
 
 [node name="JinglePlayer" type="AudioStreamPlayer" parent="."]
 bus = "Jingle"
-
-[node name="Fireball" parent="." instance=ExtResource( 30 )]
-position = Vector2( 312, 216 )
 
 [node name="Character" parent="." instance=ExtResource( 3 )]
 position = Vector2( 240, 268 )
@@ -146,7 +142,7 @@ __meta__ = {
 "_edit_group_": true
 }
 victory_jingle = ExtResource( 27 )
-opening_ignitable_paths = [ NodePath("../Torch"), NodePath("../Torch2"), NodePath("../Torch3"), NodePath("../Torch4"), NodePath("../../CanvasLayer/Title"), NodePath("") ]
+opening_ignitable_paths = [ NodePath("../Torch"), NodePath("../Torch2"), NodePath("../Torch3"), NodePath("../Torch4") ]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Room1/Door"]
 collision_layer = 4

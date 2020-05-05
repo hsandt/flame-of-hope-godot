@@ -32,7 +32,7 @@ onready var animation_player := $"../AnimationPlayer" as AnimationPlayer
 onready var rod_flame := $"../RodFlame" as CanvasItem
 onready var sfx_player := $"../SFXPlayer" as AudioStreamPlayer
 # Swing Hitbox shape. Only enabled during hit.
-onready var swing_hitbowing_hitbox_shape := $"../SwingHitBox/CollisionShape2D" as CollisionShape2D
+onready var swing_hitbox_shape := $"../SwingHitBox/CollisionShape2D" as CollisionShape2D
 onready var character_control := $"../CharacterControl" as CharacterControl
 onready var character_motor := $"../CharacterMotor" as CharacterMotor
 onready var character_anim := $"../CharacterAnim" as CharacterAnim
@@ -48,7 +48,7 @@ func _setup():
 	is_throwing_fireball = false
 	
 	# makes sure hitbox is disabled on start, in case we were testing swing anims in the Editor
-	swing_hitbowing_hitbox_shape.disabled = true
+	swing_hitbox_shape.disabled = true
 
 func _physics_process(_delta: float):
 	# consume all one-shot intentions even if we cannot execute them
@@ -118,9 +118,10 @@ func _spawn_fireball():
 	_light_off()
 	
 	# instantiate fireball and setup position and velocity
-	# add to current level, not root, so projectiles are removed on scene change
 	var fireball: Fireball = fireball_prefab.instance()
+	# add to current level, not root, so projectiles are removed on scene change
 	dungeon.add_child(fireball)
+	# spawn point must be set in animation
 	fireball.setup(fireball_spawn_point.global_position, character_motor.direction)
 	
 	# audio
