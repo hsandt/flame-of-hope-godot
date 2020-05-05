@@ -88,7 +88,6 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 0, 2 )
 shape = SubResource( 2 )
 
 [node name="FireSourceArea2D" type="Area2D" parent="."]
@@ -96,7 +95,6 @@ collision_layer = 8
 collision_mask = 16
 
 [node name="FireSourceCollisionShape2D" type="CollisionShape2D" parent="FireSourceArea2D"]
-position = Vector2( 0, 2 )
 shape = SubResource( 3 )
 disabled = true
 
@@ -105,7 +103,6 @@ collision_layer = 32
 collision_mask = 16
 
 [node name="IgnitableCollisionShape2D" type="CollisionShape2D" parent="IgnitableArea2D"]
-position = Vector2( 0, 2 )
 shape = SubResource( 3 )
 [connection signal="lit" from="." to="." method="_on_Torch_lit"]
 [connection signal="unlit" from="." to="." method="_on_Torch_unlit"]
