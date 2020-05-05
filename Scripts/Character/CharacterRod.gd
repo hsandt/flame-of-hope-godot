@@ -114,6 +114,10 @@ func _stop_throw_fireball():
 
 # Anim Call Method event
 func _spawn_fireball():
+	if not _is_lit:
+		print("ERROR: _spawn_fireball called but CharacterRod is not lit")
+		return
+	
 	# consume current flame
 	_light_off()
 	

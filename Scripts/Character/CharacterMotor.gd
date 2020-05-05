@@ -40,8 +40,8 @@ func _physics_process(_delta: float):
 		character_anim.is_walking = false
 
 func _can_move() -> bool:
-#	# character cannot move during Swing
-	return !character_rod.is_swinging
+	# character cannot move during Rod action
+	return !character_rod.is_swinging and !character_rod.is_throwing_fireball 
 
 func _update_direction(move_intention: Vector2):
 	if move_intention.x != 0.0 && move_intention.y != 0.0:
