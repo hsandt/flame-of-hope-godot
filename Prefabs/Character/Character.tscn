@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Scripts/Character/CharacterRod.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Character/CharacterAnim.gd" type="Script" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://Audio/SFX/swing.ogg" type="AudioStream" id=20]
 [ext_resource path="res://Audio/SFX/flame_light_off.ogg" type="AudioStream" id=21]
 [ext_resource path="res://Prefabs/Projectiles/Fireball.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Sprites/Character/character_walk_spritesheet.png" type="Texture" id=23]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Character_Throw_Fireball_Down"
@@ -352,8 +353,9 @@ position = Vector2( -3, 34 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -13 )
-texture = ExtResource( 14 )
-hframes = 16
+texture = ExtResource( 23 )
+hframes = 12
+frame = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Character_Idle_Down = ExtResource( 9 )
@@ -374,7 +376,7 @@ anims/Character_Walk_Right = ExtResource( 12 )
 anims/Character_Walk_Up = ExtResource( 7 )
 
 [node name="RodFlame" type="AnimatedSprite" parent="."]
-position = Vector2( -3, -27 )
+position = Vector2( 0, -27 )
 frames = ExtResource( 3 )
 offset = Vector2( 0, -4 )
 
@@ -398,7 +400,7 @@ script = ExtResource( 8 )
 
 [node name="CharacterMotor" type="Node" parent="."]
 script = ExtResource( 4 )
-speed = 40.0
+speed = 50.0
 
 [node name="CharacterRod" type="Node" parent="."]
 script = ExtResource( 1 )
