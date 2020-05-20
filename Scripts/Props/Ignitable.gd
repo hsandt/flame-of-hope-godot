@@ -43,7 +43,7 @@ func ignite():
 
 # virtual
 func _get_anim_prefix():
-	assert(false, "get_anim_prefix not overridden in Ignitable subclass")
+	assert(false, "_get_anim_prefix not overridden in Ignitable subclass")
 
 # virtual (if you override it, make the subclass script tool)
 func _tool_update_preview(_new_lit_on_start: bool):

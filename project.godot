@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Enums/Enum.gd"
 }, {
+"base": "Node",
+"class": "Event",
+"language": "GDScript",
+"path": "res://Scripts/Event/Event.gd"
+}, {
 "base": "Ignitable",
 "class": "FirePit",
 "language": "GDScript",
@@ -54,6 +59,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Constants/Layer.gd"
 }, {
+"base": "Reference",
+"class": "NodeUtils",
+"language": "GDScript",
+"path": "res://Scripts/Utils/NodeUtils.gd"
+}, {
 "base": "Ignitable",
 "class": "Torch",
 "language": "GDScript",
@@ -65,10 +75,12 @@ _global_script_class_icons={
 "CharacterMotor": "",
 "CharacterRod": "",
 "Enum": "",
+"Event": "",
 "FirePit": "",
 "Fireball": "",
 "Ignitable": "",
 "Layer": "",
+"NodeUtils": "",
 "Torch": ""
 }
 
