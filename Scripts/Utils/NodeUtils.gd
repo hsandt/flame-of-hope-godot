@@ -14,8 +14,8 @@ static func check_node_got_by_path(node, script_type, script, node_type, node_pa
 	if node:
 		return true
 	else:
-		print("ERROR: {script_type} '{script_path}' references {node_type} " +
-				"with path: '{node_path}', but there is no {node_type} there.".format({
+		print(("ERROR: {script_type} '{script_path}' references {node_type} " +
+				"with path: '{node_path}', but there is no {node_type} there.").format({
 			"script_type": script_type,
 			"script_path": script.get_path(),
 			"node_type": node_type,

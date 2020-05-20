@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Tilemap/Environment.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Props/FirePit.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Prefabs/Character/Character.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/Character/CharacterManager.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/Event/IgnitionTrigger.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/Props/Door.gd" type="Script" id=6]
 [ext_resource path="res://Audio/BGM/theme_neutral.ogg" type="AudioStream" id=23]
 [ext_resource path="res://Prefabs/Props/Torch.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Sprites/Tiles/Wall/invisible_wall.png" type="Texture" id=25]
@@ -73,10 +74,15 @@ collision_mask = 132
 
 [node name="Events" type="Node" parent="Room1"]
 
-[node name="Event" type="Node" parent="Room1/Events"]
+[node name="IgnitionTrigger" type="Node" parent="Room1/Events"]
 script = ExtResource( 5 )
 trigger_ignitable_paths = [ NodePath("../../Torch"), NodePath("../../Torch2"), NodePath("../../Torch3"), NodePath("../../Torch4") ]
-event_path = NodePath("../../Door")
+event_path = NodePath("../OpenDoorEvent")
+
+[node name="OpenDoorEvent" type="Node" parent="Room1/Events"]
+script = ExtResource( 26 )
+door_path = NodePath("../../Door")
+victory_jingle = ExtResource( 27 )
 
 [node name="RoomEntrance" parent="Room1" instance=ExtResource( 28 )]
 position = Vector2( 240, 270 )
@@ -130,20 +136,16 @@ tile_data = PoolIntArray( 0, 2, 0, 1, 1073741826, 1, 2, 1073741826, 1, 3, 107374
 [node name="Torch" parent="Room1" instance=ExtResource( 24 )]
 position = Vector2( 200, 168 )
 z_index = 2
-lit_on_start = false
 
 [node name="Torch2" parent="Room1" instance=ExtResource( 24 )]
 position = Vector2( 280, 168 )
 z_index = 2
-lit_on_start = false
 
 [node name="Torch3" parent="Room1" instance=ExtResource( 24 )]
 position = Vector2( 200, 88 )
-lit_on_start = false
 
 [node name="Torch4" parent="Room1" instance=ExtResource( 24 )]
 position = Vector2( 280, 88 )
-lit_on_start = false
 
 [node name="FirePit_Source" parent="Room1" instance=ExtResource( 2 )]
 position = Vector2( 240, 128 )
@@ -153,12 +155,10 @@ lit_on_start = true
 position = Vector2( 240, 5 )
 scale = Vector2( 2, 0.375 )
 texture = ExtResource( 25 )
-script = ExtResource( 26 )
+script = ExtResource( 6 )
 __meta__ = {
 "_edit_group_": true
 }
-sprite_path = NodePath(".")
-victory_jingle = ExtResource( 27 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Room1/Door"]
 collision_layer = 4
@@ -219,12 +219,10 @@ tile_data = PoolIntArray( 0, 2, 0, 1, 1073741826, 1, 2, 1073741826, 1, 3, 107374
 [node name="Torch" parent="Room2" instance=ExtResource( 24 )]
 position = Vector2( 96, 128 )
 z_index = 2
-lit_on_start = false
 
 [node name="Torch2" parent="Room2" instance=ExtResource( 24 )]
 position = Vector2( 384, 128 )
 z_index = 2
-lit_on_start = false
 
 [node name="FirePit_Source" parent="Room2" instance=ExtResource( 2 )]
 position = Vector2( 240, 128 )
@@ -238,7 +236,6 @@ script = ExtResource( 26 )
 __meta__ = {
 "_edit_group_": true
 }
-sprite_path = NodePath(".")
 victory_jingle = ExtResource( 27 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Room2/Door"]
@@ -297,32 +294,25 @@ tile_data = PoolIntArray( 0, 2, 0, 1, 1073741826, 1, 2, 1073741826, 1, 3, 107374
 [node name="Torch" parent="Room3" instance=ExtResource( 24 )]
 position = Vector2( 64, 64 )
 z_index = 2
-lit_on_start = false
 
 [node name="Torch2" parent="Room3" instance=ExtResource( 24 )]
 position = Vector2( 416, 64 )
 z_index = 2
-lit_on_start = false
 
 [node name="Torch3" parent="Room3" instance=ExtResource( 24 )]
 position = Vector2( 320, 216 )
-lit_on_start = false
 
 [node name="Torch6" parent="Room3" instance=ExtResource( 24 )]
 position = Vector2( 56, 216 )
-lit_on_start = false
 
 [node name="Torch7" parent="Room3" instance=ExtResource( 24 )]
 position = Vector2( 56, 200 )
-lit_on_start = false
 
 [node name="Torch4" parent="Room3" instance=ExtResource( 24 )]
 position = Vector2( 368, 216 )
-lit_on_start = false
 
 [node name="Torch5" parent="Room3" instance=ExtResource( 24 )]
 position = Vector2( 416, 216 )
-lit_on_start = false
 
 [node name="FirePit_Source" parent="Room3" instance=ExtResource( 2 )]
 position = Vector2( 240, 192 )
@@ -336,7 +326,6 @@ script = ExtResource( 26 )
 __meta__ = {
 "_edit_group_": true
 }
-sprite_path = NodePath(".")
 victory_jingle = ExtResource( 27 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Room3/Door"]

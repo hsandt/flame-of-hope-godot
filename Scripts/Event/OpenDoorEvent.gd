@@ -1,25 +1,23 @@
 extends Event
 
-# Path to door sprite
-export(NodePath) var sprite_path
+# Path to door
+export(NodePath) var door_path
 
 # Swing Audio Clip
 export(AudioStream) var victory_jingle
 
 # Door sprite (derived from sprite_path)
-var _sprite: Sprite
+var _door: Door
 
 onready var jingle_player := $"/root/Dungeon/JinglePlayer" as AudioStreamPlayer
-onready var collision_shape := $StaticBody2D/CollisionShape2D as CollisionShape2D
 
 func _ready():
-	_sprite = get_node(sprite_path) as Sprite
-	NodeUtils.check_node_got_by_path(_sprite, "OpenDoorEvent", self, "Sprite", sprite_path)
+	_door = get_node(door_path) as Door
+	NodeUtils.check_node_got_by_path(_door, "OpenDoorEvent", self, "Door", door_path)
 
 # override
 func trigger():
-	_sprite.visible = false
-	collision_shape.disabled = true
+	_door.open()
 	
 	# audio
 	jingle_player.stream = victory_jingle
