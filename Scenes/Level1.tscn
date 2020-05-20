@@ -1,20 +1,16 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Tilemap/Environment.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Props/FirePit.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Prefabs/Character/Character.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/Character/CharacterManager.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/Event/IgnitionTrigger.gd" type="Script" id=5]
-[ext_resource path="res://Scripts/Props/Door.gd" type="Script" id=6]
+[ext_resource path="res://Prefabs/Props/Door.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Audio/BGM/theme_neutral.ogg" type="AudioStream" id=23]
 [ext_resource path="res://Prefabs/Props/Torch.tscn" type="PackedScene" id=24]
-[ext_resource path="res://Sprites/Tiles/Wall/invisible_wall.png" type="Texture" id=25]
 [ext_resource path="res://Scripts/Event/OpenDoorEvent.gd" type="Script" id=26]
 [ext_resource path="res://Audio/Jingle/victory_jingle.ogg" type="AudioStream" id=27]
 [ext_resource path="res://Prefabs/EventTriggers/RoomEntrance.tscn" type="PackedScene" id=28]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 8 )
 
 [node name="Dungeon" type="Node2D"]
 
@@ -151,24 +147,22 @@ position = Vector2( 280, 88 )
 position = Vector2( 240, 128 )
 lit_on_start = true
 
-[node name="Door" type="Sprite" parent="Room1"]
-position = Vector2( 240, 5 )
-scale = Vector2( 2, 0.375 )
-texture = ExtResource( 25 )
-script = ExtResource( 6 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Room1/Door"]
-collision_layer = 4
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Room1/Door/StaticBody2D"]
-shape = SubResource( 1 )
+[node name="Door" parent="Room1" instance=ExtResource( 6 )]
 
 [node name="Room2" type="Node2D" parent="."]
 position = Vector2( 0, -272 )
+
+[node name="Events2" type="Node" parent="Room2"]
+
+[node name="IgnitionTrigger" type="Node" parent="Room2/Events2"]
+script = ExtResource( 5 )
+trigger_ignitable_paths = [ NodePath("../../Torch"), NodePath("../../Torch2") ]
+event_path = NodePath("../OpenDoorEvent")
+
+[node name="OpenDoorEvent" type="Node" parent="Room2/Events2"]
+script = ExtResource( 26 )
+door_path = NodePath("../../Door")
+victory_jingle = ExtResource( 27 )
 
 [node name="RoomEntrance" parent="Room2" instance=ExtResource( 28 )]
 position = Vector2( 240, 272 )
@@ -228,25 +222,22 @@ z_index = 2
 position = Vector2( 240, 128 )
 lit_on_start = true
 
-[node name="Door" type="Sprite" parent="Room2"]
-position = Vector2( 240, 5 )
-scale = Vector2( 2, 0.375 )
-texture = ExtResource( 25 )
-script = ExtResource( 26 )
-__meta__ = {
-"_edit_group_": true
-}
-victory_jingle = ExtResource( 27 )
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Room2/Door"]
-collision_layer = 4
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Room2/Door/StaticBody2D"]
-shape = SubResource( 1 )
+[node name="Door" parent="Room2" instance=ExtResource( 6 )]
 
 [node name="Room3" type="Node2D" parent="."]
 position = Vector2( 0, -544 )
+
+[node name="Events" type="Node" parent="Room3"]
+
+[node name="IgnitionTrigger" type="Node" parent="Room3/Events"]
+script = ExtResource( 5 )
+trigger_ignitable_paths = [ NodePath("../../Torch"), NodePath("../../Torch2"), NodePath("../../Torch3"), NodePath("../../Torch4"), NodePath("../../Torch5"), NodePath("../../Torch6"), NodePath("../../Torch7") ]
+event_path = NodePath("../OpenDoorEvent")
+
+[node name="OpenDoorEvent" type="Node" parent="Room3/Events"]
+script = ExtResource( 26 )
+door_path = NodePath("../../Door")
+victory_jingle = ExtResource( 27 )
 
 [node name="RoomEntrance" parent="Room3" instance=ExtResource( 28 )]
 position = Vector2( 240, 272 )
@@ -302,35 +293,20 @@ z_index = 2
 [node name="Torch3" parent="Room3" instance=ExtResource( 24 )]
 position = Vector2( 320, 216 )
 
-[node name="Torch6" parent="Room3" instance=ExtResource( 24 )]
-position = Vector2( 56, 216 )
-
-[node name="Torch7" parent="Room3" instance=ExtResource( 24 )]
-position = Vector2( 56, 200 )
-
 [node name="Torch4" parent="Room3" instance=ExtResource( 24 )]
 position = Vector2( 368, 216 )
 
 [node name="Torch5" parent="Room3" instance=ExtResource( 24 )]
 position = Vector2( 416, 216 )
 
+[node name="Torch6" parent="Room3" instance=ExtResource( 24 )]
+position = Vector2( 56, 200 )
+
+[node name="Torch7" parent="Room3" instance=ExtResource( 24 )]
+position = Vector2( 56, 216 )
+
 [node name="FirePit_Source" parent="Room3" instance=ExtResource( 2 )]
 position = Vector2( 240, 192 )
 lit_on_start = true
 
-[node name="Door" type="Sprite" parent="Room3"]
-position = Vector2( 240, 5 )
-scale = Vector2( 2, 0.375 )
-texture = ExtResource( 25 )
-script = ExtResource( 26 )
-__meta__ = {
-"_edit_group_": true
-}
-victory_jingle = ExtResource( 27 )
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Room3/Door"]
-collision_layer = 4
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Room3/Door/StaticBody2D"]
-shape = SubResource( 1 )
+[node name="Door" parent="Room3" instance=ExtResource( 6 )]
