@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cliff_top_side_var1.png-88aafa43fa37c230b0bf93f15f3e6f3e.stex"
+path="res://.import/ground_9tile_brick_ledge.png-0cb86ca908239be99105d81c8075add9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Tiles/Ground/cliff_top_side_var1.png"
-dest_files=[ "res://.import/cliff_top_side_var1.png-88aafa43fa37c230b0bf93f15f3e6f3e.stex" ]
+source_file="res://Sprites/Tiles/Ground/ground_9tile_brick_ledge.png"
+dest_files=[ "res://.import/ground_9tile_brick_ledge.png-0cb86ca908239be99105d81c8075add9.stex" ]
 
 [params]
 
