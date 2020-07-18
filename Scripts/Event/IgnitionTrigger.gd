@@ -25,7 +25,7 @@ var _trigger_ignitable_lit_count := 0
 
 func _ready():
 	for ignitable_path in trigger_ignitable_paths:
-		var ignitable = get_node(ignitable_path) as Ignitable
+		var ignitable := get_node(ignitable_path) as Ignitable
 		NodeUtils.assert_node_got_by_path(ignitable, "IgnitionTrigger", self, "Ignitable", ignitable_path)
 		
 		# deferred connection to avoid disabling collision during physics process (only matters for lit signal)
