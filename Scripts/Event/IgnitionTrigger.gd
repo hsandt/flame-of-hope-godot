@@ -12,10 +12,6 @@ export(Array, NodePath) var event_paths
 # List of ignitable elements (derived by trigger_ignitable_paths)
 var _trigger_ignitables: Array
 
-# Number of ignitables that need to be lit to trigger this event
-# (derived from trigger_ignitable_paths)
-var _trigger_ignitable_count := 0
-
 # List of events triggered by this trigger condition
 # (derived by event_paths)
 var _events: Array
@@ -42,8 +38,6 @@ func _ready():
 		# only count valid ignitables to avoid getting stuck in case
 		# we prepared an array too big (e.g. size = 4 but filled only 3)
 		_trigger_ignitables.append(ignitable)
-		
-		_trigger_ignitable_count += 1
 
 	for event_path in event_paths:
 		var event := get_node(event_path) as Event
@@ -53,7 +47,7 @@ func _ready():
 func _on_trigger_ignitable_lit():
 	# increment count, and trigger event if all connected ignitables have been lit
 	_trigger_ignitable_lit_count += 1
-	if _trigger_ignitable_lit_count >= _trigger_ignitable_count:
+	if _trigger_ignitable_lit_count >= len(_trigger_ignitables):
 		_trigger_event()
 
 func _on_trigger_ignitable_unlit():
