@@ -3,8 +3,12 @@ extends Node
 # List of path of ignitable elements that need to be lit to trigger this event
 export(Array, NodePath) var trigger_ignitable_paths
 
-# Path of event triggered by this trigger condition
-export(NodePath) var event_path
+# List of path of events triggered simultaneously by this trigger condition
+export(Array, NodePath) var event_paths
+
+# Events triggered by this trigger condition
+# (derived by event_paths)
+var _events: Array
 
 # Number of ignitables that need to be lit to trigger this event
 # (derived from trigger_ignitable_paths)
@@ -13,11 +17,14 @@ var _trigger_ignitable_count := 0
 # Number of ignitables already lit
 var _trigger_ignitable_lit_count := 0
 
-# Event triggered by this trigger condition
-# (derived by event_path)
-var _event: Event
-
 func _ready():
+	# TODO: like ignitables, get all events from nodes
+	# only keeping the valid ones in case some are empty
+	# later, also keep ignitable as node refs instead of node paths,
+	# so we don't have to get nodes from path again
+	# (and we don't have to erase invalid paths either... just create a list of valid
+	# nodes to start with)
+	
 	var invalid_ignitable_paths := []
 	
 	for ignitable_path in trigger_ignitable_paths:
@@ -38,7 +45,7 @@ func _ready():
 			print("WARNING: Door '%s' references trigger ignitable %s, but it is not an Ignitable. It will be removed at runtime." % [get_path(), ignitable_path])
 			continue
 
-			# deferred connection to avoid disabling collision during physics process (only matters for lit signal)
+		# deferred connection to avoid disabling collision during physics process (only matters for lit signal)
 		var error1 = ignitable.connect("lit", self, "_on_trigger_ignitable_lit", [], CONNECT_DEFERRED)
 		var error2 = ignitable.connect("unlit", self, "_on_trigger_ignitable_unlit", [], CONNECT_DEFERRED)
 		if error1 or error2:
@@ -52,10 +59,12 @@ func _ready():
 	# cleanup any invalid node path (just so _trigger doesn't have to check them again before disconnect)
 	for invalid_ignitable_path in invalid_ignitable_paths:
 		trigger_ignitable_paths.erase(invalid_ignitable_path)
-		
-	_event = get_node(event_path) as Event
-	NodeUtils.check_node_got_by_path(_event, "IgnitionEvent", self, "Event", event_path)
-			
+
+	for event_path in event_paths:
+		var event := get_node(event_path) as Event
+		NodeUtils.assert_node_got_by_path(event, typeof(self), self, "Event", event_path)
+		_events.append(event)
+
 func _on_trigger_ignitable_lit():
 	# increment count, and trigger event if all connected ignitables have been lit
 	_trigger_ignitable_lit_count += 1
@@ -69,7 +78,8 @@ func _on_trigger_ignitable_unlit():
 	_trigger_ignitable_lit_count -= 1
 
 func _trigger_event():
-	_event.trigger()
+	for event in _events:
+		event.trigger()
 	_disconnect_ignitables()
 
 func _disconnect_ignitables():

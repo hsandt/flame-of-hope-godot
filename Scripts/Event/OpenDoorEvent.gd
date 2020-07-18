@@ -3,7 +3,7 @@ extends Event
 # Path to door
 export(NodePath) var door_path
 
-# Swing Audio Clip
+# Victory Audio Clip
 export(AudioStream) var victory_jingle
 
 # Door sprite (derived from sprite_path)
@@ -13,7 +13,7 @@ onready var jingle_player := $"/root/Dungeon/JinglePlayer" as AudioStreamPlayer
 
 func _ready():
 	_door = get_node(door_path) as Door
-	NodeUtils.check_node_got_by_path(_door, "OpenDoorEvent", self, "Door", door_path)
+	NodeUtils.assert_node_got_by_path(_door, "OpenDoorEvent", self, "Door", door_path)
 
 # override
 func trigger():
