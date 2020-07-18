@@ -1,21 +1,31 @@
 extends Node
 
+
+# Parameters
+
 # List of path of ignitable elements that need to be lit to trigger this event
 export(Array, NodePath) var trigger_ignitable_paths
 
 # List of path of events triggered simultaneously by this trigger condition
 export(Array, NodePath) var event_paths
 
-# Events triggered by this trigger condition
-# (derived by event_paths)
-var _events: Array
+# List of ignitable elements (derived by trigger_ignitable_paths)
+var _trigger_ignitables: Array
 
 # Number of ignitables that need to be lit to trigger this event
 # (derived from trigger_ignitable_paths)
 var _trigger_ignitable_count := 0
 
+# List of events triggered by this trigger condition
+# (derived by event_paths)
+var _events: Array
+
+
+# State
+
 # Number of ignitables already lit
 var _trigger_ignitable_lit_count := 0
+
 
 func _ready():
 	# TODO: like ignitables, get all events from nodes
@@ -52,6 +62,8 @@ func _ready():
 			print("WARNING: Ignitable connection failed with error1: %s and error2: %s. Disconnect will fail later." % [error1, error2])
 			continue
 		
+		_trigger_ignitables.append(ignitable)
+		
 		# only count valid ignitables to avoid getting stuck in case
 		# we prepared an array too big (e.g. size = 4 but filled only 3)
 		_trigger_ignitable_count += 1
@@ -83,7 +95,6 @@ func _trigger_event():
 	_disconnect_ignitables()
 
 func _disconnect_ignitables():
-	for ignitable_path in trigger_ignitable_paths:
-		var ignitable := get_node(ignitable_path)
+	for ignitable in _trigger_ignitables:
 		ignitable.disconnect("lit", self, "_on_trigger_ignitable_lit")
 		ignitable.disconnect("unlit", self, "_on_trigger_ignitable_unlit")
