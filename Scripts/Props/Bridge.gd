@@ -2,7 +2,7 @@ class_name Bridge
 extends Node2D
 
 # Bridge sprite, visible when bridge is open
-onready var sprite : TileMap = $"Sprite"
+onready var sprite : Sprite = $"Sprite"
 
 # Ground border: invisible walls active when bridge is closed
 onready var ground_border : TileMap = $"GroundBorder"
