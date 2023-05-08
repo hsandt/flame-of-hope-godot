@@ -47,7 +47,7 @@ export_release() {
   target="$3"
 
   mkdir -p "Export/$version_folder"
-  godot --no-window --export "$preset" "Export/$version_folder/$target"
+  godot3.5.2_stable --no-window --export "$preset" "Export/$version_folder/$target"
 }
 
 export_platform_release() {
