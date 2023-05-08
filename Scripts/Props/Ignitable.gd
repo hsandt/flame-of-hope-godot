@@ -31,7 +31,7 @@ func _setup():
 	if lit_on_start:
 		call_deferred("_light_on")
 	else:
-		call_deferred("_unlit")
+		call_deferred("_light_off")
 
 # full ignition during game (light on + SFX)
 func ignite():
