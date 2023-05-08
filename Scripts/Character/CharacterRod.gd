@@ -149,6 +149,14 @@ func _light_on():
 	# start timer until flame goes off (duration is set in Inspector on FlameTimer)
 	flame_timer.start()
 
+func _rekindle():
+	# restart timer to extend burn duration
+	flame_timer.start()
+	
+	# audio
+	# note we use the same source for all Character SFX, so this will cover the Swing sound (a few frames after)
+	_play_sfx(rod_light_on_sound)
+
 # reverse of ignite, light rod off during game, with SFX
 func _go_off():
 	_light_off()
@@ -168,12 +176,15 @@ func _light_off():
 	flame_timer.stop()
 
 func _on_SwingHitBox_area_entered(area: Area2D):
-	if not _is_lit:
-		if area.get_collision_layer_bit(Layer.FIRE_SOURCE):
+	if area.get_collision_layer_bit(Layer.FIRE_SOURCE):
+		if _is_lit:
+			# we touched a fire source but already lit, rekindle rod
+			_rekindle()
+		else:
 			# we touched a fire source, ignite rod
 			_ignite()
-	else:
-		if area.get_collision_layer_bit(Layer.IGNITABLE):
+	elif area.get_collision_layer_bit(Layer.IGNITABLE):
+		if _is_lit:
 			# we touched a fire source, light rod on
 			var ignitable := area.get_parent() as Ignitable
 			ignitable.ignite()
