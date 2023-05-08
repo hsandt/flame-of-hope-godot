@@ -19,7 +19,7 @@ var _initial_ground_border_collision_layer : int
 var _initial_ground_border_mask_layer : int
 
 func _ready():
-	_initial_ground_border_visible = ground_border.collision_layer
+	_initial_ground_border_visible = ground_border.visible
 	_initial_ground_border_collision_layer = ground_border.collision_layer
 	_initial_ground_border_mask_layer = ground_border.collision_mask
 	
