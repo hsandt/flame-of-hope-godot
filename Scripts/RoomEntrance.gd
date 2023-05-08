@@ -1,7 +1,7 @@
 extends Area2D
 
 # Vertical offset between room topleft and camera so camera is centered on room
-export(float) var camera_offset_y = 1
+export(float) var camera_offset_y = 1.0
 
 onready var camera := $"/root/Dungeon/Camera2D" as Camera2D
 onready var level_label := $"/root/Dungeon/CanvasLayer/Level" as Label
