@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Tilemap/Environment.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Props/FirePit.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Scripts/Event/OpenBridgeEvent.gd" type="Script" id=8]
 [ext_resource path="res://Scripts/Props/Bridge.gd" type="Script" id=9]
 [ext_resource path="res://Fonts/dynamicfont_thank_you.tres" type="DynamicFont" id=10]
+[ext_resource path="res://Scripts/Tilemap.gd" type="Script" id=11]
 [ext_resource path="res://Audio/BGM/theme_neutral.ogg" type="AudioStream" id=23]
 [ext_resource path="res://Prefabs/Props/Torch.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Scripts/Event/OpenDoorEvent.gd" type="Script" id=26]
@@ -89,6 +90,7 @@ position = Vector2( 240, 270 )
 position = Vector2( 240, 10 )
 
 [node name="TileMaps" type="Node2D" parent="Room1"]
+script = ExtResource( 11 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -182,6 +184,7 @@ position = Vector2( 240, 272 )
 position = Vector2( 240, 10 )
 
 [node name="TileMaps" type="Node2D" parent="Room2"]
+script = ExtResource( 11 )
 
 [node name="Hole" type="TileMap" parent="Room2/TileMaps"]
 tile_set = ExtResource( 1 )
@@ -267,6 +270,7 @@ bridge_path = NodePath("../../Bridge")
 position = Vector2( 240, 272 )
 
 [node name="TileMaps" type="Node2D" parent="Room3"]
+script = ExtResource( 11 )
 
 [node name="Hole" type="TileMap" parent="Room3/TileMaps"]
 tile_set = ExtResource( 1 )
@@ -366,6 +370,7 @@ position = Vector2( 0, -813 )
 position = Vector2( 240, 272 )
 
 [node name="TileMaps" type="Node2D" parent="Room4"]
+script = ExtResource( 11 )
 
 [node name="Hole" type="TileMap" parent="Room4/TileMaps"]
 tile_set = ExtResource( 1 )

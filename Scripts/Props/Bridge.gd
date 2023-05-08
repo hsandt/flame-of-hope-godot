@@ -16,7 +16,7 @@ var _initial_ground_border_collision_layer : int
 var _initial_ground_border_mask_layer : int
 
 func _ready():
-	# Always ground border it at runtime, it's only visible during editing
+	# Always hide ground border at runtime, it's only visible during editing
 	ground_border.visible = false
 
 	_initial_ground_border_collision_layer = ground_border.collision_layer
