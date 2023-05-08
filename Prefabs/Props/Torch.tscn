@@ -106,6 +106,7 @@ collision_mask = 16
 
 [node name="IgnitableCollisionShape2D" type="CollisionShape2D" parent="IgnitableArea2D"]
 shape = SubResource( 3 )
+
 [connection signal="lit" from="." to="." method="_on_Torch_lit"]
 [connection signal="unlit" from="." to="." method="_on_Torch_unlit"]
 [connection signal="timeout" from="FlameTimer" to="." method="_on_FlameTimer_timeout"]
