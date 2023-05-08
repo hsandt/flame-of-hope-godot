@@ -19,7 +19,11 @@ var _events: Array
 
 # State
 
-# Number of ignitables already lit
+# List of ignitable elements currently lit
+# This is safer as just counting them as the count sometimes goes out of sync
+var _lit_trigger_ignitables: Array
+
+# Number of ignitables already lit (derived from _lit_trigger_ignitables)
 var _trigger_ignitable_lit_count := 0
 
 
@@ -29,8 +33,8 @@ func _ready():
 		NodeUtils.assert_node_got_by_path(ignitable, "IgnitionTrigger", self, "Ignitable", ignitable_path)
 		
 		# deferred connection to avoid disabling collision during physics process (only matters for lit signal)
-		var error1 = ignitable.connect("lit", self, "_on_trigger_ignitable_lit", [], CONNECT_DEFERRED)
-		var error2 = ignitable.connect("unlit", self, "_on_trigger_ignitable_unlit", [], CONNECT_DEFERRED)
+		var error1 = ignitable.connect("lit", self, "_on_trigger_ignitable_lit", [ignitable], CONNECT_DEFERRED)
+		var error2 = ignitable.connect("unlit", self, "_on_trigger_ignitable_unlit", [ignitable], CONNECT_DEFERRED)
 		if error1 or error2:
 			print("WARNING: Ignitable connection failed with error1: %s and error2: %s. Ignoring this ignitable." % [error1, error2])
 			continue
@@ -44,16 +48,33 @@ func _ready():
 		NodeUtils.assert_node_got_by_path(event, "IgnitionTrigger", self, "Event", event_path)
 		_events.append(event)
 
-func _on_trigger_ignitable_lit():
-	# increment count, and trigger event if all connected ignitables have been lit
+func _on_trigger_ignitable_lit(ignitable : Ignitable):
+	var index = _lit_trigger_ignitables.find(ignitable)
+	if index >= 0:
+		push_error("_on_trigger_ignitable_lit: ignitable %s was just lit " % ignitable +
+			"but it was already registered, so don't register it")
+		return
+	
+	# add ignitable to list of lit ones and increment count
+	_lit_trigger_ignitables.append(ignitable)
 	_trigger_ignitable_lit_count += 1
+	
 	if _trigger_ignitable_lit_count >= len(_trigger_ignitables):
+		# all connected ignitables have been lit, so trigger event(s)
 		_trigger_event()
 
-func _on_trigger_ignitable_unlit():
-	# decrement count, but don't "untrigger" the event
+func _on_trigger_ignitable_unlit(ignitable : Ignitable):
+	var index = _lit_trigger_ignitables.find(ignitable)
+	if index == -1:
+		push_error("_on_trigger_ignitable_unlit: ignitable %s was just unlit " % ignitable +
+			"but it was never registered in the first place, so don't unregister it")
+		return
+	
+	# remove ignitable from list of list ones and
+	# decrement count, but don't "untrigger" the event (e.g. don't close the door)
 	# if it has already been triggered, ignitables should have been
 	# disconnected anyway
+	_lit_trigger_ignitables.remove(index)
 	_trigger_ignitable_lit_count -= 1
 
 func _trigger_event():
