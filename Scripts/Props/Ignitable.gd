@@ -31,7 +31,10 @@ func _setup():
 	if lit_on_start:
 		call_deferred("_light_on")
 	else:
-		call_deferred("_light_off")
+		# do NOT call _light_off, it would emit the unlit signal, causing
+		# any connected IgnitionTrigger's _trigger_ignitable_lit_count to decrement
+		# to a negative number on start
+		_play_unlit_animation()
 
 # full ignition during game (light on + SFX)
 func ignite():
@@ -60,13 +63,16 @@ func _play_sfx(stream: AudioStream):
 # silently set light on (with anim and signal)
 func _light_on():
 	_is_lit = true
-	animation_player.play("%s_Lit" % _get_anim_prefix())
+	_play_lit_animation()
 	
 	# signal for both puzzle like connected doors and child class (e.g. Torch)
 	# this is called even on start, so doors always have the correct count if
 	# for some reason some torches start on
 	emit_signal("lit")
-	
+
+func _play_lit_animation():
+	animation_player.play("%s_Lit" % _get_anim_prefix())
+
 # full going off during game (light off + SFX)
 func _go_off():
 	_light_off()
@@ -77,11 +83,14 @@ func _go_off():
 # silently set light off (with anim and signal)
 func _light_off():
 	_is_lit = false
-	animation_player.play("%s_Unlit"  % _get_anim_prefix())
+	_play_unlit_animation()
 	
 	# signal for child class (e.g. Torch)
 	emit_signal("unlit")
 
+func _play_unlit_animation():
+	animation_player.play("%s_Unlit"  % _get_anim_prefix())
+	
 func _set_lit_on_start(new_lit_on_start: bool):
 	lit_on_start = new_lit_on_start
 	
