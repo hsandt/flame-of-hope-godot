@@ -2,6 +2,7 @@ class_name Ignitable
 extends Node2D
 
 signal lit
+signal rekindle
 signal unlit
 
 # Light On Audio Clip
@@ -38,11 +39,10 @@ func _setup():
 
 # full ignition during game (light on + SFX)
 func ignite():
-	# state
-	_light_on()
-
-	# audio
-	_play_sfx(light_on_sound)
+	if _is_lit:
+		_rekindle()
+	else:
+		_light_on_with_sound()
 
 # virtual
 func _get_anim_prefix():
@@ -60,6 +60,13 @@ func _play_sfx(stream: AudioStream):
 	sfx_player.stream = stream
 	sfx_player.play()
 
+# full light on during game (light on + SFX)
+func _light_on_with_sound():
+	_light_on()
+	
+	# audio
+	_play_sfx(light_on_sound)
+
 # silently set light on (with anim and signal)
 func _light_on():
 	_is_lit = true
@@ -72,6 +79,14 @@ func _light_on():
 
 func _play_lit_animation():
 	animation_player.play("%s_Lit" % _get_anim_prefix())
+
+# when already lit, call this to just rekindle the flame
+# without triggering lit-specific behaviors
+func _rekindle():
+	emit_signal("rekindle")	
+	
+	# audio
+	_play_sfx(light_on_sound)
 
 # full going off during game (light off + SFX)
 func _go_off():

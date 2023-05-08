@@ -25,6 +25,10 @@ func _on_Torch_lit():
 	# start timer until flame goes off (duration is set in Inspector on FlameTimer)
 	flame_timer.start()
 
+func _on_Torch_rekindle():
+	# restart timer to extend burn duration
+	flame_timer.start()
+
 func _on_Torch_unlit():
 	# stop timer to avoid warning on timeout
 	flame_timer.stop()
