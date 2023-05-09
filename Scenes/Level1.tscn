@@ -58,7 +58,6 @@ bus = "Jingle"
 
 [node name="CharacterManager" type="Node" parent="."]
 script = ExtResource( 4 )
-start_room_index = 1
 
 [node name="Character" parent="." instance=ExtResource( 3 )]
 position = Vector2( 240, 268 )
@@ -141,7 +140,7 @@ anchor_top = 0.207407
 anchor_right = 0.404167
 anchor_bottom = 0.748148
 custom_fonts/font = ExtResource( 12 )
-text = "Press C or space key, or gamepad down action button to swing the rod."
+text = "Press C, space key, or gamepad down action button to swing the rod."
 valign = 1
 autowrap = true
 script = ExtResource( 17 )
@@ -321,7 +320,7 @@ anchor_top = -0.922222
 anchor_right = 0.460417
 anchor_bottom = -0.633333
 custom_fonts/font = ExtResource( 12 )
-text = "Press X key or gamepad left action button to throw fireballs!"
+text = "Press X, shift or gamepad left action button to throw fireballs!"
 autowrap = true
 script = ExtResource( 17 )
 __meta__ = {
