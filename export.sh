@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
 title="Flame of Hope Godot"
-all_platforms=(windows osx linux html5)
+all_platforms=(windows macos linux html5)
 
 usage() {
-  echo "Export game for Windows, OSX, Linux and HTML5 with specified version."
+  echo "Export game for Windows, macOS, Linux and HTML5 with specified version."
   echo "Usage: export.sh VERSION TARGET
 
 ARGUMENTS
   VERSION               Version number, without the 'v'. Ex: '3.1.2'
-  TARGET                Target platform: 'windows', 'osx', 'linux', 'html5' or 'all'
+  TARGET                Target platform: 'windows', 'macos', 'linux', 'html5' or 'all'
 "
 }
 
@@ -65,9 +65,9 @@ export_platform_release() {
       folder="Linux"
       target="${title}.x86_64"
       ;;
-    osx )
+    macos )
       preset="Mac OSX"
-      folder="OSX"
+      folder="macOS"
       if [[ "$OSTYPE" == "darwin"* ]]; then
         target="${title}.dmg"
       else
