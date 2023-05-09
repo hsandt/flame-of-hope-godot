@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Scripts/Character/CharacterRod.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Character/CharacterAnim.gd" type="Script" id=2]
@@ -24,6 +24,9 @@
 [ext_resource path="res://Prefabs/Projectiles/Fireball.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Sprites/Character/character_walk_spritesheet.png" type="Texture" id=23]
 [ext_resource path="res://Sprites/Generic/disc_100x100.png" type="Texture" id=24]
+
+[sub_resource type="OccluderPolygon2D" id=6]
+polygon = PoolVector2Array( 6, -10, -6, -10, -6, 14, 6, 14 )
 
 [sub_resource type="Animation" id=1]
 resource_name = "Character_Throw_Fireball_Down"
@@ -358,6 +361,11 @@ texture = ExtResource( 23 )
 hframes = 12
 frame = 7
 
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite"]
+light_mask = 256
+occluder = SubResource( 6 )
+light_mask = 256
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Character_Idle_Down = ExtResource( 9 )
 anims/Character_Idle_Left = ExtResource( 5 )
@@ -423,7 +431,8 @@ script = ExtResource( 2 )
 texture = ExtResource( 24 )
 mode = 2
 range_item_cull_mask = 170
-shadow_item_cull_mask = 4
+shadow_enabled = true
+shadow_item_cull_mask = 86
 
 [connection signal="animation_finished" from="AnimationPlayer" to="CharacterRod" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="area_entered" from="SwingHitBox" to="CharacterRod" method="_on_SwingHitBox_area_entered"]

@@ -186,6 +186,10 @@ func _on_SwingHitBox_area_entered(area: Area2D):
 	if area.get_collision_layer_bit(Layer.FIRE_SOURCE):
 		if _is_lit:
 			# we touched a fire source but already lit, rekindle rod
+			# note that when lighting an ignitable, this is still called on the
+			# same frame, so this also rekindle the rod without having to swing
+			# once more (originally unintended design, but convenient for player,
+			# so we kept it)
 			_rekindle()
 		else:
 			# we touched a fire source, ignite rod

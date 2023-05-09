@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Anims/Props/ANIM_FirePit_Lit.tres" type="Animation" id=1]
 [ext_resource path="res://Anims/FX/SF_FlameBig.tres" type="SpriteFrames" id=2]
@@ -8,6 +8,9 @@
 [ext_resource path="res://Audio/SFX/fire_pit_light_on.ogg" type="AudioStream" id=6]
 [ext_resource path="res://Sprites/Generic/disc_100x100.png" type="Texture" id=7]
 [ext_resource path="res://Materials/CanvasItemMaterial_Flame.tres" type="Material" id=8]
+
+[sub_resource type="OccluderPolygon2D" id=3]
+polygon = PoolVector2Array( -4, 12, 4, 12, 13, 2, 13, -7, 5, -15, -5, -15, -13, -7, -13, 2 )
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 15.0
@@ -24,6 +27,11 @@ light_on_sound = ExtResource( 6 )
 light_mask = 32
 texture = ExtResource( 3 )
 offset = Vector2( 0, -4 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Body"]
+light_mask = 64
+occluder = SubResource( 3 )
+light_mask = 64
 
 [node name="FlameBig" type="AnimatedSprite" parent="."]
 visible = false
@@ -67,4 +75,5 @@ shape = SubResource( 2 )
 texture = ExtResource( 7 )
 mode = 2
 range_item_cull_mask = 170
-shadow_item_cull_mask = 4
+shadow_enabled = true
+shadow_item_cull_mask = 278

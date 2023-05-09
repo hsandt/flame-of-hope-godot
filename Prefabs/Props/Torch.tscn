@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Anims/Props/ANIM_Torch_Unlit.tres" type="Animation" id=1]
 [ext_resource path="res://Anims/Props/SF_Torch_Unlit.tres" type="SpriteFrames" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://Audio/SFX/flame_light_off.ogg" type="AudioStream" id=5]
 [ext_resource path="res://Sprites/Generic/disc_100x100.png" type="Texture" id=6]
 [ext_resource path="res://Anims/Props/SF_Torch_Lit.tres" type="SpriteFrames" id=7]
+
+[sub_resource type="OccluderPolygon2D" id=4]
+polygon = PoolVector2Array( -2, 2, -2, -10, 2, -10, 2, 2 )
 
 [sub_resource type="Animation" id=1]
 resource_name = "Torch_Unlit"
@@ -76,6 +79,11 @@ light_mask = 32
 frames = ExtResource( 7 )
 offset = Vector2( 0, -14 )
 
+[node name="LightOccluder2D" type="LightOccluder2D" parent="AnimatedSprite"]
+light_mask = 64
+occluder = SubResource( 4 )
+light_mask = 64
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Torch_Lit = ExtResource( 1 )
 anims/Torch_Unlit = SubResource( 1 )
@@ -114,7 +122,8 @@ disabled = true
 texture = ExtResource( 6 )
 mode = 2
 range_item_cull_mask = 170
-shadow_item_cull_mask = 4
+shadow_enabled = true
+shadow_item_cull_mask = 278
 
 [connection signal="lit" from="." to="." method="_on_Torch_lit"]
 [connection signal="rekindle" from="." to="." method="_on_Torch_rekindle"]

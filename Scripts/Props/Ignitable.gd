@@ -108,7 +108,7 @@ func _light_off():
 	emit_signal("unlit")
 
 func _play_unlit_animation():
-	animation_player.play("%s_Unlit"  % _get_anim_prefix())
+	animation_player.play("%s_Unlit" % _get_anim_prefix())
 		
 	# disable flame light
 	light.visible = false

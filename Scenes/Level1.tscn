@@ -292,6 +292,10 @@ position = Vector2( 240, 128 )
 lit_on_start = true
 
 [node name="Door" parent="Room2" instance=ExtResource( 6 )]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Room2"]
 follow_viewport_enable = true
@@ -409,6 +413,10 @@ position = Vector2( 240, 192 )
 lit_on_start = true
 
 [node name="Door" parent="Room3" instance=ExtResource( 6 )]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="Bridge" type="Node2D" parent="Room3"]
 position = Vector2( 240, 71 )

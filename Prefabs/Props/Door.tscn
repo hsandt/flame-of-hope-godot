@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Anims/FX/SF_FlameSmall.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Scripts/Props/Door.gd" type="Script" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://Sprites/Generic/disc_50x50.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 13, 4.5 )
+
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 13, 4.5 )
 
 [node name="Door" type="Node2D"]
@@ -41,3 +44,11 @@ texture = ExtResource( 4 )
 mode = 2
 range_item_cull_mask = 170
 shadow_item_cull_mask = 4
+
+[node name="FireSourceArea2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 16
+
+[node name="FireSourceCollisionShape2D" type="CollisionShape2D" parent="FireSourceArea2D"]
+position = Vector2( 0, 2.5 )
+shape = SubResource( 2 )
