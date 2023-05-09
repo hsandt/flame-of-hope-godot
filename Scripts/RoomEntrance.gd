@@ -4,7 +4,7 @@ extends Area2D
 export(float) var camera_offset_y = 1.0
 
 onready var camera := $"/root/Dungeon/Camera2D" as Camera2D
-onready var level_label := $"/root/Dungeon/CanvasLayer/Level" as Label
+onready var level_label := $"/root/Dungeon/DebugCanvasLayer/Level" as Label
 
 func _on_RoomEntrance_body_entered(_body):
 	# Collision is set with Character only, so we don't need to check for body nature,

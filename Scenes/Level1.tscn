@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Tilemap/Environment.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Props/FirePit.tscn" type="PackedScene" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://Fonts/dynamicfont_thank_you.tres" type="DynamicFont" id=10]
 [ext_resource path="res://Scripts/Tilemap.gd" type="Script" id=11]
 [ext_resource path="res://Fonts/dynamicfont_tutorial.tres" type="DynamicFont" id=12]
+[ext_resource path="res://Fonts/dynamicfont_build_info.tres" type="DynamicFont" id=13]
+[ext_resource path="res://Scripts/DebugCanvasLayer.gd" type="Script" id=14]
 [ext_resource path="res://Audio/BGM/theme_neutral.ogg" type="AudioStream" id=23]
 [ext_resource path="res://Prefabs/Props/Torch.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Scripts/Event/OpenDoorEvent.gd" type="Script" id=26]
@@ -25,23 +27,10 @@ anchor_mode = 0
 current = true
 smoothing_enabled = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="DebugCanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource( 14 )
 
-[node name="Title" type="Label" parent="CanvasLayer"]
-margin_left = 16.0
-margin_top = 18.0
-margin_right = 161.0
-margin_bottom = 32.0
-text = "Flame of Hope - Godot"
-
-[node name="Version" type="Label" parent="CanvasLayer"]
-margin_left = 17.0
-margin_top = 34.0
-margin_right = 162.0
-margin_bottom = 48.0
-text = "v0.1.2"
-
-[node name="Level" type="Label" parent="CanvasLayer"]
+[node name="Level" type="Label" parent="DebugCanvasLayer"]
 margin_left = 418.0
 margin_top = 21.0
 margin_right = 464.0
@@ -157,13 +146,29 @@ lit_on_start = true
 [node name="CanvasLayer" type="CanvasLayer" parent="Room1"]
 follow_viewport_enable = true
 
+[node name="Title" type="Label" parent="Room1/CanvasLayer"]
+margin_left = 18.0
+margin_top = 19.0
+margin_right = 180.0
+margin_bottom = 43.0
+custom_fonts/font = ExtResource( 13 )
+text = "Flame of Hope - Godot"
+
+[node name="Version" type="Label" parent="Room1/CanvasLayer"]
+margin_left = 19.0
+margin_top = 35.0
+margin_right = 164.0
+margin_bottom = 59.0
+custom_fonts/font = ExtResource( 13 )
+text = "v0.1.2"
+
 [node name="TutoLabel1" type="Label" parent="Room1/CanvasLayer"]
-anchor_left = 0.0479167
+anchor_left = 0.0395833
 anchor_top = 0.207407
-anchor_right = 0.4125
+anchor_right = 0.404167
 anchor_bottom = 0.748148
 custom_fonts/font = ExtResource( 12 )
-text = "Press C key or gamepad down action button to swing the rod."
+text = "Press C or space key, or gamepad down action button to swing the rod."
 valign = 1
 autowrap = true
 __meta__ = {
