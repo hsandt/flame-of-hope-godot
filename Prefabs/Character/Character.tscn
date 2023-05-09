@@ -410,7 +410,7 @@ script = ExtResource( 8 )
 
 [node name="CharacterMotor" type="Node" parent="."]
 script = ExtResource( 4 )
-speed = 50.0
+speed = 60.0
 
 [node name="CharacterRod" type="Node" parent="."]
 script = ExtResource( 1 )
