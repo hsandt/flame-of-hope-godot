@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Tilemap/Environment.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Props/FirePit.tscn" type="PackedScene" id=2]
@@ -14,11 +14,18 @@
 [ext_resource path="res://Fonts/dynamicfont_tutorial.tres" type="DynamicFont" id=12]
 [ext_resource path="res://Fonts/dynamicfont_build_info.tres" type="DynamicFont" id=13]
 [ext_resource path="res://Scripts/DebugCanvasLayer.gd" type="Script" id=14]
+[ext_resource path="res://Scripts/EnterAreaTrigger.gd" type="Script" id=15]
+[ext_resource path="res://Scripts/Event/PlayJingleEvent.gd" type="Script" id=16]
+[ext_resource path="res://Scripts/Utils/HideOnStart.gd" type="Script" id=17]
+[ext_resource path="res://Scripts/Event/ShowLabel.gd" type="Script" id=18]
 [ext_resource path="res://Audio/BGM/theme_neutral.ogg" type="AudioStream" id=23]
 [ext_resource path="res://Prefabs/Props/Torch.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Scripts/Event/OpenDoorEvent.gd" type="Script" id=26]
 [ext_resource path="res://Audio/Jingle/victory_jingle.ogg" type="AudioStream" id=27]
 [ext_resource path="res://Prefabs/EventTriggers/RoomEntrance.tscn" type="PackedScene" id=28]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 48, 16.75 )
 
 [node name="Dungeon" type="YSort"]
 
@@ -47,6 +54,7 @@ bus = "Jingle"
 
 [node name="CharacterManager" type="Node" parent="."]
 script = ExtResource( 4 )
+start_room_index = 3
 
 [node name="Character" parent="." instance=ExtResource( 3 )]
 position = Vector2( 240, 268 )
@@ -310,6 +318,9 @@ bridge_path = NodePath("../../Bridge")
 [node name="RoomEntrance" parent="Room3" instance=ExtResource( 28 )]
 position = Vector2( 240, 272 )
 
+[node name="RoomEntrance2" parent="Room3" instance=ExtResource( 28 )]
+position = Vector2( 240, 10 )
+
 [node name="TileMaps" type="Node2D" parent="Room3"]
 script = ExtResource( 11 )
 
@@ -408,8 +419,28 @@ position = Vector2( 0, -813 )
 
 [node name="Events" type="Node" parent="Room4"]
 
+[node name="PlayThankYouJingle" type="Node" parent="Room4/Events"]
+script = ExtResource( 16 )
+victory_jingle = ExtResource( 27 )
+
+[node name="ShowThankYouLabel" type="Node" parent="Room4/Events"]
+script = ExtResource( 18 )
+label_path = NodePath("../../CanvasLayer2/ThankYouLabel")
+
 [node name="RoomEntrance" parent="Room4" instance=ExtResource( 28 )]
-position = Vector2( 240, 272 )
+position = Vector2( 240, 269 )
+
+[node name="EnterAreaTrigger - Play Thank You Jingle" type="Area2D" parent="Room4"]
+position = Vector2( 241, 144 )
+z_index = 1
+collision_layer = 64
+collision_mask = 2
+script = ExtResource( 15 )
+event_paths = [ NodePath("../Events/PlayThankYouJingle"), NodePath("../Events/ShowThankYouLabel") ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Room4/EnterAreaTrigger - Play Thank You Jingle"]
+position = Vector2( 0, 0.25 )
+shape = SubResource( 1 )
 
 [node name="TileMaps" type="Node2D" parent="Room4"]
 script = ExtResource( 11 )
@@ -476,3 +507,6 @@ margin_bottom = -738.0
 custom_fonts/font = ExtResource( 10 )
 text = "Thank you for playing!"
 align = 1
+script = ExtResource( 17 )
+
+[connection signal="body_entered" from="Room4/EnterAreaTrigger - Play Thank You Jingle" to="Room4/EnterAreaTrigger - Play Thank You Jingle" method="_on_body_entered"]

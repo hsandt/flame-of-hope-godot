@@ -6,7 +6,7 @@ export(NodePath) var door_path
 # Victory Audio Clip
 export(AudioStream) var victory_jingle
 
-# Door sprite (derived from sprite_path)
+# Door sprite (derived from door_path)
 var _door: Door
 
 onready var jingle_player := $"/root/Dungeon/JinglePlayer" as AudioStreamPlayer
