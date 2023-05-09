@@ -421,7 +421,7 @@ rod_light_on_sound = ExtResource( 19 )
 rod_light_off_sound = ExtResource( 21 )
 
 [node name="FlameTimer" type="Timer" parent="CharacterRod"]
-wait_time = 20.0
+wait_time = 5.0
 one_shot = true
 
 [node name="CharacterAnim" type="Node" parent="."]
