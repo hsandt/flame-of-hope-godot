@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Anims/FX/SF_FlameSmall.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Anims/FX/SF_FlameSmallBlue.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Scripts/Props/Door.gd" type="Script" id=2]
 [ext_resource path="res://Materials/CanvasItemMaterial_Flame.tres" type="Material" id=3]
 [ext_resource path="res://Sprites/Generic/disc_50x50.png" type="Texture" id=4]
