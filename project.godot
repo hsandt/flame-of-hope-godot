@@ -274,6 +274,15 @@ throw_fireball={
 
 [layer_names]
 
+2d_render/layer_1="default"
+2d_render/layer_2="ground_lit"
+2d_render/layer_3="ground_occluder"
+2d_render/layer_4="wall_lit"
+2d_render/layer_5="wall_occluder"
+2d_render/layer_6="prop_lit"
+2d_render/layer_7="prop_occluder"
+2d_render/layer_8="character_lit"
+2d_render/layer_9="character_occluder"
 2d_physics/layer_1="Hole"
 2d_physics/layer_2="Character"
 2d_physics/layer_3="Obstacle"

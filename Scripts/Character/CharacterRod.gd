@@ -37,6 +37,7 @@ onready var character_control := $"../CharacterControl" as CharacterControl
 onready var character_motor := $"../CharacterMotor" as CharacterMotor
 onready var character_anim := $"../CharacterAnim" as CharacterAnim
 onready var flame_timer := $FlameTimer as Timer
+onready var light := $"../Light2D" as Light2D
 
 func _ready():
 	_setup()
@@ -148,6 +149,9 @@ func _light_on():
 	
 	# start timer until flame goes off (duration is set in Inspector on FlameTimer)
 	flame_timer.start()
+	
+	# enable flame light
+	light.visible = true
 
 func _rekindle():
 	# restart timer to extend burn duration
@@ -174,6 +178,9 @@ func _light_off():
 	
 	# stop timer to avoid warning on timeout
 	flame_timer.stop()
+	
+	# disable flame light
+	light.visible = false
 
 func _on_SwingHitBox_area_entered(area: Area2D):
 	if area.get_collision_layer_bit(Layer.FIRE_SOURCE):

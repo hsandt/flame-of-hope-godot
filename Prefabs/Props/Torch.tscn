@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Anims/Props/ANIM_Torch_Unlit.tres" type="Animation" id=1]
 [ext_resource path="res://Anims/Props/SF_Torch_Unlit.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://Scripts/Props/Torch.gd" type="Script" id=3]
 [ext_resource path="res://Audio/SFX/fire_pit_light_on.ogg" type="AudioStream" id=4]
 [ext_resource path="res://Audio/SFX/flame_light_off.ogg" type="AudioStream" id=5]
+[ext_resource path="res://Sprites/Generic/disc_100x100.png" type="Texture" id=6]
+[ext_resource path="res://Anims/Props/SF_Torch_Lit.tres" type="SpriteFrames" id=7]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Torch_Unlit"
@@ -70,7 +72,10 @@ light_on_sound = ExtResource( 4 )
 light_off_sound = ExtResource( 5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = ExtResource( 2 )
+light_mask = 32
+frames = ExtResource( 7 )
+frame = 2
+playing = true
 offset = Vector2( 0, -14 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -98,7 +103,6 @@ collision_mask = 16
 
 [node name="FireSourceCollisionShape2D" type="CollisionShape2D" parent="FireSourceArea2D"]
 shape = SubResource( 3 )
-disabled = true
 
 [node name="IgnitableArea2D" type="Area2D" parent="."]
 collision_layer = 32
@@ -106,6 +110,13 @@ collision_mask = 16
 
 [node name="IgnitableCollisionShape2D" type="CollisionShape2D" parent="IgnitableArea2D"]
 shape = SubResource( 3 )
+disabled = true
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 6 )
+mode = 2
+range_item_cull_mask = 170
+shadow_item_cull_mask = 4
 
 [connection signal="lit" from="." to="." method="_on_Torch_lit"]
 [connection signal="rekindle" from="." to="." method="_on_Torch_rekindle"]

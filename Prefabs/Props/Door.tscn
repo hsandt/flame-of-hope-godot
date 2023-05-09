@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Anims/FX/SF_FlameSmall.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Scripts/Props/Door.gd" type="Script" id=2]
+[ext_resource path="res://Materials/CanvasItemMaterial_Flame.tres" type="Material" id=3]
+[ext_resource path="res://Sprites/Generic/disc_50x50.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13, 4.5 )
@@ -15,11 +17,13 @@ __meta__ = {
 }
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = ExtResource( 3 )
 position = Vector2( -8, 0 )
 z_index = 1
 frames = ExtResource( 1 )
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
+material = ExtResource( 3 )
 position = Vector2( 8, 0 )
 z_index = 1
 frames = ExtResource( 1 )
@@ -31,3 +35,9 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 0, 2.5 )
 shape = SubResource( 1 )
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 4 )
+mode = 2
+range_item_cull_mask = 170
+shadow_item_cull_mask = 4

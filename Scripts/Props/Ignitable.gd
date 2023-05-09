@@ -19,6 +19,7 @@ var _is_lit: bool
 
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var sfx_player: AudioStreamPlayer = $"SFXPlayer"
+onready var light := $"Light2D" as Light2D
 
 func _ready():
 	if Engine.editor_hint:
@@ -79,6 +80,9 @@ func _light_on():
 
 func _play_lit_animation():
 	animation_player.play("%s_Lit" % _get_anim_prefix())
+	
+	# enable flame light
+	light.visible = true
 
 # when already lit, call this to just rekindle the flame
 # without triggering lit-specific behaviors
@@ -105,6 +109,9 @@ func _light_off():
 
 func _play_unlit_animation():
 	animation_player.play("%s_Unlit"  % _get_anim_prefix())
+		
+	# disable flame light
+	light.visible = false
 	
 func _set_lit_on_start(new_lit_on_start: bool):
 	lit_on_start = new_lit_on_start
