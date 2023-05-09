@@ -43,11 +43,15 @@ fi
 
 export_release() {
   preset="$1"
-  version_folder="$2"
+  folder="$2"
   target="$3"
 
-  mkdir -p "Export/$version_folder"
-  godot3.5.2_stable --no-window --export "$preset" "Export/$version_folder/$target"
+  # Remove any existing folder to avoid leftover files if title changed since
+  rm -rf "$folder/"
+  echo "$folder"
+
+  mkdir -p "$folder"
+  godot3.5.2_stable --no-window --export --quiet "$preset" "$folder/$target"
 }
 
 export_platform_release() {
@@ -57,17 +61,17 @@ export_platform_release() {
   case "$platform" in
     windows )
       preset="Windows Desktop"
-      folder="Windows"
+      platform_titlecase="Windows"
       target="${title}.exe"
       ;;
     linux )
       preset="Linux/X11"
-      folder="Linux"
+      platform_titlecase="Linux"
       target="${title}.x86_64"
       ;;
     macos )
       preset="Mac OSX"
-      folder="macOS"
+      platform_titlecase="macOS"
       if [[ "$OSTYPE" == "darwin"* ]]; then
         target="${title}.dmg"
       else
@@ -76,7 +80,7 @@ export_platform_release() {
       ;;
     html5 )
       preset="HTML5"
-      folder="HTML5"
+      platform_titlecase="HTML5"
       target="index.html"
       ;;
     * )
@@ -86,7 +90,39 @@ export_platform_release() {
       ;;
   esac
 
-  export_release "$preset" "v$version/$folder" "$target"
+  version_folder="Export/v$version"
+  subfolder="$title v$version - $platform_titlecase"
+  folder_path="$version_folder/$title v$version - $platform_titlecase"
+  echo "version_folder: $version_folder"
+  echo "subfolder: $subfolder"
+  echo "folder_path: $folder_path"
+  echo "true folder: v$version/$folder_path"
+
+  echo "Exporting for $platform..."
+  export_release "$preset" "$folder_path" "$target"
+
+  # Enter the version folder, which is the parent folder of the platform subfolders
+  # This is important to zip subfolders without copying the whole hierarchy from cwd
+  # See https://superuser.com/questions/119649/avoid-unwanted-path-in-zip-file/119661#119661
+  # It's optional for macOS where we only copy a file
+  pushd "$version_folder"
+
+    if [[ "$platform" == "macos" ]]; then
+      # For OSX, Godot already zips the .app, so we just copy it to the outside folder
+      # and rename it to full name with version and platformer, so all zips are in the
+      # same folder with the same naming convention, ready for the next step
+      #(copy to Drive and/or upload to itch.io)
+      echo "Copying zip to outside folder"
+      cp "${subfolder}/${title}.zip" "${subfolder}.zip"
+    else
+      echo "Zipping..."
+      zip_path="${subfolder}.zip"
+      # delete existing one to be safe
+      rm -f "$zip_path"
+      zip -r "$zip_path" "$subfolder"
+    fi
+
+  popd
 }
 
 if [[ "$target" == "all" ]]; then
