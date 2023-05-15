@@ -33,7 +33,7 @@ extents = Vector2( 48, 5 )
 light_mask = 0
 color = Color( 0.572549, 0.572549, 0.572549, 1 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." groups=["camera"]]
 anchor_mode = 0
 current = true
 smoothing_enabled = true
