@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/sfx_bridge_appear_step.ogg-fd29a9eb2a8ded40941d105c175a3323.oggstr"
+
+[deps]
+
+source_file="res://Audio/SFX/sfx_bridge_appear_step.ogg"
+dest_files=[ "res://.import/sfx_bridge_appear_step.ogg-fd29a9eb2a8ded40941d105c175a3323.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
