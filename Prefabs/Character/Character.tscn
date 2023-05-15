@@ -74,7 +74,7 @@ light_mask = 128
 position = Vector2( 0, -13 )
 texture = ExtResource( 14 )
 hframes = 16
-frame = 2
+frame = 14
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite"]
 light_mask = 256
@@ -119,9 +119,8 @@ collision_layer = 16
 collision_mask = 40
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwingHitBox"]
-position = Vector2( 26, 0 )
+position = Vector2( -26, 0 )
 shape = SubResource( 5 )
-disabled = true
 
 [node name="CharacterControl" type="Node" parent="."]
 script = ExtResource( 8 )

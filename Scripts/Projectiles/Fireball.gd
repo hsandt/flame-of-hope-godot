@@ -70,5 +70,5 @@ func _get_direction_vector(direction: int) -> Vector2:  # direction: CardinalDir
 
 func _spawn_pfx(pfx_prefab):
 	var pfx = pfx_prefab.instance()
-	get_tree().root.add_child(pfx)
+	get_tree().root.get_node("/root/Dungeon").add_child(pfx)
 	pfx.global_position = global_position

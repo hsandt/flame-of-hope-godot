@@ -143,6 +143,7 @@ autowrap = true
 script = ExtResource( 17 )
 
 [node name="TutoLabel2" type="Label" parent="Room1/CanvasLayer"]
+anchor_top = -0.0629625
 anchor_bottom = -0.0629625
 margin_left = 309.0
 margin_top = 94.0

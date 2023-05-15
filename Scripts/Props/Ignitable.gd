@@ -132,5 +132,5 @@ func _set_lit_on_start(new_lit_on_start: bool):
 
 func _spawn_pfx(pfx_prefab):
 	var pfx = pfx_prefab.instance()
-	get_tree().root.add_child(pfx)
+	get_tree().root.get_node("/root/Dungeon").add_child(pfx)
 	pfx.global_position = pfx_ignite_anchor.global_position
