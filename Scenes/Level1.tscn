@@ -18,7 +18,7 @@
 [ext_resource path="res://Scripts/Event/PlayJingleEvent.gd" type="Script" id=16]
 [ext_resource path="res://Scripts/Utils/HideOnStart.gd" type="Script" id=17]
 [ext_resource path="res://Scripts/Event/ShowLabel.gd" type="Script" id=18]
-[ext_resource path="res://Audio/BGM/theme_neutral.ogg" type="AudioStream" id=23]
+[ext_resource path="res://Audio/BGM/theme_neutral_loop.ogg" type="AudioStream" id=19]
 [ext_resource path="res://Prefabs/Props/Torch.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Scripts/Event/OpenDoorEvent.gd" type="Script" id=26]
 [ext_resource path="res://Audio/Jingle/victory_jingle.ogg" type="AudioStream" id=27]
@@ -49,7 +49,7 @@ margin_bottom = 35.0
 text = "RoomX"
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 23 )
+stream = ExtResource( 19 )
 autoplay = true
 bus = "Music"
 

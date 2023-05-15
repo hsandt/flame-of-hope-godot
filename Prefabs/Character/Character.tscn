@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Scripts/Character/CharacterRod.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Character/CharacterAnim.gd" type="Script" id=2]
@@ -344,6 +344,21 @@ tracks/5/keys = {
 "values": [ Vector2( -4, -34 ) ]
 }
 
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("RodFlame:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2, -27 ) ]
+}
+
 [sub_resource type="CircleShape2D" id=5]
 radius = 8.06226
 
@@ -358,8 +373,8 @@ position = Vector2( -3, 34 )
 light_mask = 128
 position = Vector2( 0, -13 )
 texture = ExtResource( 23 )
-hframes = 12
-frame = 7
+hframes = 24
+frame = 2
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite"]
 light_mask = 256
@@ -383,10 +398,12 @@ anims/Character_Walk_Down = ExtResource( 11 )
 anims/Character_Walk_Left = ExtResource( 13 )
 anims/Character_Walk_Right = ExtResource( 12 )
 anims/Character_Walk_Up = ExtResource( 7 )
+anims/RESET = SubResource( 7 )
 
 [node name="RodFlame" type="AnimatedSprite" parent="."]
+self_modulate = Color( 1, 1, 1, 0.905882 )
 light_mask = 128
-position = Vector2( 0, -27 )
+position = Vector2( 2, -27 )
 frames = ExtResource( 3 )
 offset = Vector2( 0, -4 )
 
