@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Anims/Props/ANIM_FirePit_Lit.tres" type="Animation" id=1]
 [ext_resource path="res://Anims/FX/SF_FlameBig.tres" type="SpriteFrames" id=2]
-[ext_resource path="res://Sprites/Props/firepit_lit.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Props/firepit_unlit.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/Props/FirePit.gd" type="Script" id=4]
 [ext_resource path="res://Anims/Props/ANIM_FirePit_Unlit.tres" type="Animation" id=5]
 [ext_resource path="res://Audio/SFX/fire_pit_light_on.ogg" type="AudioStream" id=6]
@@ -41,8 +41,6 @@ visible = false
 material = ExtResource( 8 )
 position = Vector2( 0, -4 )
 frames = ExtResource( 2 )
-frame = 3
-playing = true
 offset = Vector2( 1, -14 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -66,6 +64,7 @@ collision_mask = 16
 
 [node name="FireSourceCollisionShape2D" type="CollisionShape2D" parent="FireSourceArea2D"]
 shape = SubResource( 2 )
+disabled = true
 
 [node name="IgnitableArea2D" type="Area2D" parent="."]
 visible = false
@@ -74,7 +73,6 @@ collision_mask = 16
 
 [node name="IgnitableCollisionShape2D" type="CollisionShape2D" parent="IgnitableArea2D"]
 shape = SubResource( 2 )
-disabled = true
 
 [node name="Light2D" type="Light2D" parent="."]
 texture = ExtResource( 7 )
