@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Anims/Props/ANIM_Torch_Unlit.tres" type="Animation" id=1]
 [ext_resource path="res://Anims/Props/SF_Torch_Unlit.tres" type="SpriteFrames" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Audio/SFX/fire_pit_light_on.ogg" type="AudioStream" id=4]
 [ext_resource path="res://Audio/SFX/flame_light_off.ogg" type="AudioStream" id=5]
 [ext_resource path="res://Sprites/Generic/disc_100x100.png" type="Texture" id=6]
+[ext_resource path="res://Prefabs/PFX/PFX_Ignite_Small.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Prefabs/Audio/SFXPlayer.tscn" type="PackedScene" id=8]
 
 [sub_resource type="OccluderPolygon2D" id=4]
@@ -71,6 +72,7 @@ radius = 9.0
 [node name="Torch" type="Node2D"]
 position = Vector2( 208, 175 )
 script = ExtResource( 3 )
+pfx_ignite_prefab = ExtResource( 7 )
 light_on_sound = ExtResource( 4 )
 light_off_sound = ExtResource( 5 )
 
@@ -122,6 +124,9 @@ mode = 2
 range_item_cull_mask = 170
 shadow_enabled = true
 shadow_item_cull_mask = 278
+
+[node name="PFXIgniteAnchor" type="Node2D" parent="."]
+position = Vector2( 0, -13 )
 
 [connection signal="lit" from="." to="." method="_on_Torch_lit"]
 [connection signal="rekindle" from="." to="." method="_on_Torch_rekindle"]

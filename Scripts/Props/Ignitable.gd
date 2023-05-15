@@ -5,6 +5,9 @@ signal lit
 signal rekindle
 signal unlit
 
+# PFX ignite prefab
+export(PackedScene) var pfx_ignite_prefab
+
 # Light On Audio Clip
 export(AudioStream) var light_on_sound
 
@@ -19,7 +22,8 @@ var _is_lit: bool
 
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var sfx_player: AudioStreamPlayer = $"SFXPlayer"
-onready var light := $"Light2D" as Light2D
+onready var light: Node2D = $"Light2D"
+onready var pfx_ignite_anchor: Node2D = $"PFXIgniteAnchor"
 
 func _ready():
 	if Engine.editor_hint:
@@ -40,6 +44,8 @@ func _setup():
 
 # full ignition during game (light on + SFX)
 func ignite():
+	_spawn_pfx(pfx_ignite_prefab)
+	
 	if _is_lit:
 		_rekindle()
 	else:
@@ -123,3 +129,8 @@ func _set_lit_on_start(new_lit_on_start: bool):
 	if Engine.editor_hint:
 		# defer to let child be loaded if this is called on start/save scene
 		call_deferred("_tool_update_preview", new_lit_on_start)
+
+func _spawn_pfx(pfx_prefab):
+	var pfx = pfx_prefab.instance()
+	get_tree().root.add_child(pfx)
+	pfx.global_position = pfx_ignite_anchor.global_position

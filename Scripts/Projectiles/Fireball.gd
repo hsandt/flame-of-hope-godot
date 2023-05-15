@@ -22,8 +22,11 @@ func _physics_process(delta):
 		var ignitable := kinematic_collision2d.collider.get_parent() as Ignitable
 		if ignitable:
 			ignitable.ignite()
-			
-		_spawn_explosion()
+			# Don't spawn PFX Ignite, Ignitable will do it on their side
+			# (also on Swing Ignite)
+		else:
+			# Default explosion PFX (when hitting wall, etc.)
+			_spawn_pfx(pfx_explosion_prefab)
 		
 		# fireball disappears whether it hit an ignitable or some obstacle
 		# including FireballBlocker
@@ -65,7 +68,7 @@ func _get_direction_vector(direction: int) -> Vector2:  # direction: CardinalDir
 		_: # Enum.CardinalDirection.RIGHT:
 			return Vector2.RIGHT
 
-func _spawn_explosion():
-	var pfx_explosion = pfx_explosion_prefab.instance()
-	get_tree().root.add_child(pfx_explosion)
-	pfx_explosion.global_position = global_position
+func _spawn_pfx(pfx_prefab):
+	var pfx = pfx_prefab.instance()
+	get_tree().root.add_child(pfx)
+	pfx.global_position = global_position

@@ -4,6 +4,9 @@ extends Node
 # Fireball prefab
 export(PackedScene) var fireball_prefab
 
+# PFX ignite prefab
+export(PackedScene) var pfx_ignite_prefab
+
 # Rod Swing Audio Clip
 export(AudioStream) var swing_sound
 
@@ -136,6 +139,9 @@ func _spawn_fireball():
 func _ignite():
 	_light_on()
 	
+	# Spawn PFX for rod being ignited itself
+	_spawn_pfx(pfx_ignite_prefab)
+	
 	# audio
 	# note we use the same source for all Character SFX, so this will cover the Swing sound (a few frames after)
 	_play_sfx(rod_light_on_sound)
@@ -181,6 +187,11 @@ func _light_off():
 	
 	# disable flame light
 	light.visible = false
+
+func _spawn_pfx(pfx_prefab):
+	var pfx = pfx_prefab.instance()
+	get_tree().root.add_child(pfx)
+	pfx.global_position = rod_flame.global_position
 
 func _on_SwingHitBox_area_entered(area: Area2D):
 	if area.get_collision_layer_bit(Layer.FIRE_SOURCE):
