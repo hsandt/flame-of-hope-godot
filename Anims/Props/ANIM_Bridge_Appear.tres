@@ -1,0 +1,16 @@
+[gd_resource type="Animation" format=2]
+
+[resource]
+resource_name = "ANIM_Bridge_Appear"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Rect2( 0, 0, 32, 0 ), Rect2( 0, 0, 32, 48 ) ]
+}

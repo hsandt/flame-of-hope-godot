@@ -57,6 +57,7 @@ bus = "Jingle"
 
 [node name="CharacterManager" type="Node" parent="."]
 script = ExtResource( 4 )
+start_room_index = 2
 
 [node name="Character" parent="." instance=ExtResource( 3 )]
 position = Vector2( 240, 268 )
