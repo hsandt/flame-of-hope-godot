@@ -9,8 +9,7 @@ func _ready():
 	# Note that this is run even in release, so we can place character and camera
 	# where we want immediately in case they are not preset correctly in the level
 	
-	# room 1 entrance is at 240, 268 and each room has a height of 16*17=272
-	_warp_character(Vector2(240, 268 - 272 * start_room_index))
+	_warp_character(start_room_index)
 
 	# Wait a short time, just enough to load/reload the game if using restart
 	# and so character enters RoomEntrance and triggers camera motion
@@ -27,6 +26,15 @@ func _unhandled_input(event):
 	if OS.has_feature("debug"):
 		if event.is_action_pressed("cheat_restart"):
 			var _err = get_tree().reload_current_scene()
+		elif event.is_action_pressed("go_to_room1"):
+			_warp_character(0)
+		elif event.is_action_pressed("go_to_room2"):
+			_warp_character(1)
+		elif event.is_action_pressed("go_to_room3"):
+			_warp_character(2)
+		elif event.is_action_pressed("go_to_room4"):
+			_warp_character(3)
 
-func _warp_character(position: Vector2):
-	character.global_position = position
+func _warp_character(room_index: int):
+	# room 1 entrance is at 240, 268 and each room has a height of 16*17=272
+	character.global_position = Vector2(240, 268 - 272 * room_index)
