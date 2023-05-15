@@ -6,7 +6,7 @@
 [ext_resource path="res://Audio/SFX/fire_pit_light_on.ogg" type="AudioStream" id=4]
 [ext_resource path="res://Audio/SFX/flame_light_off.ogg" type="AudioStream" id=5]
 [ext_resource path="res://Sprites/Generic/disc_100x100.png" type="Texture" id=6]
-[ext_resource path="res://Anims/Props/SF_Torch_Lit.tres" type="SpriteFrames" id=7]
+[ext_resource path="res://Prefabs/Audio/SFXPlayer.tscn" type="PackedScene" id=8]
 
 [sub_resource type="OccluderPolygon2D" id=4]
 polygon = PoolVector2Array( -2, 2, -2, -10, 2, -10, 2, 2 )
@@ -76,7 +76,7 @@ light_off_sound = ExtResource( 5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 light_mask = 32
-frames = ExtResource( 7 )
+frames = ExtResource( 2 )
 offset = Vector2( 0, -14 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="AnimatedSprite"]
@@ -88,9 +88,7 @@ light_mask = 64
 anims/Torch_Lit = ExtResource( 1 )
 anims/Torch_Unlit = SubResource( 1 )
 
-[node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
-volume_db = -15.0
-bus = "SFX"
+[node name="SFXPlayer" parent="." instance=ExtResource( 8 )]
 
 [node name="FlameTimer" type="Timer" parent="."]
 wait_time = 10.0
