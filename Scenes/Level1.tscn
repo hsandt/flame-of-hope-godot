@@ -35,7 +35,6 @@ color = Color( 0.572549, 0.572549, 0.572549, 1 )
 [node name="Camera2D" type="Camera2D" parent="." groups=["camera"]]
 anchor_mode = 0
 current = true
-smoothing_enabled = true
 
 [node name="DebugCanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource( 14 )
@@ -55,11 +54,11 @@ bus = "Music"
 [node name="JinglePlayer" type="AudioStreamPlayer" parent="."]
 bus = "Jingle"
 
-[node name="CharacterManager" type="Node" parent="."]
+[node name="CharacterManager" type="Node" parent="." groups=["character_manager"]]
 script = ExtResource( 4 )
-start_room_index = 2
+start_room_index = 1
 
-[node name="Character" parent="." instance=ExtResource( 3 )]
+[node name="Character" parent="." groups=["player_character"] instance=ExtResource( 3 )]
 position = Vector2( 240, 268 )
 collision_mask = 132
 
