@@ -25,6 +25,6 @@ func trigger():
 	_triggered = true
 	
 	_label.visible = true
-	get_tree().create_tween() \
+	var _modulate_tweener = get_tree().create_tween() \
 		.tween_property(_label, "modulate", Color(1.0, 1.0, 1.0, 1.0), fade_in_duration) \
 		.from(Color(1.0, 1.0, 1.0, 0.0))
