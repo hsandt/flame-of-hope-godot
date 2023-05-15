@@ -26,7 +26,7 @@ func _ready():
 		return
 	
 	_setup()
-		
+
 func _setup():
 	_is_lit = false
 	
@@ -44,6 +44,10 @@ func ignite():
 		_rekindle()
 	else:
 		_light_on_with_sound()
+
+# virtual
+func on_lit_triggered_event():
+	pass
 
 # virtual
 func _get_anim_prefix():
