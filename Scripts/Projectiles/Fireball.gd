@@ -4,6 +4,8 @@ class_name Fireball
 # Travel speed
 export(float) var speed = 64.0
 
+export(PackedScene) var pfx_explosion_prefab
+
 # Current velocity for manual kinematic motion
 var velocity : Vector2
 
@@ -21,6 +23,8 @@ func _physics_process(delta):
 		if ignitable:
 			ignitable.ignite()
 			
+		_spawn_explosion()
+		
 		# fireball disappears whether it hit an ignitable or some obstacle
 		# including FireballBlocker
 		queue_free()
@@ -60,3 +64,8 @@ func _get_direction_vector(direction: int) -> Vector2:  # direction: CardinalDir
 			return Vector2.UP
 		_: # Enum.CardinalDirection.RIGHT:
 			return Vector2.RIGHT
+
+func _spawn_explosion():
+	var pfx_explosion = pfx_explosion_prefab.instance()
+	get_tree().root.add_child(pfx_explosion)
+	pfx_explosion.global_position = global_position

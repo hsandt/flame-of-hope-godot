@@ -313,6 +313,7 @@ go_to_room4={
 2d_render/layer_7="prop_occluder"
 2d_render/layer_8="character_lit"
 2d_render/layer_9="character_occluder"
+2d_render/layer_10="pfx"
 2d_physics/layer_1="Hole"
 2d_physics/layer_2="Character"
 2d_physics/layer_3="Obstacle"
