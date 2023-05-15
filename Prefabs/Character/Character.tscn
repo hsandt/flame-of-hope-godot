@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Scripts/Character/CharacterRod.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Character/CharacterAnim.gd" type="Script" id=2]
@@ -22,7 +22,6 @@
 [ext_resource path="res://Audio/SFX/swing.ogg" type="AudioStream" id=20]
 [ext_resource path="res://Audio/SFX/flame_light_off.ogg" type="AudioStream" id=21]
 [ext_resource path="res://Prefabs/Projectiles/Fireball.tscn" type="PackedScene" id=22]
-[ext_resource path="res://Sprites/Character/character_walk_spritesheet.png" type="Texture" id=23]
 [ext_resource path="res://Sprites/Generic/disc_100x100.png" type="Texture" id=24]
 
 [sub_resource type="OccluderPolygon2D" id=6]
@@ -104,7 +103,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector2( -3, 34 ) ]
+"values": [ Vector2( -3, 18 ) ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -183,7 +182,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector2( -34, 0 ) ]
+"values": [ Vector2( -29, -9 ) ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -262,7 +261,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector2( 34, 0 ) ]
+"values": [ Vector2( 29, -9 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -341,7 +340,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -4, -34 ) ]
+"values": [ Vector2( -3, -40 ) ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -358,6 +357,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 2, -27 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("FireballSpawnPoint:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -3, 24 ) ]
+}
 
 [sub_resource type="CircleShape2D" id=5]
 radius = 8.06226
@@ -367,14 +378,14 @@ collision_layer = 2
 collision_mask = 4
 
 [node name="FireballSpawnPoint" type="Node2D" parent="."]
-position = Vector2( -3, 34 )
+position = Vector2( -3, 24 )
 
 [node name="Sprite" type="Sprite" parent="."]
 light_mask = 128
 position = Vector2( 0, -13 )
-texture = ExtResource( 23 )
-hframes = 24
-frame = 2
+texture = ExtResource( 14 )
+hframes = 16
+frame = 6
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite"]
 light_mask = 256
@@ -419,8 +430,9 @@ collision_layer = 16
 collision_mask = 40
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwingHitBox"]
-position = Vector2( 0, -26 )
+position = Vector2( 26, 0 )
 shape = SubResource( 5 )
+disabled = true
 
 [node name="CharacterControl" type="Node" parent="."]
 script = ExtResource( 8 )
