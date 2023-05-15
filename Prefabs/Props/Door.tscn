@@ -6,10 +6,10 @@
 [ext_resource path="res://Sprites/Generic/disc_50x50.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 13, 4.5 )
+extents = Vector2( 13, 8 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 13, 4.5 )
+extents = Vector2( 13, 8 )
 
 [node name="Door" type="Node2D"]
 position = Vector2( 240, 5 )
@@ -34,7 +34,7 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 0, 2.5 )
+position = Vector2( 0, -1 )
 shape = SubResource( 1 )
 
 [node name="Light2D" type="Light2D" parent="."]
@@ -48,5 +48,5 @@ collision_layer = 8
 collision_mask = 16
 
 [node name="FireSourceCollisionShape2D" type="CollisionShape2D" parent="FireSourceArea2D"]
-position = Vector2( 0, 2.5 )
+position = Vector2( 0, -1 )
 shape = SubResource( 2 )
