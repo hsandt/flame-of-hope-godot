@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Tilemap/Environment.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Props/FirePit.tscn" type="PackedScene" id=2]
@@ -8,10 +8,8 @@
 [ext_resource path="res://Prefabs/Props/Door.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Prefabs/Props/Bridge.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scripts/Event/OpenBridgeEvent.gd" type="Script" id=8]
-[ext_resource path="res://Fonts/dynamicfont_thank_you.tres" type="DynamicFont" id=10]
+[ext_resource path="res://Themes/theme_default_label.tres" type="Theme" id=9]
 [ext_resource path="res://Scripts/Tilemap.gd" type="Script" id=11]
-[ext_resource path="res://Fonts/dynamicfont_tutorial.tres" type="DynamicFont" id=12]
-[ext_resource path="res://Fonts/dynamicfont_build_info.tres" type="DynamicFont" id=13]
 [ext_resource path="res://Scripts/DebugCanvasLayer.gd" type="Script" id=14]
 [ext_resource path="res://Scripts/EnterAreaTrigger.gd" type="Script" id=15]
 [ext_resource path="res://Scripts/Event/PlayJingleEvent.gd" type="Script" id=16]
@@ -40,10 +38,11 @@ current = true
 script = ExtResource( 14 )
 
 [node name="Level" type="Label" parent="DebugCanvasLayer"]
-margin_left = 418.0
+margin_left = 430.0
 margin_top = 21.0
 margin_right = 464.0
-margin_bottom = 35.0
+margin_bottom = 42.0
+theme = ExtResource( 9 )
 text = "RoomX"
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
@@ -56,7 +55,6 @@ bus = "Jingle"
 
 [node name="CharacterManager" type="Node" parent="." groups=["character_manager"]]
 script = ExtResource( 4 )
-start_room_index = 1
 
 [node name="Character" parent="." groups=["player_character"] instance=ExtResource( 3 )]
 position = Vector2( 240, 268 )
@@ -121,8 +119,8 @@ follow_viewport_enable = true
 margin_left = 18.0
 margin_top = 19.0
 margin_right = 180.0
-margin_bottom = 43.0
-custom_fonts/font = ExtResource( 13 )
+margin_bottom = 54.0
+theme = ExtResource( 9 )
 text = "Flame of Hope - Godot"
 
 [node name="Version" type="Label" parent="Room1/CanvasLayer"]
@@ -130,29 +128,27 @@ margin_left = 19.0
 margin_top = 35.0
 margin_right = 164.0
 margin_bottom = 59.0
-custom_fonts/font = ExtResource( 13 )
+theme = ExtResource( 9 )
 text = "v0.1.2"
 
 [node name="TutoLabel1" type="Label" parent="Room1/CanvasLayer"]
-anchor_left = 0.0395833
-anchor_top = 0.207407
-anchor_right = 0.404167
-anchor_bottom = 0.748148
-custom_fonts/font = ExtResource( 12 )
+margin_left = 23.0
+margin_top = 89.0
+margin_right = 186.0
+margin_bottom = 159.0
+theme = ExtResource( 9 )
 text = "Press C, space key, or gamepad down action button to swing the rod."
 valign = 1
 autowrap = true
 script = ExtResource( 17 )
-__meta__ = {
-"_edit_use_anchors_": true
-}
 
 [node name="TutoLabel2" type="Label" parent="Room1/CanvasLayer"]
-anchor_left = 0.64375
-anchor_top = 0.348148
-anchor_right = 0.9625
-anchor_bottom = 0.644444
-custom_fonts/font = ExtResource( 12 )
+anchor_bottom = -0.0629625
+margin_left = 309.0
+margin_top = 94.0
+margin_right = 462.0
+margin_bottom = 174.0
+theme = ExtResource( 9 )
 text = "Grab and deliver the flame of hope!"
 valign = 1
 autowrap = true
@@ -318,11 +314,11 @@ victory_jingle = ExtResource( 27 )
 follow_viewport_enable = true
 
 [node name="TutoLabel3" type="Label" parent="Room2/CanvasLayer"]
-anchor_left = 0.0458333
-anchor_top = -0.922222
-anchor_right = 0.460417
-anchor_bottom = -0.633333
-custom_fonts/font = ExtResource( 12 )
+margin_left = 22.0
+margin_top = -249.0
+margin_right = 214.0
+margin_bottom = -198.0
+theme = ExtResource( 9 )
 text = "Press X, shift or gamepad left action button to throw fireballs!"
 autowrap = true
 script = ExtResource( 17 )
@@ -607,13 +603,14 @@ position = Vector2( 240, 111 )
 follow_viewport_enable = true
 
 [node name="ThankYouLabel" type="Label" parent="Room4/CanvasLayer2"]
-margin_left = 102.0
-margin_top = -780.0
-margin_right = 376.0
-margin_bottom = -738.0
-custom_fonts/font = ExtResource( 10 )
-text = "Thank you for playing!"
+margin_left = 103.0
+margin_top = -786.0
+margin_right = 377.0
+margin_bottom = -752.0
+theme = ExtResource( 9 )
+text = "Thank you for playing!!"
 align = 1
+valign = 1
 script = ExtResource( 17 )
 
 [connection signal="body_entered" from="Room1/Events/EnterAreaTrigger - Show tutorial 1" to="Room1/Events/EnterAreaTrigger - Show tutorial 1" method="_on_body_entered"]
