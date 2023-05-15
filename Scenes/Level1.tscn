@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Tilemap/Environment.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Props/FirePit.tscn" type="PackedScene" id=2]
@@ -6,9 +6,8 @@
 [ext_resource path="res://Scripts/Character/CharacterManager.gd" type="Script" id=4]
 [ext_resource path="res://Scripts/Event/IgnitionTrigger.gd" type="Script" id=5]
 [ext_resource path="res://Prefabs/Props/Door.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Sprites/Tile Objects/bridge_proto.png" type="Texture" id=7]
+[ext_resource path="res://Prefabs/Props/Bridge.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scripts/Event/OpenBridgeEvent.gd" type="Script" id=8]
-[ext_resource path="res://Scripts/Props/Bridge.gd" type="Script" id=9]
 [ext_resource path="res://Fonts/dynamicfont_thank_you.tres" type="DynamicFont" id=10]
 [ext_resource path="res://Scripts/Tilemap.gd" type="Script" id=11]
 [ext_resource path="res://Fonts/dynamicfont_tutorial.tres" type="DynamicFont" id=12]
@@ -513,26 +512,7 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Bridge" type="Node2D" parent="Room3"]
-position = Vector2( 240, 71 )
-scale = Vector2( 1, 0.999999 )
-script = ExtResource( 9 )
-
-[node name="Sprite" type="Sprite" parent="Room3/Bridge"]
-light_mask = 2
-z_index = -1
-texture = ExtResource( 7 )
-region_enabled = true
-region_rect = Rect2( 0, 0, 32, 48 )
-
-[node name="GroundBorder" type="TileMap" parent="Room3/Bridge"]
-position = Vector2( -240, -72 )
-tile_set = ExtResource( 1 )
-cell_size = Vector2( 16, 16 )
-collision_layer = 128
-collision_mask = 2
-format = 1
-tile_data = PoolIntArray( 196622, 10, 0, 196623, 10, 0, 327694, 10, 0, 327695, 10, 0 )
+[node name="Bridge" parent="Room3" instance=ExtResource( 7 )]
 
 [node name="Room4" type="YSort" parent="."]
 position = Vector2( 0, -813 )
