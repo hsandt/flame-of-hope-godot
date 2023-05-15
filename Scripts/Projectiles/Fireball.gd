@@ -22,6 +22,7 @@ func _physics_process(delta):
 			ignitable.ignite()
 			
 		# fireball disappears whether it hit an ignitable or some obstacle
+		# including FireballBlocker
 		queue_free()
 
 func setup(init_position, direction):

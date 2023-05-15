@@ -292,6 +292,7 @@ throw_fireball={
 2d_physics/layer_6="Ignitable"
 2d_physics/layer_7="EventTrigger"
 2d_physics/layer_8="GroundBorder"
+2d_physics/layer_9="FireballBlocker"
 
 [rendering]
 
