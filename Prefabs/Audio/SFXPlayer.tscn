@@ -6,4 +6,4 @@
 volume_db = -15.0
 bus = "SFX"
 script = ExtResource( 1 )
-max_distance = 400.0
+max_distance = 350.0
