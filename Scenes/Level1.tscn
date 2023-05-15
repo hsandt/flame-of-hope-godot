@@ -129,7 +129,7 @@ margin_top = 35.0
 margin_right = 164.0
 margin_bottom = 59.0
 theme = ExtResource( 9 )
-text = "v0.1.2"
+text = "v1.1.0"
 
 [node name="TutoLabel1" type="Label" parent="Room1/CanvasLayer"]
 margin_left = 23.0
