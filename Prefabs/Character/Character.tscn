@@ -13,7 +13,7 @@
 [ext_resource path="res://Anims/Character/ANIM_Character_Walk_Down.tres" type="Animation" id=11]
 [ext_resource path="res://Anims/Character/ANIM_Character_Walk_Right.tres" type="Animation" id=12]
 [ext_resource path="res://Anims/Character/ANIM_Character_Walk_Left.tres" type="Animation" id=13]
-[ext_resource path="res://Sprites/Character/character_swing_spritesheet.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/Character/character_idle_spritesheet.png" type="Texture" id=14]
 [ext_resource path="res://Anims/Character/ANIM_Character_Swing_Up.tres" type="Animation" id=15]
 [ext_resource path="res://Anims/Character/ANIM_Character_Swing_Down.tres" type="Animation" id=16]
 [ext_resource path="res://Anims/Character/ANIM_Character_Swing_Right.tres" type="Animation" id=17]
@@ -45,7 +45,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 2, -27 ) ]
+"values": [ Vector2( -3, -27 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("FireballSpawnPoint:position")
@@ -57,7 +57,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -3, 24 ) ]
+"values": [ Vector2( -7, 24 ) ]
 }
 
 [sub_resource type="CircleShape2D" id=5]
@@ -68,14 +68,13 @@ collision_layer = 2
 collision_mask = 4
 
 [node name="FireballSpawnPoint" type="Node2D" parent="."]
-position = Vector2( -3, 24 )
+position = Vector2( -7, 24 )
 
 [node name="Sprite" type="Sprite" parent="."]
 light_mask = 128
 position = Vector2( 0, -13 )
 texture = ExtResource( 14 )
 hframes = 16
-frame = 14
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite"]
 light_mask = 256
@@ -104,7 +103,7 @@ anims/RESET = SubResource( 7 )
 [node name="RodFlame" type="AnimatedSprite" parent="."]
 self_modulate = Color( 1, 1, 1, 0.905882 )
 light_mask = 128
-position = Vector2( 2, -27 )
+position = Vector2( -3, -27 )
 frames = ExtResource( 3 )
 offset = Vector2( 0, -4 )
 
@@ -120,7 +119,7 @@ collision_layer = 16
 collision_mask = 40
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwingHitBox"]
-position = Vector2( -26, 0 )
+position = Vector2( 0, -26 )
 shape = SubResource( 5 )
 
 [node name="CharacterControl" type="Node" parent="."]
@@ -153,6 +152,9 @@ mode = 2
 range_item_cull_mask = 170
 shadow_enabled = true
 shadow_item_cull_mask = 86
+__meta__ = {
+"_edit_lock_": true
+}
 
 [connection signal="animation_finished" from="AnimationPlayer" to="CharacterRod" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="area_entered" from="SwingHitBox" to="CharacterRod" method="_on_SwingHitBox_area_entered"]
