@@ -13,5 +13,4 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
-
-[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+scale_to_zero_duration = 0.2

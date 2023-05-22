@@ -47,14 +47,15 @@ onready var character_control := $"../CharacterControl" as CharacterControl
 onready var character_motor := $"../CharacterMotor" as CharacterMotor
 onready var character_anim := $"../CharacterAnim" as CharacterAnim
 onready var flame_timer := $FlameTimer as Timer
-onready var light := $"../DiscLight2D" as ScaleFlicker
+onready var light_scale_flicker := $"../DiscLight2D" as ScaleFlicker
 
 func _ready():
 	_setup()
 
 func _setup():
 	# allows to work with Flame active in the editor, but deactivate on start
-	_light_off()
+	# make sure to pass on_setup: true
+	_light_off(true)
 	is_swinging = false
 	has_just_ignited_prop = false
 	is_throwing_fireball = false
@@ -132,7 +133,7 @@ func _spawn_fireball():
 		return
 	
 	# consume current flame
-	_light_off()
+	_light_off(false)
 	
 	# instantiate fireball and setup position and velocity
 	var fireball: Fireball = fireball_prefab.instance()
@@ -163,8 +164,8 @@ func _light_on():
 	# start timer until flame goes off (duration is set in Inspector on FlameTimer)
 	flame_timer.start()
 	
-	# enable flame light
-	light.visible = true
+	# show flame light wtih flicker
+	light_scale_flicker.show_with_flicker()
 
 func _rekindle():
 	# restart timer to extend burn duration
@@ -176,7 +177,7 @@ func _rekindle():
 
 # reverse of ignite, light rod off during game, with SFX
 func _go_off():
-	_light_off()
+	_light_off(false)
 	
 	# visual
 	_spawn_pfx(pfx_light_off_smoke)
@@ -186,17 +187,21 @@ func _go_off():
 
 # silently set rod lit state to off (logical and visual), useful on setup
 # and also during game when combined with SFX
-func _light_off():
+func _light_off(on_setup: bool):
 	_is_lit = false
 	rod_flame.visible = false
 	# do not play animated sprite in the background while invisible
 	rod_flame.stop()
 	
-	# stop timer to avoid warning on timeout
-	flame_timer.stop()
-	
-	# disable flame light
-	light.visible = false
+	if on_setup:
+		# on setup, instant hide
+		light_scale_flicker.visible = false
+	else:
+		# mid-game, we need to stop timer to avoid warning on timeout
+		flame_timer.stop()
+		
+		# and hide flame light gradually
+		light_scale_flicker.hide_with_scale_to_zero()
 
 func _spawn_pfx(pfx_prefab):
 	var pfx = pfx_prefab.instance()
