@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Anims/Props/ANIM_Torch_Unlit.tres" type="Animation" id=1]
 [ext_resource path="res://Anims/Props/SF_Torch_Unlit.tres" type="SpriteFrames" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Sprites/Generic/disc_100x100.png" type="Texture" id=6]
 [ext_resource path="res://Prefabs/PFX/PFX_Ignite_Small.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Prefabs/Audio/SFXPlayer.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Prefabs/PFX/PFX_Light_Off_Smoke.tscn" type="PackedScene" id=9]
 
 [sub_resource type="OccluderPolygon2D" id=4]
 polygon = PoolVector2Array( -2, 2, -2, -10, 2, -10, 2, 2 )
@@ -73,6 +74,7 @@ radius = 9.0
 position = Vector2( 208, 175 )
 script = ExtResource( 3 )
 pfx_ignite_prefab = ExtResource( 7 )
+pfx_light_off_smoke = ExtResource( 9 )
 light_on_sound = ExtResource( 4 )
 light_off_sound = ExtResource( 5 )
 

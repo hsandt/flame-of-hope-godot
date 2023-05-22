@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Scripts/Character/CharacterRod.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Character/CharacterAnim.gd" type="Script" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://Anims/Character/ANIM_Character_Throw_Fireball_Right.tres" type="Animation" id=26]
 [ext_resource path="res://Anims/Character/ANIM_Character_Throw_Fireball_Up.tres" type="Animation" id=27]
 [ext_resource path="res://Prefabs/PFX/PFX_Ignite_Small.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Prefabs/PFX/PFX_Light_Off_Smoke.tscn" type="PackedScene" id=29]
 
 [sub_resource type="OccluderPolygon2D" id=6]
 polygon = PoolVector2Array( 5, 11, -5, 11, -5, 15, 5, 15 )
@@ -133,6 +134,7 @@ speed = 60.0
 script = ExtResource( 1 )
 fireball_prefab = ExtResource( 22 )
 pfx_ignite_prefab = ExtResource( 28 )
+pfx_light_off_smoke = ExtResource( 29 )
 swing_sound = ExtResource( 20 )
 throw_fireball_sound = ExtResource( 19 )
 rod_light_on_sound = ExtResource( 19 )

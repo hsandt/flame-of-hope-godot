@@ -8,6 +8,9 @@ signal unlit
 # PFX ignite prefab
 export(PackedScene) var pfx_ignite_prefab
 
+# PFX light off smoke
+export(PackedScene) var pfx_light_off_smoke
+
 # Light On Audio Clip
 export(AudioStream) var light_on_sound
 
@@ -105,6 +108,9 @@ func _rekindle():
 # full going off during game (light off + SFX)
 func _go_off():
 	_light_off()
+	
+	# visual
+	_spawn_pfx(pfx_light_off_smoke)
 	
 	# audio
 	_play_sfx(light_off_sound)

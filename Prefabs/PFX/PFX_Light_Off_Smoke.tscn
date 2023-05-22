@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Materials/CanvasItemMaterial_PFX_Explosion.tres" type="Material" id=1]
+[ext_resource path="res://Scripts/PFX/MultiPFX.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/PFX/pfx_explosion_texture_white_32x32_x5.png" type="Texture" id=3]
+[ext_resource path="res://Curves/curve_pfx_explosion_animation_offset.tres" type="Curve" id=4]
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0, 0.205729, 1 )
+colors = PoolColorArray( 0.878906, 0.878906, 0.878906, 1, 0.71875, 0.71875, 0.71875, 1, 0.74902, 0.74902, 0.74902, 0 )
+
+[node name="PFX_Light_Off_Smoke" type="Node2D"]
+z_index = 1
+script = ExtResource( 2 )
+initial_particle_node_paths = [ NodePath("CPUParticles2D Explosion Smoke") ]
+
+[node name="CPUParticles2D Explosion Smoke" type="CPUParticles2D" parent="."]
+light_mask = 512
+material = ExtResource( 1 )
+amount = 10
+explosiveness = 0.7
+randomness = 0.5
+lifetime_randomness = 0.5
+texture = ExtResource( 3 )
+direction = Vector2( 0, -1 )
+gravity = Vector2( 0, -100 )
+initial_velocity = 20.0
+initial_velocity_random = 0.5
+damping = 100.0
+damping_random = 0.5
+scale_amount = 0.2
+scale_amount_random = 0.05
+color = Color( 0.556863, 0.556863, 0.556863, 1 )
+color_ramp = SubResource( 5 )
+anim_offset_curve = ExtResource( 4 )
+
+[node name="Timer Free" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer Free" to="." method="queue_free"]

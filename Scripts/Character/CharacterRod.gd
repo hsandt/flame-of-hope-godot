@@ -7,6 +7,9 @@ export(PackedScene) var fireball_prefab
 # PFX ignite prefab
 export(PackedScene) var pfx_ignite_prefab
 
+# PFX light off smoke
+export(PackedScene) var pfx_light_off_smoke
+
 # Rod Swing Audio Clip
 export(AudioStream) var swing_sound
 
@@ -174,6 +177,9 @@ func _rekindle():
 # reverse of ignite, light rod off during game, with SFX
 func _go_off():
 	_light_off()
+	
+	# visual
+	_spawn_pfx(pfx_light_off_smoke)
 	
 	# audio
 	_play_sfx(rod_light_off_sound)	
