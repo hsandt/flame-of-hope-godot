@@ -6,15 +6,15 @@
 [ext_resource path="res://Sprites/PFX/pfx_explosion_texture_white_32x32_x5.png" type="Texture" id=4]
 
 [sub_resource type="Gradient" id=5]
-offsets = PoolRealArray( 0, 0.205729, 1 )
-colors = PoolColorArray( 0.878906, 0.878906, 0.878906, 1, 0.71875, 0.71875, 0.71875, 1, 0.74902, 0.74902, 0.74902, 0 )
+offsets = PoolRealArray( 0, 0.200521, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.658824, 0.74902, 0.74902, 0.74902, 0 )
 
 [sub_resource type="Curve" id=3]
 _data = [ Vector2( 0, 0.656818 ), 0.0, 3.58934, 0, 0, Vector2( 0.449631, 0.0863637 ), -5.24166, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=4]
 offsets = PoolRealArray( 0, 0.408854, 0.723958, 1 )
-colors = PoolColorArray( 1, 1, 1, 0.54902, 0.933594, 0.871483, 0.536087, 1, 1, 0.788235, 0.627451, 0.623529, 0.917647, 0.666667, 0.372549, 0 )
+colors = PoolColorArray( 1, 1, 1, 0.54902, 1, 0.952941, 0.690196, 0.878431, 1, 0.788235, 0.627451, 0.623529, 0.917647, 0.666667, 0.372549, 0 )
 
 [node name="PFX_Ignite_Small" type="Node2D"]
 z_index = 1

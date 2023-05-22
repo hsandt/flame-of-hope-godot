@@ -6,8 +6,8 @@
 [ext_resource path="res://Curves/curve_pfx_explosion_animation_offset.tres" type="Curve" id=4]
 
 [sub_resource type="Gradient" id=5]
-offsets = PoolRealArray( 0, 0.205729, 1 )
-colors = PoolColorArray( 0.878906, 0.878906, 0.878906, 1, 0.71875, 0.71875, 0.71875, 1, 0.74902, 0.74902, 0.74902, 0 )
+offsets = PoolRealArray( 0, 0.208333, 1 )
+colors = PoolColorArray( 0.878906, 0.878906, 0.878906, 1, 0.717647, 0.717647, 0.717647, 0.701961, 0.74902, 0.74902, 0.74902, 0 )
 
 [node name="PFX_Light_Off_Smoke" type="Node2D"]
 z_index = 1
