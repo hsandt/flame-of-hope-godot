@@ -47,7 +47,7 @@ onready var character_control := $"../CharacterControl" as CharacterControl
 onready var character_motor := $"../CharacterMotor" as CharacterMotor
 onready var character_anim := $"../CharacterAnim" as CharacterAnim
 onready var flame_timer := $FlameTimer as Timer
-onready var light := $"../Light2D" as Light2D
+onready var light := $"../DiscLight2D" as ScaleFlicker
 
 func _ready():
 	_setup()

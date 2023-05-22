@@ -25,7 +25,7 @@ var _is_lit: bool
 
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var sfx_player: AudioStreamPlayer = $"SFXPlayer"
-onready var light: Node2D = $"Light2D"
+onready var light: Node2D = $"DiscLight2D"
 onready var pfx_ignite_anchor: Node2D = $"PFXIgniteAnchor"
 
 func _ready():

@@ -74,6 +74,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Utils/NodeUtils.gd"
 }, {
+"base": "Node2D",
+"class": "ScaleFlicker",
+"language": "GDScript",
+"path": "res://Scripts/Visual/ScaleFlicker.gd"
+}, {
 "base": "Ignitable",
 "class": "Torch",
 "language": "GDScript",
@@ -93,6 +98,7 @@ _global_script_class_icons={
 "Ignitable": "",
 "Layer": "",
 "NodeUtils": "",
+"ScaleFlicker": "",
 "Torch": ""
 }
 
