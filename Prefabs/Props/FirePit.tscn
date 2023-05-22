@@ -6,7 +6,7 @@
 [ext_resource path="res://Scripts/Props/FirePit.gd" type="Script" id=4]
 [ext_resource path="res://Anims/Props/ANIM_FirePit_Unlit.tres" type="Animation" id=5]
 [ext_resource path="res://Audio/SFX/fire_pit_light_on.ogg" type="AudioStream" id=6]
-[ext_resource path="res://Sprites/Generic/disc_100x100.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Generic/disc_white_radial_alpha_gradient-2_100x100.png" type="Texture" id=7]
 [ext_resource path="res://Materials/CanvasItemMaterial_Flame.tres" type="Material" id=8]
 [ext_resource path="res://Prefabs/Audio/SFXPlayer.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Prefabs/PFX/PFX_Ignite_Big.tscn" type="PackedScene" id=10]
@@ -41,6 +41,7 @@ visible = false
 material = ExtResource( 8 )
 position = Vector2( 0, -4 )
 frames = ExtResource( 2 )
+frame = 2
 offset = Vector2( 1, -14 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
