@@ -19,6 +19,7 @@ pfx_explosion_prefab = ExtResource( 3 )
 hit_wall_sound = ExtResource( 5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -9 )
 frames = ExtResource( 1 )
 offset = Vector2( 0, -2 )
 
