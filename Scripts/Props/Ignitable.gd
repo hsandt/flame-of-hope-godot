@@ -20,18 +20,22 @@ export(AudioStream) var light_off_sound
 # Is the fire pit lit on level start?
 export(bool) var lit_on_start = false setget _set_lit_on_start
 
+var room_light: Light2D
+
 # Is the ignitable in fire?
 var _is_lit: bool
 
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var sfx_player: AudioStreamPlayer = $"SFXPlayer"
 onready var light_scale_flicker: ScaleFlicker = $"DiscLight2D"
-onready var room_light: Light2D = $"RoomLight2D"
 onready var pfx_ignite_anchor: Node2D = $"PFXIgniteAnchor"
 
 func _ready():
 	if Engine.editor_hint:
 		return
+	
+	if has_node("RoomLight2D"):
+		room_light = $RoomLight2D
 	
 	_setup()
 
