@@ -29,7 +29,7 @@ extents = Vector2( 48, 5 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 light_mask = 0
-color = Color( 0.572549, 0.572549, 0.572549, 1 )
+color = Color( 0.247059, 0.247059, 0.247059, 1 )
 
 [node name="Camera2D" type="Camera2D" parent="." groups=["camera"]]
 anchor_mode = 0
@@ -243,9 +243,6 @@ __meta__ = {
 
 [node name="Torch" parent="Room1" instance=ExtResource( 24 )]
 position = Vector2( 202, 162 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Torch2" parent="Room1" instance=ExtResource( 24 )]
 position = Vector2( 278, 162 )
@@ -270,7 +267,6 @@ position = Vector2( 240, 128 )
 __meta__ = {
 "_edit_lock_": true
 }
-lit_on_start = true
 
 [node name="Door" parent="Room1" instance=ExtResource( 6 )]
 position = Vector2( 240, 8 )

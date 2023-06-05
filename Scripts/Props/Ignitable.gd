@@ -26,6 +26,7 @@ var _is_lit: bool
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var sfx_player: AudioStreamPlayer = $"SFXPlayer"
 onready var light_scale_flicker: ScaleFlicker = $"DiscLight2D"
+onready var room_light: Light2D = $"RoomLight2D"
 onready var pfx_ignite_anchor: Node2D = $"PFXIgniteAnchor"
 
 func _ready():
@@ -97,6 +98,8 @@ func _play_lit_animation():
 	
 	# show flame light wtih flicker
 	light_scale_flicker.show_with_flicker()
+	if room_light != null:
+		room_light.visible = true
 
 # when already lit, call this to just rekindle the flame
 # without triggering lit-specific behaviors
@@ -125,12 +128,16 @@ func _light_off(on_setup: bool):
 	if on_setup:
 		# on setup, instant hide
 		light_scale_flicker.visible = false
+		if room_light != null:
+			room_light.visible = false
 	else:
 		# signal for child class (e.g. Torch)
 		emit_signal("unlit")
 		
 		# hide flame light gradually
 		light_scale_flicker.hide_with_scale_to_zero()
+		if room_light != null:
+			room_light.visible = false
 
 func _play_unlit_animation():
 	animation_player.play("%s_Unlit" % _get_anim_prefix())
