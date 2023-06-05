@@ -18,7 +18,7 @@ func _init_tween_flicker():
 func _init_tween_scale_to_zero():
 	_tween_scale_to_zero = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
 	var _scale_to_zero_tweener = _tween_scale_to_zero.tween_property(self, "scale", Vector2.ZERO, scale_to_zero_duration)
-	_tween_scale_to_zero.tween_callback(self, "set_visible", [false])
+	var _scale_to_zero_callback = _tween_scale_to_zero.tween_callback(self, "set_visible", [false])
 	
 func show_with_flicker():
 	# cancel any concurrent tween
