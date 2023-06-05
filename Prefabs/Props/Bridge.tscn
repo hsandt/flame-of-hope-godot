@@ -49,3 +49,7 @@ anims/ANIM_Bridge_Appear = ExtResource( 4 )
 anims/RESET = SubResource( 1 )
 
 [node name="SFXPlayer" parent="." instance=ExtResource( 5 )]
+volume_db = -15.0
+__meta__ = {
+"_edit_pinned_properties_": [ "volume_db" ]
+}

@@ -93,6 +93,10 @@ anims/Torch_Lit = ExtResource( 1 )
 anims/Torch_Unlit = SubResource( 1 )
 
 [node name="SFXPlayer" parent="." instance=ExtResource( 8 )]
+volume_db = -15.0
+__meta__ = {
+"_edit_pinned_properties_": [ "volume_db" ]
+}
 
 [node name="FlameTimer" type="Timer" parent="."]
 wait_time = 10.0

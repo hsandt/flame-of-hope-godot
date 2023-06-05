@@ -50,6 +50,9 @@ anims/FirePit_Unlit = ExtResource( 5 )
 
 [node name="SFXPlayer" parent="." instance=ExtResource( 9 )]
 volume_db = -10.0
+__meta__ = {
+"_edit_pinned_properties_": [ "volume_db" ]
+}
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 4

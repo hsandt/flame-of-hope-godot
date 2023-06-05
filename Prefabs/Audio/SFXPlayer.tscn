@@ -3,7 +3,6 @@
 [ext_resource path="res://Scripts/Audio/SFXPlayerCustomDistanceAttenuation.gd" type="Script" id=1]
 
 [node name="SFXPlayer" type="AudioStreamPlayer"]
-volume_db = -15.0
 bus = "SFX"
 script = ExtResource( 1 )
 max_distance = 350.0

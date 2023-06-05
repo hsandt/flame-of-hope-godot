@@ -6,6 +6,9 @@ export(float) var speed = 64.0
 
 export(PackedScene) var pfx_explosion_prefab
 
+# Hit Wall Audio Clip
+export(AudioStream) var hit_wall_sound
+
 # Current velocity for manual kinematic motion
 var velocity : Vector2
 
@@ -25,8 +28,9 @@ func _physics_process(delta):
 			# Don't spawn PFX Ignite, Ignitable will do it on their side
 			# (also on Swing Ignite)
 		else:
-			# Default explosion PFX (when hitting wall, etc.)
+			# Default explosion PFX (when hitting wall, etc.) + SFX
 			_spawn_pfx(pfx_explosion_prefab)
+			SfxManager.spawn_sfx(hit_wall_sound)
 		
 		# fireball disappears whether it hit an ignitable or some obstacle
 		# including FireballBlocker
@@ -56,7 +60,7 @@ func _get_rotation_degrees(direction: int) -> float:  # direction: CardinalDirec
 			quarter_index = 3
 	
 	return 90.0 * quarter_index
-	
+
 func _get_direction_vector(direction: int) -> Vector2:  # direction: CardinalDirection
 	match direction:
 		Enum.CardinalDirection.DOWN:
