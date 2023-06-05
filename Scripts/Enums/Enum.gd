@@ -6,3 +6,8 @@ enum CardinalDirection {
 	UP,
 	RIGHT,
 }
+
+enum ControlMode {
+	PLAYER_INPUT,
+	SIMULATION,
+}
