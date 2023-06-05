@@ -172,8 +172,11 @@ func _rekindle():
 	flame_timer.start()
 	
 	# audio
-	# note we use the same source for all Character SFX, so this will cover the Swing sound (a few frames after)
-	_play_sfx(rod_light_on_sound)
+	# if already igniting prop during this swing, don't play light on SFX on top
+	# of it to avoid SFX stacking (increasing overall volume)
+	if not has_just_ignited_prop:
+		# note we use the same source for all Character SFX, so this will cover the Swing sound (a few frames after)
+		_play_sfx(rod_light_on_sound)
 
 # reverse of ignite, light rod off during game, with SFX
 func _go_off():
