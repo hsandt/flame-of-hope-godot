@@ -1,6 +1,6 @@
 extends Node
 
-onready var character := $"../Character" as Node2D
+onready var character: Character = $"../Character"
 
 # Initial room (0 in normal game, change for debug)
 export(int) var start_room_index = 0
@@ -21,6 +21,11 @@ func _ready():
 	var camera: Camera2D = get_tree().get_nodes_in_group("camera")[0]
 	camera.smoothing_enabled = true
 	
+	# Play intro sequence if starting in first room, as normally
+	# but skip it if debug warping to another room
+	if start_room_index == 0:
+		_play_intro_sequence()
+	
 
 func _unhandled_input(event):
 	if OS.has_feature("debug"):
@@ -38,3 +43,41 @@ func _unhandled_input(event):
 func _warp_character(room_index: int):
 	# room 1 entrance is at 240, 268 and each room has a height of 16*17=272
 	character.global_position = Vector2(240, 268 - 272 * room_index)
+
+	# to support warping during intro sequence, stop it now
+	stop_intro_sequence()
+
+
+func _play_intro_sequence():
+	# Light rod on silently for setup
+	var rod = character.rod
+	rod._light_on()
+	
+	# Move character a little lower so it starts outside room
+	character.position += 20.0 * Vector2.DOWN
+	
+	# Take control of character
+	var control = character.control
+	control.control_mode = Enum.ControlMode.SIMULATION
+	
+	# Move up until first Fire Pit
+	control.move_intention = Vector2.UP
+	yield(get_tree().create_timer(2.0), "timeout")
+	control.move_intention = Vector2.ZERO
+	
+	# Light First Pit
+	control._swing_intention = true
+	yield(get_tree().create_timer(0.5), "timeout")
+	
+	# Give control back to player
+	stop_intro_sequence()
+
+
+func stop_intro_sequence():
+	var control = character.control
+	
+	# control may still be null on ready and we have not started playing intro
+	# anyway on first warp, so skip it in this case
+	if control != null:
+		control.control_mode = Enum.ControlMode.PLAYER_INPUT
+	

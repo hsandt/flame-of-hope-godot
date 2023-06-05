@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Scripts/Character/CharacterRod.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Character/CharacterAnim.gd" type="Script" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://Anims/Character/ANIM_Character_Throw_Fireball_Up.tres" type="Animation" id=27]
 [ext_resource path="res://Prefabs/PFX/PFX_Ignite_Small.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Prefabs/PFX/PFX_Light_Off_Smoke.tscn" type="PackedScene" id=29]
+[ext_resource path="res://Scripts/Character/Character.gd" type="Script" id=30]
 
 [sub_resource type="OccluderPolygon2D" id=6]
 polygon = PoolVector2Array( 5, 11, -5, 11, -5, 15, 5, 15 )
@@ -66,6 +67,7 @@ radius = 8.06226
 [node name="Character" type="KinematicBody2D"]
 collision_layer = 2
 collision_mask = 4
+script = ExtResource( 30 )
 
 [node name="FireballSpawnPoint" type="Node2D" parent="."]
 position = Vector2( -7, 24 )

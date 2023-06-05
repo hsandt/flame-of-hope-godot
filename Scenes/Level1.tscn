@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Tilemap/Environment.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Props/FirePit.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Themes/theme_default_label.tres" type="Theme" id=9]
 [ext_resource path="res://Sprites/Generic/white_square_1x1.png" type="Texture" id=10]
 [ext_resource path="res://Scripts/Level/Tilemap.gd" type="Script" id=11]
+[ext_resource path="res://Scripts/Event/CloseDoorEvent.gd" type="Script" id=12]
 [ext_resource path="res://Scripts/Level/DebugCanvasLayer.gd" type="Script" id=14]
 [ext_resource path="res://Scripts/Level/EnterAreaTrigger.gd" type="Script" id=15]
 [ext_resource path="res://Scripts/Event/PlayJingleEvent.gd" type="Script" id=16]
@@ -65,6 +66,21 @@ collision_mask = 132
 
 [node name="Events" type="Node" parent="Room1"]
 
+[node name="EnterAreaTrigger - Close Entrance Door" type="Area2D" parent="Room1/Events"]
+position = Vector2( 240, 233 )
+z_index = 1
+collision_layer = 64
+collision_mask = 2
+script = ExtResource( 15 )
+__meta__ = {
+"_edit_group_": true
+}
+event_paths = [ NodePath("../Close Entrance Door") ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Room1/Events/EnterAreaTrigger - Close Entrance Door"]
+position = Vector2( 0, 0.25 )
+shape = SubResource( 1 )
+
 [node name="EnterAreaTrigger - Show tutorial 1" type="Area2D" parent="Room1/Events"]
 position = Vector2( 240, 233 )
 z_index = 1
@@ -94,6 +110,10 @@ event_paths = [ NodePath("../ShowLabel Tutorial2") ]
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Room1/Events/EnterAreaTrigger - Show tutorial 2"]
 position = Vector2( 0, 0.25 )
 shape = SubResource( 1 )
+
+[node name="Close Entrance Door" type="Node" parent="Room1/Events"]
+script = ExtResource( 12 )
+door_path = NodePath("../../EntranceDoor")
 
 [node name="ShowLabel Tutorial1" type="Node" parent="Room1/Events"]
 script = ExtResource( 18 )
@@ -224,7 +244,7 @@ cell_size = Vector2( 16, 16 )
 collision_layer = 128
 collision_mask = 2
 format = 1
-tile_data = PoolIntArray( 65549, 10, 0, 65552, 536870922, 0, 131085, 10, 0, 131088, 536870922, 0, 196621, 10, 0, 196624, 536870922, 0, 262156, 536870922, 0, 262157, 10, 0, 262160, 536870922, 0, 262161, 536870922, 0, 327691, 536870922, 0, 327698, 536870922, 0, 393227, 536870922, 0, 393234, 536870922, 0, 458763, 536870922, 0, 458770, 536870922, 0, 524299, 536870922, 0, 524306, 536870922, 0, 589835, 10, 0, 589842, 536870922, 0, 655371, 10, 0, 655378, 536870922, 0, 720908, 536870922, 0, 720909, 536870922, 0, 720912, 536870922, 0, 720913, 536870922, 0, 786445, 536870922, 0, 786448, 536870922, 0, 851981, 536870922, 0, 851984, 536870922, 0, 917517, 536870922, 0, 917520, 536870922, 0, 983053, 536870922, 0, 983056, 536870922, 0, 1114126, 536870922, 0, 1114127, 536870922, 0 )
+tile_data = PoolIntArray( 65549, 10, 0, 65552, 536870922, 0, 131085, 10, 0, 131088, 536870922, 0, 196621, 10, 0, 196624, 536870922, 0, 262156, 536870922, 0, 262157, 10, 0, 262160, 536870922, 0, 262161, 536870922, 0, 327691, 536870922, 0, 327698, 536870922, 0, 393227, 536870922, 0, 393234, 536870922, 0, 458763, 536870922, 0, 458770, 536870922, 0, 524299, 536870922, 0, 524306, 536870922, 0, 589835, 10, 0, 589842, 536870922, 0, 655371, 10, 0, 655378, 536870922, 0, 720908, 536870922, 0, 720909, 536870922, 0, 720912, 536870922, 0, 720913, 536870922, 0, 786445, 536870922, 0, 786448, 536870922, 0, 851981, 536870922, 0, 851984, 536870922, 0, 917517, 536870922, 0, 917520, 536870922, 0, 983053, 536870922, 0, 983056, 536870922, 0 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -267,6 +287,13 @@ position = Vector2( 240, 128 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="EntranceDoor" parent="Room1" instance=ExtResource( 6 )]
+position = Vector2( 240, 265 )
+__meta__ = {
+"_edit_group_": true
+}
+open_on_start = true
 
 [node name="Door" parent="Room1" instance=ExtResource( 6 )]
 position = Vector2( 240, 8 )
@@ -617,6 +644,7 @@ position = Vector2( 288, 248 )
 scale = Vector2( 100, 100 )
 texture = ExtResource( 10 )
 
+[connection signal="body_entered" from="Room1/Events/EnterAreaTrigger - Close Entrance Door" to="Room1/Events/EnterAreaTrigger - Close Entrance Door" method="_on_body_entered"]
 [connection signal="body_entered" from="Room1/Events/EnterAreaTrigger - Show tutorial 1" to="Room1/Events/EnterAreaTrigger - Show tutorial 1" method="_on_body_entered"]
 [connection signal="body_entered" from="Room1/Events/EnterAreaTrigger - Show tutorial 2" to="Room1/Events/EnterAreaTrigger - Show tutorial 2" method="_on_body_entered"]
 [connection signal="body_entered" from="Room2/Events2/EnterAreaTrigger - Show tutorial 3" to="Room2/Events2/EnterAreaTrigger - Show tutorial 3" method="_on_body_entered"]
