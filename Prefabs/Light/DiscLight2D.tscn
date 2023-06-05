@@ -5,7 +5,6 @@
 
 [node name="DiscLight2D" type="Light2D"]
 texture = ExtResource( 1 )
-energy = 0.8
 mode = 2
 range_item_cull_mask = 170
 shadow_enabled = true
