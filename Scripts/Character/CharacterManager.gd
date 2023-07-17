@@ -71,7 +71,9 @@ func _play_intro_sequence():
 	
 	# Move up to just enter room
 	control.move_intention = Vector2.UP
-	yield(get_tree().create_timer(1.5), "timeout")
+	# In this case, self has same lifetime as Character since Restart will free them all,
+	# so we can pass it as timer owner
+	yield(TempTimer.create_timer_under(self, 1.5), "timeout")
 	control.move_intention = Vector2.ZERO
 	
 	# Give control back to player

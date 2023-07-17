@@ -89,6 +89,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Audio/TempSFXPlayer.gd"
 }, {
+"base": "Reference",
+"class": "TempTimer",
+"language": "GDScript",
+"path": "res://Scripts/Utils/TempTimer.gd"
+}, {
 "base": "Ignitable",
 "class": "Torch",
 "language": "GDScript",
@@ -111,6 +116,7 @@ _global_script_class_icons={
 "NodeUtils": "",
 "ScaleFlicker": "",
 "TempSFXPlayer": "",
+"TempTimer": "",
 "Torch": ""
 }
 
@@ -146,6 +152,10 @@ window/stretch/aspect="keep"
 [editor_plugins]
 
 enabled=PoolStringArray( "gut" )
+
+[global]
+
+"physics inter"=false
 
 [importer_defaults]
 
