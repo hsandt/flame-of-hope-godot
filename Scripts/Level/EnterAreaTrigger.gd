@@ -17,7 +17,12 @@ func _ready():
 
 
 func _on_body_entered(_body):
-	_trigger_events()
+	# call_deferred is important when event.trigger() modifies physics state (e.g. enables or
+	# disables a collider, such as open/close door) while we are already checking it,
+	# to avoid error such as:
+	# > body_set_shape_disabled: Can't change this state while flushing queries.
+	# > Use call_deferred() or set_deferred() to change monitoring state instead.
+	call_deferred("_trigger_events")
 
 
 func _trigger_events():
