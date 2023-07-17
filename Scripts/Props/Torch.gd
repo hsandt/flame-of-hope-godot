@@ -2,10 +2,45 @@ tool
 class_name Torch
 extends Ignitable
 
+# Tool preview only (we play full animation via AnimationPlayer at runtime)
 var sf_torch_lit := preload("res://Anims/Props/SF_Torch_Lit.tres") as SpriteFrames
 var sf_torch_unlit := preload("res://Anims/Props/SF_Torch_Unlit.tres") as SpriteFrames
 
+onready var animated_sprite := $AnimatedSprite as AnimatedSprite
 onready var flame_timer := $FlameTimer as Timer
+onready var fire_source_collision_shape := $FireSourceArea2D/FireSourceCollisionShape2D as CollisionShape2D
+onready var ignitable_collision_shape := $IgnitableArea2D/IgnitableCollisionShape2D as CollisionShape2D
+
+# When false, hide and disable ignitable collider on start
+export var activated_on_start: bool = true
+
+
+func _ready():
+	# In Godot 3, _ready is called on parent then on child without the need for
+	# super call. We could override existing _setup method, but then this would
+	# be called at parent _ready time, where child ignitable_area_collision_shape
+	# is still null, causing error
+	# So better use the local _ready
+	# We assume torches are all activated (visible, collision shapes enabled)
+	# in scene, so only deactivate if needed
+	if not activated_on_start:
+		deactivate()
+
+# override
+func can_light_on_start():
+	# prevent lighting on start if not activated on start
+	return activated_on_start
+	
+# Show and enable collider (this is unrelated to ignition state)
+func activate():
+	animation_player.play("Torch_Unlit")
+
+# Hide sprite and disable collider (this is unrelated to ignition state, but we assume
+# torch is unlit when this happens, as this should only happen on start with activated_on_start
+# false, and lit_on_start also false to be clean)
+func deactivate():
+	# This should set sprite visible = false, and disable all collision shapes
+	animation_player.play("Torch_Hidden")
 
 # override
 func on_lit_triggered_event():

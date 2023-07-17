@@ -156,13 +156,15 @@ func _ignite():
 
 # silently set rod lit state to on (logical and visual), useful on setup
 # and also during game when combined with SFX
-func _light_on():
+# if go_off_after_timer is true (default), set timer before go off
+func _light_on(go_off_after_timer: bool = true):
 	_is_lit = true
 	rod_flame.visible = true
 	rod_flame.play()
 	
-	# start timer until flame goes off (duration is set in Inspector on FlameTimer)
-	flame_timer.start()
+	if go_off_after_timer:
+		# start timer until flame goes off (duration is set in Inspector on FlameTimer)
+		flame_timer.start()
 	
 	# show flame light wtih flicker
 	light_scale_flicker.show_with_flicker()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Anims/Props/ANIM_Torch_Unlit.tres" type="Animation" id=1]
 [ext_resource path="res://Anims/Props/SF_Torch_Unlit.tres" type="SpriteFrames" id=2]
@@ -12,6 +12,84 @@
 
 [sub_resource type="OccluderPolygon2D" id=4]
 polygon = PoolVector2Array( -2, 2, -2, -10, 2, -10, 2, 2 )
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Torch_Hidden"
+tracks/0/type = "value"
+tracks/0/path = NodePath("FireSourceArea2D/FireSourceCollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("IgnitableArea2D/IgnitableCollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedSprite:frames")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 2 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedSprite:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AnimatedSprite:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "Torch_Unlit"
@@ -63,6 +141,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("AnimatedSprite:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 9.05539
@@ -89,6 +179,8 @@ occluder = SubResource( 4 )
 light_mask = 64
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 6 )
+anims/Torch_Hidden = SubResource( 5 )
 anims/Torch_Lit = ExtResource( 1 )
 anims/Torch_Unlit = SubResource( 1 )
 
@@ -115,6 +207,7 @@ collision_mask = 16
 
 [node name="FireSourceCollisionShape2D" type="CollisionShape2D" parent="FireSourceArea2D"]
 shape = SubResource( 3 )
+disabled = true
 
 [node name="IgnitableArea2D" type="Area2D" parent="."]
 collision_layer = 32
@@ -122,7 +215,6 @@ collision_mask = 16
 
 [node name="IgnitableCollisionShape2D" type="CollisionShape2D" parent="IgnitableArea2D"]
 shape = SubResource( 3 )
-disabled = true
 
 [node name="DiscLight2D" parent="." instance=ExtResource( 6 )]
 shadow_item_cull_mask = 278

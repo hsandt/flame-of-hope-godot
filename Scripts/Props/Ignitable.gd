@@ -43,13 +43,21 @@ func _setup():
 	_is_lit = false
 	
 	if lit_on_start:
-		call_deferred("_light_on")
+		if can_light_on_start():
+			call_deferred("_light_on")
+		else:
+			push_warning("%s: lit_on_start is true, but can_light_on_start() is false, no lighting on start" %
+				[get_path()])
 	else:
 		# make sure to pass on_setup: true so we don't emit the unlit signal, causing
 		# any connected IgnitionTrigger._on_trigger_ignitable_unlit to fail
 		# as it cannot unregister an ignitable never registered
 		_light_off(true)
-		_play_unlit_animation()
+
+# override to prevent lighting on start, e.g. when fully hiding object
+# of course, best is to clear lit_on_start flag in this case, so it's just a safety measure
+func can_light_on_start():
+	return true
 
 # full ignition during game (light on + SFX)
 func ignite():

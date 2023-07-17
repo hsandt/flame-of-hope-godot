@@ -8,6 +8,9 @@ export(float) var input_min_threshold = 0.125
 # Current control mode
 var control_mode: int # Enum.ControlMode
 
+# Intro-only: when false, character cannot throw fireball (avoids soft lock)
+var can_throw_fireball: bool
+
 # Move intention vector, exposed for CharacterMotor
 var move_intention : Vector2
 
@@ -22,6 +25,7 @@ func _ready():
 
 func _setup():
 	control_mode = Enum.ControlMode.PLAYER_INPUT
+	can_throw_fireball = true  # default to true so when debugging in non-intro rooms, we can fully play
 	move_intention = Vector2.ZERO
 	_swing_intention = false
 	_throw_fireball_intention = false
@@ -33,7 +37,7 @@ func _unhandled_input(event: InputEvent):
 		# due to this _process being called 2x before CharacterRod._physics_process
 		if event.is_action_pressed("swing"):
 			_swing_intention = true
-		if event.is_action_pressed("throw_fireball"):
+		if event.is_action_pressed("throw_fireball") and can_throw_fireball:
 			_throw_fireball_intention = true
 
 func _process(_delta: float):

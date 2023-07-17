@@ -51,23 +51,28 @@ func _warp_character(room_index: int):
 func _play_intro_sequence():
 	# Light rod on silently for setup
 	var rod = character.rod
-	rod._light_on()
 	
-	# Move character a little lower so it starts outside room
-	character.position += 20.0 * Vector2.DOWN
+	# pass go_off_after_timer = false so the first flame is infinite
+	# note that the first ignite will rekindle the rod, with timer this time,
+	# thus starting the timer and deactivating infinite flame as we want
+	rod._light_on(false)
+	
+	# Move character lower so it starts outside room
+	# (far enough so his own light disc is not visible on screen at first)
+	character.position += 60.0 * Vector2.DOWN
 	
 	# Take control of character
 	var control = character.control
 	control.control_mode = Enum.ControlMode.SIMULATION
 	
-	# Move up until first Fire Pit
-	control.move_intention = Vector2.UP
-	yield(get_tree().create_timer(2.0), "timeout")
-	control.move_intention = Vector2.ZERO
+	# Prevent throwing fireball because player would lose the initial flame
+	# before igniting the first fire pit, causing soft lock
+	control.can_throw_fireball = false
 	
-	# Light First Pit
-	control._swing_intention = true
-	yield(get_tree().create_timer(0.5), "timeout")
+	# Move up to just enter room
+	control.move_intention = Vector2.UP
+	yield(get_tree().create_timer(1.5), "timeout")
+	control.move_intention = Vector2.ZERO
 	
 	# Give control back to player
 	stop_intro_sequence()
