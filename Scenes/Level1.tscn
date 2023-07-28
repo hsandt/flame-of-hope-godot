@@ -202,6 +202,7 @@ position = Vector2( 240, 270 )
 position = Vector2( 240, 10 )
 
 [node name="TileMaps" type="Node2D" parent="Room1"]
+z_index = -1
 script = ExtResource( 11 )
 __meta__ = {
 "_edit_lock_": true
@@ -310,6 +311,7 @@ __meta__ = {
 
 [node name="EntranceDoor" parent="Room1" instance=ExtResource( 6 )]
 position = Vector2( 240, 265 )
+z_index = -1
 __meta__ = {
 "_edit_group_": true
 }
