@@ -19,8 +19,15 @@ func _ready():
 
 # override
 func trigger():
+	# prepare average position calculation for SFX
+	var central_position := Vector2.ZERO
+	
 	for torch in _torches:
 		torch.activate()
+		central_position += torch.global_position
+	
+	if _torches.size() > 0:
+		central_position /= _torches.size()
 	
 	# audio
-	SfxManager.spawn_sfx(sfx_activate_torches)
+	SfxManager.spawn_sfx(sfx_activate_torches, central_position)

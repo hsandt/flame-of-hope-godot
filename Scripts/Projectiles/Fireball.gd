@@ -30,7 +30,8 @@ func _physics_process(delta):
 		else:
 			# Default explosion PFX (when hitting wall, etc.) + SFX
 			_spawn_pfx(pfx_explosion_prefab)
-			SfxManager.spawn_sfx(hit_wall_sound)
+			# Spawn SFX at position of collision to benefit from SFXPlayerCustomDistanceAttenuation.gd
+			SfxManager.spawn_sfx(hit_wall_sound, kinematic_collision2d.position)
 		
 		# fireball disappears whether it hit an ignitable or some obstacle
 		# including FireballBlocker

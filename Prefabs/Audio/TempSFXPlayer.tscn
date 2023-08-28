@@ -7,5 +7,6 @@
 script = ExtResource( 2 )
 
 [node name="SFXPlayer" parent="." instance=ExtResource( 1 )]
+volume_db = -15.0
 
 [connection signal="finished" from="SFXPlayer" to="." method="_on_SFXPlayer_finished"]

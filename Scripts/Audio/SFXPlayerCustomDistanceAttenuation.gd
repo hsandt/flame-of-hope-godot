@@ -35,6 +35,12 @@ func _ready():
 
 func set_volume_from_current_distance_to_camera():
 	var camera_center := playercam.get_camera_screen_center()
+	
+	# AudioStreamPlayer itself has no position, but we assume it's always child of
+	# a Node2D at some position:
+	# - for AudioStreamPlayer attached to a fixed object like a prop, parent is the prop
+	# - for TempSFXPlayer, parent is TempSFXPlayer which is a Node2D positioned in
+	#   SFXManager.spawn_sfx
 	var parent_pos: Vector2 = get_parent().global_position
 	
 	if abs(parent_pos.x - camera_center.x) <= native_width / 2.0 and \
