@@ -10,8 +10,6 @@ var _label: Label
 # Flag to remember not to trigger twice
 var _triggered: bool = false
 
-onready var jingle_player := $"/root/Dungeon/JinglePlayer" as AudioStreamPlayer
-
 func _ready():
 	_label = get_node(label_path) as Label
 	NodeUtils.assert_node_got_by_path(_label, "ShowLabel", self, "Label", label_path)
