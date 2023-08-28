@@ -1,6 +1,9 @@
 class_name CharacterMotor
 extends Node
 
+# Walk Step Audio Clip
+export(AudioStream) var walk_step
+
 # Character speed
 export(float) var speed = 32.0
 
@@ -9,6 +12,9 @@ var direction: int # enum CardinalDirection
 
 onready var character: KinematicBody2D = $".."
 onready var animation_player: AnimationPlayer = $"../AnimationPlayer"
+# Dedicated SFX player for motor SFX (walk step) so we can tune volume in inspector and avoid
+# conflicts with other SFX
+onready var motor_sfx_player := $"../MotorSFXPlayer" as AudioStreamPlayer
 onready var character_control: CharacterControl = $"../CharacterControl"
 onready var character_rod = $"../CharacterRod"
 onready var character_anim: CharacterAnim = $"../CharacterAnim"
@@ -38,6 +44,18 @@ func _physics_process(_delta: float):
 		character_anim.is_walking = true
 	elif not character_rod.is_swinging:
 		character_anim.is_walking = false
+
+func _play_sfx(stream: AudioStream):
+	if not stream:
+		print("ERROR: '%s' _play_sfx stream argument is null, will not play" % get_path())
+		return
+		
+	motor_sfx_player.stream = stream
+	motor_sfx_player.play()
+
+# Call via animation Call track
+func play_walk_step_sfx():
+	_play_sfx(walk_step)
 
 func _can_move() -> bool:
 	# character cannot move during Rod action

@@ -54,3 +54,20 @@ tracks/3/keys = {
 "update": 1,
 "values": [ Vector2( 1, -28 ), Vector2( 2, -27 ), Vector2( 1, -28 ), Vector2( 0, -27 ), Vector2( 1, -28 ) ]
 }
+tracks/4/type = "method"
+tracks/4/path = NodePath("CharacterMotor")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_walk_step_sfx"
+}, {
+"args": [  ],
+"method": "play_walk_step_sfx"
+} ]
+}
