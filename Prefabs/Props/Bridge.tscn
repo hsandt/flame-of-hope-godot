@@ -53,3 +53,5 @@ volume_db = -15.0
 __meta__ = {
 "_edit_pinned_properties_": [ "volume_db" ]
 }
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

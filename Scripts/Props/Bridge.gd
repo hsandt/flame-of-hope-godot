@@ -30,10 +30,15 @@ func _ready():
 func open():
 	sprite.visible = true
 	animation_player.play("ANIM_Bridge_Appear")
-	ground_border.collision_layer = 0
-	ground_border.collision_mask = 0
+	# wait for animation to finish to disable invisible ground_border and
+	# allow player to walk on bridge
 
 func close():
 	sprite.visible = false
 	ground_border.collision_layer = _initial_ground_border_collision_layer
 	ground_border.collision_mask = _initial_ground_border_mask_layer
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "ANIM_Bridge_Appear":
+		ground_border.collision_layer = 0
+		ground_border.collision_mask = 0
