@@ -50,7 +50,7 @@ anims/FirePit_Lit = ExtResource( 1 )
 anims/FirePit_Unlit = ExtResource( 5 )
 
 [node name="SFXPlayer" parent="." instance=ExtResource( 9 )]
-volume_db = -10.0
+volume_db = -15.0
 __meta__ = {
 "_edit_pinned_properties_": [ "volume_db" ]
 }

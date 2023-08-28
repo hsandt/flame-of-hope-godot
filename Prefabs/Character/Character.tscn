@@ -112,7 +112,7 @@ frames = ExtResource( 3 )
 offset = Vector2( 0, -4 )
 
 [node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
-volume_db = -10.0
+volume_db = -15.0
 bus = "SFX"
 
 [node name="MotorSFXPlayer" type="AudioStreamPlayer" parent="."]
