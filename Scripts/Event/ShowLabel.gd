@@ -3,6 +3,9 @@ extends Event
 # Path to door
 export(NodePath) var label_path
 export(float) var fade_in_duration = 1.0
+# if stay duration <= 0, keep label forever
+export(float) var stay_duration = 0.0
+export(float) var fade_out_duration = 0.0
 
 # Door sprite (derived from label_path)
 var _label: Label
@@ -23,6 +26,12 @@ func trigger():
 	_triggered = true
 	
 	_label.visible = true
-	var _modulate_tweener = get_tree().create_tween() \
-		.tween_property(_label, "modulate", Color(1.0, 1.0, 1.0, 1.0), fade_in_duration) \
+	var modulate_tween := get_tree().create_tween()
+	modulate_tween.tween_property(_label, "modulate", Color(1.0, 1.0, 1.0, 1.0), fade_in_duration) \
 		.from(Color(1.0, 1.0, 1.0, 0.0))
+		
+	if stay_duration > 0.0:
+		# stay
+		modulate_tween.tween_interval(stay_duration)
+		# fade out
+		modulate_tween.tween_property(_label, "modulate", Color(1.0, 1.0, 1.0, 0.0), fade_out_duration)

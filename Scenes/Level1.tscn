@@ -150,6 +150,8 @@ event_paths = [ NodePath("../ActivateTorchesEvent"), NodePath("../EnablePlayerCh
 [node name="ShowLabel Title" type="Node" parent="Room1/Events"]
 script = ExtResource( 18 )
 label_path = NodePath("../../CanvasLayer/Title")
+stay_duration = 2.0
+fade_out_duration = 1.0
 
 [node name="PlayNeutralBGM" type="Node" parent="Room1/Events"]
 script = ExtResource( 22 )
