@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Tilemap/Environment.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Props/FirePit.tscn" type="PackedScene" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://Audio/BGM/theme_neutral_loop.ogg" type="AudioStream" id=19]
 [ext_resource path="res://Audio/SFX/sfx_object_appears_step.ogg" type="AudioStream" id=20]
 [ext_resource path="res://Scripts/Event/EnablePlayerCharacterThrowFireball.gd" type="Script" id=21]
+[ext_resource path="res://Scripts/Event/PlayBGM.gd" type="Script" id=22]
 [ext_resource path="res://Prefabs/Props/Torch.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Scripts/Event/OpenDoorEvent.gd" type="Script" id=26]
 [ext_resource path="res://Audio/Jingle/victory_jingle.ogg" type="AudioStream" id=27]
@@ -67,8 +68,7 @@ theme = ExtResource( 9 )
 text = "v1.1.0"
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 19 )
-autoplay = true
+unique_name_in_owner = true
 bus = "Music"
 
 [node name="JinglePlayer" type="AudioStreamPlayer" parent="."]
@@ -145,11 +145,15 @@ label_path = NodePath("../../CanvasLayer/TutoLabel2")
 [node name="FirePitIgnitionTrigger" type="Node" parent="Room1/Events"]
 script = ExtResource( 5 )
 trigger_ignitable_paths = [ NodePath("../../FirePit_Source") ]
-event_paths = [ NodePath("../ActivateTorchesEvent"), NodePath("../EnablePlayerCharacterThrowFireball"), NodePath("../ShowLabel Title") ]
+event_paths = [ NodePath("../ActivateTorchesEvent"), NodePath("../EnablePlayerCharacterThrowFireball"), NodePath("../ShowLabel Title"), NodePath("../PlayNeutralBGM") ]
 
 [node name="ShowLabel Title" type="Node" parent="Room1/Events"]
 script = ExtResource( 18 )
 label_path = NodePath("../../CanvasLayer/Title")
+
+[node name="PlayNeutralBGM" type="Node" parent="Room1/Events"]
+script = ExtResource( 22 )
+bgm = ExtResource( 19 )
 
 [node name="TorchesIgnitionTrigger" type="Node" parent="Room1/Events"]
 script = ExtResource( 5 )
