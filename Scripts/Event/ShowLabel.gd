@@ -27,11 +27,11 @@ func trigger():
 	
 	_label.visible = true
 	var modulate_tween := get_tree().create_tween()
-	modulate_tween.tween_property(_label, "modulate", Color(1.0, 1.0, 1.0, 1.0), fade_in_duration) \
+	var _tweener1 = modulate_tween.tween_property(_label, "modulate", Color(1.0, 1.0, 1.0, 1.0), fade_in_duration) \
 		.from(Color(1.0, 1.0, 1.0, 0.0))
 		
 	if stay_duration > 0.0:
 		# stay
-		modulate_tween.tween_interval(stay_duration)
+		var _tweener2 = modulate_tween.tween_interval(stay_duration)
 		# fade out
-		modulate_tween.tween_property(_label, "modulate", Color(1.0, 1.0, 1.0, 0.0), fade_out_duration)
+		var _tweener3 = modulate_tween.tween_property(_label, "modulate", Color(1.0, 1.0, 1.0, 0.0), fade_out_duration)
