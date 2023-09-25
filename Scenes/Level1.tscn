@@ -145,39 +145,39 @@ label_path = NodePath("../../CanvasLayer/TutoLabel2")
 [node name="FirePitIgnitionTrigger" type="Node" parent="Room1/Events"]
 script = ExtResource( 5 )
 trigger_ignitable_paths = [ NodePath("../../FirePit_Source") ]
-event_paths = [ NodePath("../ActivateTorchesEvent"), NodePath("../EnablePlayerCharacterThrowFireball"), NodePath("../ShowLabel Title"), NodePath("../PlayNeutralBGM") ]
+event_paths = [ NodePath("ActivateTorchesEvent"), NodePath("EnablePlayerCharacterThrowFireball"), NodePath("ShowLabel Title"), NodePath("PlayNeutralBGM") ]
 
-[node name="ShowLabel Title" type="Node" parent="Room1/Events"]
+[node name="ActivateTorchesEvent" type="Node" parent="Room1/Events/FirePitIgnitionTrigger"]
+script = ExtResource( 13 )
+torch_paths = [ NodePath("../../../Torch"), NodePath("../../../Torch2"), NodePath("../../../Torch3"), NodePath("../../../Torch4") ]
+sfx_activate_torches = ExtResource( 20 )
+
+[node name="EnablePlayerCharacterThrowFireball" type="Node" parent="Room1/Events/FirePitIgnitionTrigger"]
+script = ExtResource( 21 )
+
+[node name="ShowLabel Title" type="Node" parent="Room1/Events/FirePitIgnitionTrigger"]
 script = ExtResource( 18 )
-label_path = NodePath("../../CanvasLayer/Title")
+label_path = NodePath("../../../CanvasLayer/Title")
 stay_duration = 2.0
 fade_out_duration = 1.0
 
-[node name="PlayNeutralBGM" type="Node" parent="Room1/Events"]
+[node name="PlayNeutralBGM" type="Node" parent="Room1/Events/FirePitIgnitionTrigger"]
 script = ExtResource( 22 )
 bgm = ExtResource( 19 )
 
 [node name="TorchesIgnitionTrigger" type="Node" parent="Room1/Events"]
 script = ExtResource( 5 )
 trigger_ignitable_paths = [ NodePath("../../Torch"), NodePath("../../Torch2"), NodePath("../../Torch3"), NodePath("../../Torch4") ]
-event_paths = [ NodePath("../OpenDoorEvent"), NodePath("../OpenBridgeEvent") ]
+event_paths = [ NodePath("OpenDoorEvent"), NodePath("OpenBridgeEvent") ]
 
-[node name="OpenDoorEvent" type="Node" parent="Room1/Events"]
+[node name="OpenDoorEvent" type="Node" parent="Room1/Events/TorchesIgnitionTrigger"]
 script = ExtResource( 26 )
-door_path = NodePath("../../Door")
+door_path = NodePath("../../../Door")
 victory_jingle = ExtResource( 27 )
 
-[node name="OpenBridgeEvent" type="Node" parent="Room1/Events"]
+[node name="OpenBridgeEvent" type="Node" parent="Room1/Events/TorchesIgnitionTrigger"]
 script = ExtResource( 8 )
-bridge_path = NodePath("../../Bridge")
-
-[node name="ActivateTorchesEvent" type="Node" parent="Room1/Events"]
-script = ExtResource( 13 )
-torch_paths = [ NodePath("../../Torch"), NodePath("../../Torch2"), NodePath("../../Torch3"), NodePath("../../Torch4") ]
-sfx_activate_torches = ExtResource( 20 )
-
-[node name="EnablePlayerCharacterThrowFireball" type="Node" parent="Room1/Events"]
-script = ExtResource( 21 )
+bridge_path = NodePath("../../../Bridge")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Room1"]
 follow_viewport_enable = true
