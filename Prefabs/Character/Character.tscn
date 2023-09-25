@@ -13,7 +13,7 @@
 [ext_resource path="res://Anims/Character/ANIM_Character_Walk_Down.tres" type="Animation" id=11]
 [ext_resource path="res://Anims/Character/ANIM_Character_Walk_Right.tres" type="Animation" id=12]
 [ext_resource path="res://Anims/Character/ANIM_Character_Walk_Left.tres" type="Animation" id=13]
-[ext_resource path="res://Sprites/Character/character_walk_spritesheet.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/Character/character_idle_spritesheet.png" type="Texture" id=14]
 [ext_resource path="res://Anims/Character/ANIM_Character_Swing_Up.tres" type="Animation" id=15]
 [ext_resource path="res://Anims/Character/ANIM_Character_Swing_Down.tres" type="Animation" id=16]
 [ext_resource path="res://Anims/Character/ANIM_Character_Swing_Right.tres" type="Animation" id=17]
@@ -77,8 +77,7 @@ position = Vector2( -7, 24 )
 light_mask = 128
 position = Vector2( 0, -13 )
 texture = ExtResource( 14 )
-hframes = 24
-frame = 11
+hframes = 16
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite"]
 light_mask = 256
