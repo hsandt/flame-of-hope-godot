@@ -42,7 +42,12 @@ func _unhandled_input(event):
 
 func _warp_character(room_index: int):
 	# room 1 entrance is at 240, 268 and each room has a height of 16*17=272
-	character.global_position = Vector2(240, 268 - 272 * room_index)
+	# for room 1, we want to be after the entrance door in room 1 after it closed
+	# so add offset UP by 16
+	var target_pos = Vector2(240, 268 - 272 * room_index)
+	if room_index == 0:
+		target_pos.y -= 16
+	character.global_position = target_pos
 
 	# to support warping during intro sequence, stop it now
 	stop_intro_sequence()
@@ -59,7 +64,7 @@ func _play_intro_sequence():
 	
 	# Move character lower so it starts outside room
 	# (far enough so his own light disc is not visible on screen at first)
-	character.position += 60.0 * Vector2.DOWN
+	character.position += 76.0 * Vector2.DOWN
 	
 	# Take control of character
 	var control = character.control

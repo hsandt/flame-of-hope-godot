@@ -86,7 +86,7 @@ collision_mask = 132
 [node name="Events" type="Node" parent="Room1"]
 
 [node name="EnterAreaTrigger - Close Entrance Door" type="Area2D" parent="Room1/Events"]
-position = Vector2( 240, 233 )
+position = Vector2( 240, 232 )
 z_index = 1
 collision_layer = 64
 collision_mask = 2
@@ -220,10 +220,10 @@ autowrap = true
 script = ExtResource( 17 )
 
 [node name="RoomEntrance" parent="Room1" instance=ExtResource( 28 )]
-position = Vector2( 240, 270 )
+position = Vector2( 240, 257 )
 
 [node name="RoomEntrance2" parent="Room1" instance=ExtResource( 28 )]
-position = Vector2( 240, 10 )
+position = Vector2( 240, 12 )
 
 [node name="TileMaps" type="Node2D" parent="Room1"]
 z_index = -1
@@ -404,10 +404,10 @@ __meta__ = {
 }
 
 [node name="RoomEntrance" parent="Room2" instance=ExtResource( 28 )]
-position = Vector2( 240, 272 )
+position = Vector2( 240, 271 )
 
 [node name="RoomEntrance2" parent="Room2" instance=ExtResource( 28 )]
-position = Vector2( 240, 10 )
+position = Vector2( 240, 12 )
 
 [node name="TileMaps" type="Node2D" parent="Room2"]
 script = ExtResource( 11 )
@@ -498,10 +498,10 @@ script = ExtResource( 8 )
 bridge_path = NodePath("../../Bridge")
 
 [node name="RoomEntrance" parent="Room3" instance=ExtResource( 28 )]
-position = Vector2( 240, 272 )
+position = Vector2( 240, 271 )
 
 [node name="RoomEntrance2" parent="Room3" instance=ExtResource( 28 )]
-position = Vector2( 240, 10 )
+position = Vector2( 240, 12 )
 
 [node name="TileMaps" type="Node2D" parent="Room3"]
 script = ExtResource( 11 )
@@ -604,7 +604,7 @@ script = ExtResource( 18 )
 label_path = NodePath("../../CanvasLayer2/ThankYouLabel")
 
 [node name="RoomEntrance" parent="Room4" instance=ExtResource( 28 )]
-position = Vector2( 240, 269 )
+position = Vector2( 240, 268 )
 
 [node name="EnterAreaTrigger - Play Thank You Jingle" type="Area2D" parent="Room4"]
 position = Vector2( 241, 144 )
