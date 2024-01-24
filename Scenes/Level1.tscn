@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Tilemap/Environment.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Props/FirePit.tscn" type="PackedScene" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://Audio/SFX/sfx_object_appears_step.ogg" type="AudioStream" id=20]
 [ext_resource path="res://Scripts/Event/EnablePlayerCharacterThrowFireball.gd" type="Script" id=21]
 [ext_resource path="res://Scripts/Event/PlayBGM.gd" type="Script" id=22]
+[ext_resource path="res://Scripts/Event/StopBGM.gd" type="Script" id=23]
 [ext_resource path="res://Prefabs/Props/Torch.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Scripts/Event/OpenDoorEvent.gd" type="Script" id=26]
 [ext_resource path="res://Audio/Jingle/victory_jingle.ogg" type="AudioStream" id=27]
@@ -593,7 +594,7 @@ position = Vector2( 0, -813 )
 [node name="IgnitionTrigger" type="Node" parent="Room4/Events"]
 script = ExtResource( 5 )
 trigger_ignitable_paths = [ NodePath("../../FirePit_Source") ]
-event_paths = [ NodePath("../PlayThankYouJingle"), NodePath("../ShowThankYouLabel"), NodePath("../ShowCredits1"), NodePath("../ShowCredits2") ]
+event_paths = [ NodePath("../PlayThankYouJingle"), NodePath("../ShowThankYouLabel"), NodePath("../ShowCredits1"), NodePath("../ShowCredits2"), NodePath("../StopBGM") ]
 
 [node name="PlayThankYouJingle" type="Node" parent="Room4/Events"]
 script = ExtResource( 16 )
@@ -610,6 +611,12 @@ canvas_item_path = NodePath("../../CanvasLayer2/Credits1")
 [node name="ShowCredits2" type="Node" parent="Room4/Events"]
 script = ExtResource( 18 )
 canvas_item_path = NodePath("../../CanvasLayer2/Credits2")
+
+[node name="StopBGM" type="Node" parent="Room4/Events"]
+script = ExtResource( 23 )
+fade_out_duration = 4.0
+
+[node name="Tween" type="Tween" parent="Room4/Events/StopBGM"]
 
 [node name="RoomEntrance" parent="Room4" instance=ExtResource( 28 )]
 position = Vector2( 240, 268 )
