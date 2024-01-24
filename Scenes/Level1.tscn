@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Tilemap/Environment.tres" type="TileSet" id=1]
 [ext_resource path="res://Prefabs/Props/FirePit.tscn" type="PackedScene" id=2]
@@ -17,11 +17,12 @@
 [ext_resource path="res://Scripts/Level/EnterAreaTrigger.gd" type="Script" id=15]
 [ext_resource path="res://Scripts/Event/PlayJingleEvent.gd" type="Script" id=16]
 [ext_resource path="res://Scripts/Utils/HideOnStart.gd" type="Script" id=17]
-[ext_resource path="res://Scripts/Event/ShowLabel.gd" type="Script" id=18]
+[ext_resource path="res://Scripts/Event/ShowCanvasItem.gd" type="Script" id=18]
 [ext_resource path="res://Audio/BGM/theme_neutral_loop.ogg" type="AudioStream" id=19]
 [ext_resource path="res://Audio/SFX/sfx_object_appears_step.ogg" type="AudioStream" id=20]
 [ext_resource path="res://Scripts/Event/EnablePlayerCharacterThrowFireball.gd" type="Script" id=21]
 [ext_resource path="res://Scripts/Event/PlayBGM.gd" type="Script" id=22]
+[ext_resource path="res://Scripts/Event/StopBGM.gd" type="Script" id=23]
 [ext_resource path="res://Prefabs/Props/Torch.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Scripts/Event/OpenDoorEvent.gd" type="Script" id=26]
 [ext_resource path="res://Audio/Jingle/victory_jingle.ogg" type="AudioStream" id=27]
@@ -136,11 +137,11 @@ door_path = NodePath("../../EntranceDoor")
 
 [node name="ShowLabel Tutorial1" type="Node" parent="Room1/Events"]
 script = ExtResource( 18 )
-label_path = NodePath("../../CanvasLayer/TutoLabel1")
+canvas_item_path = NodePath("../../CanvasLayer/TutoLabel1")
 
 [node name="ShowLabel Tutorial2" type="Node" parent="Room1/Events"]
 script = ExtResource( 18 )
-label_path = NodePath("../../CanvasLayer/TutoLabel2")
+canvas_item_path = NodePath("../../CanvasLayer/TutoLabel2")
 
 [node name="FirePitIgnitionTrigger" type="Node" parent="Room1/Events"]
 script = ExtResource( 5 )
@@ -157,7 +158,7 @@ script = ExtResource( 21 )
 
 [node name="ShowLabel Title" type="Node" parent="Room1/Events/FirePitIgnitionTrigger"]
 script = ExtResource( 18 )
-label_path = NodePath("../../../CanvasLayer/Title")
+canvas_item_path = NodePath("../../../CanvasLayer/Title")
 stay_duration = 2.0
 fade_out_duration = 1.0
 
@@ -375,7 +376,7 @@ shape = SubResource( 1 )
 
 [node name="ShowLabel Tutorial3" type="Node" parent="Room2/Events2"]
 script = ExtResource( 18 )
-label_path = NodePath("../../CanvasLayer/TutoLabel3")
+canvas_item_path = NodePath("../../CanvasLayer/TutoLabel3")
 
 [node name="IgnitionTrigger" type="Node" parent="Room2/Events2"]
 script = ExtResource( 5 )
@@ -593,7 +594,7 @@ position = Vector2( 0, -813 )
 [node name="IgnitionTrigger" type="Node" parent="Room4/Events"]
 script = ExtResource( 5 )
 trigger_ignitable_paths = [ NodePath("../../FirePit_Source") ]
-event_paths = [ NodePath("../PlayThankYouJingle"), NodePath("../ShowThankYouLabel") ]
+event_paths = [ NodePath("../PlayThankYouJingle"), NodePath("../ShowThankYouLabel"), NodePath("../ShowCredits1"), NodePath("../ShowCredits2"), NodePath("../StopBGM") ]
 
 [node name="PlayThankYouJingle" type="Node" parent="Room4/Events"]
 script = ExtResource( 16 )
@@ -601,7 +602,21 @@ victory_jingle = ExtResource( 27 )
 
 [node name="ShowThankYouLabel" type="Node" parent="Room4/Events"]
 script = ExtResource( 18 )
-label_path = NodePath("../../CanvasLayer2/ThankYouLabel")
+canvas_item_path = NodePath("../../CanvasLayer2/ThankYouLabel")
+
+[node name="ShowCredits1" type="Node" parent="Room4/Events"]
+script = ExtResource( 18 )
+canvas_item_path = NodePath("../../CanvasLayer2/Credits1")
+
+[node name="ShowCredits2" type="Node" parent="Room4/Events"]
+script = ExtResource( 18 )
+canvas_item_path = NodePath("../../CanvasLayer2/Credits2")
+
+[node name="StopBGM" type="Node" parent="Room4/Events"]
+script = ExtResource( 23 )
+fade_out_duration = 4.0
+
+[node name="Tween" type="Tween" parent="Room4/Events/StopBGM"]
 
 [node name="RoomEntrance" parent="Room4" instance=ExtResource( 28 )]
 position = Vector2( 240, 268 )
@@ -684,6 +699,42 @@ margin_right = 377.0
 margin_bottom = -752.0
 theme = ExtResource( 9 )
 text = "Thank you for playing!!"
+align = 1
+valign = 1
+script = ExtResource( 17 )
+
+[node name="Credits1" type="Label" parent="Room4/CanvasLayer2"]
+margin_left = 25.0
+margin_top = -759.0
+margin_right = 174.0
+margin_bottom = -570.0
+theme = ExtResource( 9 )
+text = "- Cicero106 -
+Tileset
+FX
+Music and sound effects
+
+- FluentlyS -
+Character sprites
+Artworks"
+align = 1
+valign = 1
+script = ExtResource( 17 )
+
+[node name="Credits2" type="Label" parent="Room4/CanvasLayer2"]
+margin_left = 291.0
+margin_top = -759.0
+margin_right = 459.0
+margin_bottom = -570.0
+theme = ExtResource( 9 )
+text = "- komehara -
+Level design
+Programming
+Sprite adjustments
+
+Flame of Hope v1.1.0
+Godot port and upgrade of
+a game made for Ludum Dare 46"
 align = 1
 valign = 1
 script = ExtResource( 17 )

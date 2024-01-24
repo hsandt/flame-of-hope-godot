@@ -4,4 +4,4 @@
 
 [node name="AppManager" type="Node"]
 script = ExtResource( 1 )
-auto_fullscreen_in_standalone = true
+auto_fullscreen_on_pc = true
