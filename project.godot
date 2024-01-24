@@ -159,10 +159,6 @@ window/stretch/aspect="keep"
 
 enabled=PoolStringArray( "gut" )
 
-[global]
-
-"physics inter"=false
-
 [importer_defaults]
 
 texture={
