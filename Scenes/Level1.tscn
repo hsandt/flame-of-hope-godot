@@ -715,15 +715,19 @@ valign = 1
 script = ExtResource( 17 )
 
 [node name="Credits2" type="Label" parent="Room4/CanvasLayer2"]
-margin_left = 319.0
-margin_top = -742.0
-margin_right = 444.0
-margin_bottom = -601.0
+margin_left = 291.0
+margin_top = -759.0
+margin_right = 459.0
+margin_bottom = -570.0
 theme = ExtResource( 9 )
 text = "- komehara -
 Level design
 Programming
-Sprite adjustments"
+Sprite adjustments
+
+Flame of Hope v1.1.0
+Godot port and upgrade of
+a game made for Ludum Dare 46"
 align = 1
 valign = 1
 script = ExtResource( 17 )
