@@ -593,7 +593,7 @@ position = Vector2( 0, -813 )
 [node name="IgnitionTrigger" type="Node" parent="Room4/Events"]
 script = ExtResource( 5 )
 trigger_ignitable_paths = [ NodePath("../../FirePit_Source") ]
-event_paths = [ NodePath("../PlayThankYouJingle"), NodePath("../ShowThankYouLabel") ]
+event_paths = [ NodePath("../PlayThankYouJingle"), NodePath("../ShowThankYouLabel"), NodePath("../ShowCredits1"), NodePath("../ShowCredits2") ]
 
 [node name="PlayThankYouJingle" type="Node" parent="Room4/Events"]
 script = ExtResource( 16 )
@@ -602,6 +602,14 @@ victory_jingle = ExtResource( 27 )
 [node name="ShowThankYouLabel" type="Node" parent="Room4/Events"]
 script = ExtResource( 18 )
 canvas_item_path = NodePath("../../CanvasLayer2/ThankYouLabel")
+
+[node name="ShowCredits1" type="Node" parent="Room4/Events"]
+script = ExtResource( 18 )
+canvas_item_path = NodePath("../../CanvasLayer2/Credits1")
+
+[node name="ShowCredits2" type="Node" parent="Room4/Events"]
+script = ExtResource( 18 )
+canvas_item_path = NodePath("../../CanvasLayer2/Credits2")
 
 [node name="RoomEntrance" parent="Room4" instance=ExtResource( 28 )]
 position = Vector2( 240, 268 )
