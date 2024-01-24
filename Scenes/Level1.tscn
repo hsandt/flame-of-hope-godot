@@ -136,11 +136,11 @@ door_path = NodePath("../../EntranceDoor")
 
 [node name="ShowLabel Tutorial1" type="Node" parent="Room1/Events"]
 script = ExtResource( 18 )
-label_path = NodePath("../../CanvasLayer/TutoLabel1")
+canvas_item_path = NodePath("../../CanvasLayer/TutoLabel1")
 
 [node name="ShowLabel Tutorial2" type="Node" parent="Room1/Events"]
 script = ExtResource( 18 )
-label_path = NodePath("../../CanvasLayer/TutoLabel2")
+canvas_item_path = NodePath("../../CanvasLayer/TutoLabel2")
 
 [node name="FirePitIgnitionTrigger" type="Node" parent="Room1/Events"]
 script = ExtResource( 5 )
@@ -157,7 +157,7 @@ script = ExtResource( 21 )
 
 [node name="ShowLabel Title" type="Node" parent="Room1/Events/FirePitIgnitionTrigger"]
 script = ExtResource( 18 )
-label_path = NodePath("../../../CanvasLayer/Title")
+canvas_item_path = NodePath("../../../CanvasLayer/Title")
 stay_duration = 2.0
 fade_out_duration = 1.0
 
@@ -375,7 +375,7 @@ shape = SubResource( 1 )
 
 [node name="ShowLabel Tutorial3" type="Node" parent="Room2/Events2"]
 script = ExtResource( 18 )
-label_path = NodePath("../../CanvasLayer/TutoLabel3")
+canvas_item_path = NodePath("../../CanvasLayer/TutoLabel3")
 
 [node name="IgnitionTrigger" type="Node" parent="Room2/Events2"]
 script = ExtResource( 5 )
@@ -601,7 +601,7 @@ victory_jingle = ExtResource( 27 )
 
 [node name="ShowThankYouLabel" type="Node" parent="Room4/Events"]
 script = ExtResource( 18 )
-label_path = NodePath("../../CanvasLayer2/ThankYouLabel")
+canvas_item_path = NodePath("../../CanvasLayer2/ThankYouLabel")
 
 [node name="RoomEntrance" parent="Room4" instance=ExtResource( 28 )]
 position = Vector2( 240, 268 )
@@ -684,6 +684,38 @@ margin_right = 377.0
 margin_bottom = -752.0
 theme = ExtResource( 9 )
 text = "Thank you for playing!!"
+align = 1
+valign = 1
+script = ExtResource( 17 )
+
+[node name="Credits1" type="Label" parent="Room4/CanvasLayer2"]
+margin_left = 25.0
+margin_top = -759.0
+margin_right = 174.0
+margin_bottom = -570.0
+theme = ExtResource( 9 )
+text = "- Cicero106 -
+Tileset
+FX
+Music and sound effects
+
+- FluentlyS -
+Character sprites
+Artworks"
+align = 1
+valign = 1
+script = ExtResource( 17 )
+
+[node name="Credits2" type="Label" parent="Room4/CanvasLayer2"]
+margin_left = 319.0
+margin_top = -742.0
+margin_right = 444.0
+margin_bottom = -601.0
+theme = ExtResource( 9 )
+text = "- komehara -
+Level design
+Programming
+Sprite adjustments"
 align = 1
 valign = 1
 script = ExtResource( 17 )
