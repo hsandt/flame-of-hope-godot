@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/sfx_torch_appears_step.ogg-c1da478ba7b617dd880379a56703b344.oggstr"
+
+[deps]
+
+source_file="res://Audio/SFX/sfx_torch_appears_step.ogg"
+dest_files=[ "res://.import/sfx_torch_appears_step.ogg-c1da478ba7b617dd880379a56703b344.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

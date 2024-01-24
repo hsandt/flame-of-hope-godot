@@ -32,7 +32,10 @@ func _ready():
 		var ignitable := get_node(ignitable_path) as Ignitable
 		NodeUtils.assert_node_got_by_path(ignitable, "IgnitionTrigger", self, "Ignitable", ignitable_path)
 		
-		# deferred connection to avoid disabling collision during physics process (only matters for lit signal)
+		# deferred connection to:
+		# 1. avoid disabling collision during physics process (only matters for lit signal)
+		# 2. make sure this happens after ignitable's own lit/unlit callback so we can override
+		#    FlameTimer behavior in _notify_ignitables_lit_triggered_event
 		var error1 = ignitable.connect("lit", self, "_on_trigger_ignitable_lit", [ignitable], CONNECT_DEFERRED)
 		var error2 = ignitable.connect("unlit", self, "_on_trigger_ignitable_unlit", [ignitable], CONNECT_DEFERRED)
 		if error1 or error2:
@@ -81,7 +84,12 @@ func _trigger_event():
 	for event in _events:
 		event.trigger()
 	
+	_notify_ignitables_lit_triggered_event()
 	_disconnect_ignitables()
+
+func _notify_ignitables_lit_triggered_event():
+	for ignitable in _trigger_ignitables:
+		ignitable.on_lit_triggered_event()
 
 func _disconnect_ignitables():
 	for ignitable in _trigger_ignitables:

@@ -8,8 +8,8 @@ extends Node
 #   app_exit
 
 # Parameters
-## If true, auto-switch to fullscreen on standalone game start
-export(bool) var auto_fullscreen_in_standalone = false
+## If true, auto-switch to fullscreen on pc game start
+export(bool) var auto_fullscreen_on_pc = false
 
 # Parameters (set on _ready)
 ## Window initial size, used for hi-dpi resize
@@ -22,9 +22,9 @@ var hidpi_active = false
 func _ready():
 	initial_size = OS.window_size
 	
-	if not OS.window_fullscreen and auto_fullscreen_in_standalone:
-		if OS.has_feature("standalone"):
-			print("[AppManager] Playing standalone game with auto-fullscreen ON, enabling fullscreen")
+	if not OS.window_fullscreen and auto_fullscreen_on_pc:
+		if OS.has_feature("pc"):
+			print("[AppManager] Playing pc game with auto-fullscreen ON, enabling fullscreen")
 			call_deferred("toggle_fullscreen")
 
 func _unhandled_input(event: InputEvent):

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Sprites/Generic/disc_white_radial_alpha_gradient-2_100x100.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Visual/ScaleFlicker.gd" type="Script" id=2]
+
+[node name="DiscLight2D" type="Light2D"]
+texture = ExtResource( 1 )
+mode = 2
+range_item_cull_mask = 170
+shadow_enabled = true
+shadow_item_cull_mask = 342
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+scale_to_zero_duration = 0.2

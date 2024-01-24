@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Anims/Props/ANIM_FirePit_Lit.tres" type="Animation" id=1]
 [ext_resource path="res://Anims/FX/SF_FlameBig.tres" type="SpriteFrames" id=2]
@@ -6,8 +6,11 @@
 [ext_resource path="res://Scripts/Props/FirePit.gd" type="Script" id=4]
 [ext_resource path="res://Anims/Props/ANIM_FirePit_Unlit.tres" type="Animation" id=5]
 [ext_resource path="res://Audio/SFX/fire_pit_light_on.ogg" type="AudioStream" id=6]
-[ext_resource path="res://Sprites/Generic/disc_100x100.png" type="Texture" id=7]
+[ext_resource path="res://Prefabs/Light/DiscLight2D.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Materials/CanvasItemMaterial_Flame.tres" type="Material" id=8]
+[ext_resource path="res://Prefabs/Audio/SFXPlayer.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Prefabs/PFX/PFX_Ignite_Big.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Sprites/Generic/white_square_1x1.png" type="Texture" id=11]
 
 [sub_resource type="OccluderPolygon2D" id=3]
 polygon = PoolVector2Array( -4, 12, 4, 12, 13, 2, 13, -7, 5, -15, -5, -15, -13, -7, -13, 2 )
@@ -21,6 +24,7 @@ radius = 12.0
 [node name="FirePit" type="Node2D"]
 position = Vector2( 208, 175 )
 script = ExtResource( 4 )
+pfx_ignite_prefab = ExtResource( 10 )
 light_on_sound = ExtResource( 6 )
 
 [node name="Body" type="Sprite" parent="."]
@@ -38,14 +42,18 @@ visible = false
 material = ExtResource( 8 )
 position = Vector2( 0, -4 )
 frames = ExtResource( 2 )
+frame = 2
 offset = Vector2( 1, -14 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/FirePit_Lit = ExtResource( 1 )
 anims/FirePit_Unlit = ExtResource( 5 )
 
-[node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
-volume_db = -10.0
+[node name="SFXPlayer" parent="." instance=ExtResource( 9 )]
+volume_db = -15.0
+__meta__ = {
+"_edit_pinned_properties_": [ "volume_db" ]
+}
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 4
@@ -71,9 +79,18 @@ collision_mask = 16
 [node name="IgnitableCollisionShape2D" type="CollisionShape2D" parent="IgnitableArea2D"]
 shape = SubResource( 2 )
 
-[node name="Light2D" type="Light2D" parent="."]
-texture = ExtResource( 7 )
-mode = 2
-range_item_cull_mask = 170
-shadow_enabled = true
+[node name="DiscLight2D" parent="." instance=ExtResource( 7 )]
 shadow_item_cull_mask = 278
+
+[node name="RoomLight2D" type="Light2D" parent="."]
+scale = Vector2( 480, 270 )
+texture = ExtResource( 11 )
+energy = 0.5
+range_item_cull_mask = 170
+shadow_item_cull_mask = 278
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PFXIgniteAnchor" type="Node2D" parent="."]
+position = Vector2( 0, -9 )

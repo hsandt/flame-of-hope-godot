@@ -4,6 +4,12 @@ extends Node
 # Fireball prefab
 export(PackedScene) var fireball_prefab
 
+# PFX ignite prefab
+export(PackedScene) var pfx_ignite_prefab
+
+# PFX light off smoke
+export(PackedScene) var pfx_light_off_smoke
+
 # Rod Swing Audio Clip
 export(AudioStream) var swing_sound
 
@@ -22,6 +28,10 @@ var _is_lit: bool
 # Is the character swinging the rod?
 var is_swinging: bool
 
+# Has the character just ignited a prop during the current swing animation?
+# Cleared on Swing end
+var has_just_ignited_prop: bool
+
 # Is the character throwing a fireball
 var is_throwing_fireball: bool
 
@@ -37,15 +47,17 @@ onready var character_control := $"../CharacterControl" as CharacterControl
 onready var character_motor := $"../CharacterMotor" as CharacterMotor
 onready var character_anim := $"../CharacterAnim" as CharacterAnim
 onready var flame_timer := $FlameTimer as Timer
-onready var light := $"../Light2D" as Light2D
+onready var light_scale_flicker := $"../DiscLight2D" as ScaleFlicker
 
 func _ready():
 	_setup()
 
 func _setup():
 	# allows to work with Flame active in the editor, but deactivate on start
-	_light_off()
+	# make sure to pass on_setup: true
+	_light_off(true)
 	is_swinging = false
+	has_just_ignited_prop = false
 	is_throwing_fireball = false
 	
 	# makes sure hitbox is disabled on start, in case we were testing swing anims in the Editor
@@ -96,6 +108,7 @@ func _start_swing():
 func _stop_swing():
 	# logic & animation
 	is_swinging = false
+	has_just_ignited_prop = false
 	character_anim.is_swinging = false
 
 # Start throw fireball animation with SFX 
@@ -120,7 +133,7 @@ func _spawn_fireball():
 		return
 	
 	# consume current flame
-	_light_off()
+	_light_off(false)
 	
 	# instantiate fireball and setup position and velocity
 	var fireball: Fireball = fireball_prefab.instance()
@@ -135,6 +148,7 @@ func _spawn_fireball():
 # light rod on during game, with SFX
 func _ignite():
 	_light_on()
+
 	
 	# audio
 	# note we use the same source for all Character SFX, so this will cover the Swing sound (a few frames after)
@@ -142,48 +156,72 @@ func _ignite():
 
 # silently set rod lit state to on (logical and visual), useful on setup
 # and also during game when combined with SFX
-func _light_on():
+# if go_off_after_timer is true (default), set timer before go off
+func _light_on(go_off_after_timer: bool = true):
 	_is_lit = true
 	rod_flame.visible = true
 	rod_flame.play()
 	
-	# start timer until flame goes off (duration is set in Inspector on FlameTimer)
-	flame_timer.start()
+	if go_off_after_timer:
+		# start timer until flame goes off (duration is set in Inspector on FlameTimer)
+		flame_timer.start()
 	
-	# enable flame light
-	light.visible = true
+	# show flame light wtih flicker
+	light_scale_flicker.show_with_flicker()
 
 func _rekindle():
 	# restart timer to extend burn duration
 	flame_timer.start()
 	
 	# audio
-	# note we use the same source for all Character SFX, so this will cover the Swing sound (a few frames after)
-	_play_sfx(rod_light_on_sound)
+	# if already igniting prop during this swing, don't play light on SFX on top
+	# of it to avoid SFX stacking (increasing overall volume)
+	if not has_just_ignited_prop:
+		# note we use the same source for all Character SFX, so this will cover the Swing sound (a few frames after)
+		_play_sfx(rod_light_on_sound)
 
 # reverse of ignite, light rod off during game, with SFX
 func _go_off():
-	_light_off()
+	_light_off(false)
+	
+	# visual
+	_spawn_pfx(pfx_light_off_smoke)
 	
 	# audio
 	_play_sfx(rod_light_off_sound)	
 
 # silently set rod lit state to off (logical and visual), useful on setup
 # and also during game when combined with SFX
-func _light_off():
+func _light_off(on_setup: bool):
 	_is_lit = false
 	rod_flame.visible = false
 	# do not play animated sprite in the background while invisible
 	rod_flame.stop()
 	
-	# stop timer to avoid warning on timeout
-	flame_timer.stop()
-	
-	# disable flame light
-	light.visible = false
+	if on_setup:
+		# on setup, instant hide
+		light_scale_flicker.visible = false
+	else:
+		# mid-game, we need to stop timer to avoid warning on timeout
+		flame_timer.stop()
+		
+		# and hide flame light gradually
+		light_scale_flicker.hide_with_scale_to_zero()
+
+func _spawn_pfx(pfx_prefab):
+	var pfx = pfx_prefab.instance()
+	get_tree().root.get_node("/root/Dungeon").add_child(pfx)
+	pfx.global_position = rod_flame.global_position
 
 func _on_SwingHitBox_area_entered(area: Area2D):
 	if area.get_collision_layer_bit(Layer.FIRE_SOURCE):
+		# Spawn PFX for rod being ignited itself unless we have just ignited a prop,
+		# in which case we have already played an Ignite PFX and we are probably just
+		# rekindling the rod and don't want to play an extra PFX
+		# (but we play a PFX when rekindling on a prop already lit up)
+		if not has_just_ignited_prop:
+			_spawn_pfx(pfx_ignite_prefab)
+	
 		if _is_lit:
 			# we touched a fire source but already lit, rekindle rod
 			# note that when lighting an ignitable, this is still called on the
@@ -202,6 +240,9 @@ func _on_SwingHitBox_area_entered(area: Area2D):
 			# since we just touched what is now a fire source,
 			# restart the flame timer
 			flame_timer.start()
+			
+			# remember we did it until end of Swing animation
+			has_just_ignited_prop = true
 
 func _on_AnimationPlayer_animation_finished(anim_name: String):
 	if anim_name.begins_with("Character_Swing_"):

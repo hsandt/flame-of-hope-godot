@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Audio/SFXManager.gd" type="Script" id=1]
+[ext_resource path="res://Prefabs/Audio/TempSFXPlayer.tscn" type="PackedScene" id=2]
+
+[node name="SFXManager" type="Node"]
+script = ExtResource( 1 )
+temp_sfx_player_prefab = ExtResource( 2 )
